@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="px-4 py-3 border-bottom">
+                <h5 class="card-title fw-semibold mb-0">Cargar nuevo vehiculo</h5>
+              </div>
+              <form th:action="@{/vehiculo/nuevo}" th:object="${vehiculo}" method="post">
+              <div class="card-body p-4">
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Tipo</label>
+                  <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}">
+                    <option value="camion">Camion</option>
+                    <option value="camioneta">Camioneta</option>
+                    <option value="automovil">Automovil</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="patente" class="form-label fw-semibold">Patente</label>
+                  <input type="text" class="form-control" id="patente" placeholder="Patente del vehiculo"  th:field="*{patente}">
+                </div>
+                <div class="mb-4">
+                  <label for="marca" class="form-label fw-semibold">Marca</label>
+                  <input type="text" class="form-control" id="marca" placeholder="Marca/Version del vehiculo"  th:field="*{marca}">
+                </div>
+                <div class="mb-4">
+                  <label for="anio" class="form-label fw-semibold">Modelo</label>
+                  <input type="number" class="form-control" placeholder="Modelo/Año del vehiculo" id="anio" th:field="*{anio}">
+                </div>
+                <div class="mb-4">
+                  <label for="km" class="form-label fw-semibold">Kilometraje actual</label>
+                  <input type="number" class="form-control" id="km" placeholder="Kilometros actual del vehiculo"  th:field="*{km}">
+                </div>
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Estado</label>
+                  <select class="form-select" aria-label="Seleccionar opción" id="estado" th:field="*{estado}">
+                    <option value="activo" selected>Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="ubicacion" class="form-label fw-semibold">Ubicacion</label>
+                  <input type="text" class="form-control" id="ubicacion" placeholder="Ubicacion actual del vehiculo" th:field="*{ubicacion}">
+                </div>
+                <BUtton class="btn btn-primary">Send</BUtton>
+              </div>
+              </form>
+            </div>
+          </div>
+
+      </div>
+
+      <!-- fin contenido -->
+
+      <footer th:replace="layout/layout :: footer"></footer>
+      <!-- fin sect3 -->
+    </div>
+    <!-- fin sect2 -->
+  </div>
+
+  <!-- fin sect1 -->
+</div>
+
+<statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>

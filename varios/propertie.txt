@@ -1,0 +1,40 @@
+# Puerto en el que se ejecutará el servidor
+server.port=443
+
+#Configuraciones Generales de DB - debian 11 - linode
+spring.datasource.url=jdbc:mysql://45.56.73.45/credicuotas?serverTimezone=America/Argentina/Buenos_Aires&useSSL=false&allowPublicKeyRetrieval=true
+spring.datasource.username=admin
+spring.datasource.password=max12023
+
+#Configuraciones Generales de DB localhost
+#spring.datasource.url=jdbc:mysql://localhost/credicuotas?serverTimezone=America/Argentina/Buenos_Aires&useSSL=false&allowPublicKeyRetrieval=true
+#spring.datasource.username=root
+#spring.datasource.password=admin
+
+#Drivers sql
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.hibernate.ddl-auto=none
+logging.level.org.hibernate.SQL=debug
+
+#Para exporar a xls
+spring.mvc.contentnegotiation.media-types.xlsx = application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+# Habilitar SSL
+server.ssl.enabled=true
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store=classpath:certificado.p12
+server.ssl.key-store-password=123456
+server.ssl.key-alias=certificadoAlias
+server.ssl.redirectHttpToHttps=true
+
+#Recaptcha google
+recaptcha.siteKey=6Le9cfomAAAAAEG6YidHEsuBB7E16mN76bvXOXNz
+recaptcha.secretKey=6Le9cfomAAAAAFGbvAFv_5Xmz4JzZWiDvU7HiSqT
+
+#Especificaciones spring.jpa.hibernate.ddl-auto
+#spring.jpa.hibernate.ddl-auto=none -> Este valor desactiva la generación automática de esquema.
+#spring.jpa.hibernate.ddl-auto=validate -> validará la estructura actual de la base de datos con las entidades definidas en tu aplicación
+#spring.jpa.hibernate.ddl-auto=update -> Hibernate actualizará el esquema de la base de datos según las entidades
+#spring.jpa.hibernate.ddl-auto=create -> Si ya existe un esquema, lo eliminará y creará uno nuevo
+#spring.jpa.hibernate.ddl-auto=create-drop -> Hibernate creará el esquema al inicio, pero también lo eliminará al cerrar la aplicación

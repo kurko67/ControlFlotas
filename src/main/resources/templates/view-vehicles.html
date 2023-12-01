@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- ---------------------
+                                start Form with view only
+                            ---------------- -->
+            <div class="card">
+              <div class="card-header text-bg-primary">
+                <h5 class="mb-0 text-white" th:text="${vehiculo.tipo} + ' ' + ${vehiculo.marca} + ', Patente: ' + ${vehiculo.patente}"></h5>
+              </div>
+              <form class="form-horizontal">
+                <div class="form-body">
+                  <div class="card-body">
+                    <h5 class="card-title mb-0">Informacion General</h5>
+                  </div>
+                  <hr class="mt-0 mb-5" />
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Tipo:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static" th:text="${vehiculo.tipo}"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Patente:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static" th:text="${vehiculo.patente}"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Marca/version:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static" th:text="${vehiculo.marca}"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Modelo/Año</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static" th:text="${vehiculo.anio}"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Km actual:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">Category1</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Membership:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">Free</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <h5 class="mb-0">Address</h5>
+                  </div>
+                  <hr class="mt-0 mb-5" />
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Address:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">
+                              E104, Dharti-2, Near silverstar mall
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">City:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">Bhavnagar</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">State:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">Gujarat</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                    <!--/row-->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Post Code:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">457890</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="control-label text-end col-md-3">Country:</label>
+                          <div class="col-md-9">
+                            <p class="form-control-static">India</p>
+                          </div>
+                        </div>
+                      </div>
+                      <!--/span-->
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="form-actions">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                              <button type="submit" class="btn btn-primary">
+                                <i class="ti ti-edit fs-5"></i>
+                                Edit
+                              </button>
+                              <button type="button" class="btn btn-danger">
+                                Cancel
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+        <!-- fin contenido -->
+
+        <footer th:replace="layout/layout :: footer"></footer>
+        <!-- fin sect3 -->
+      </div>
+      <!-- fin sect2 -->
+    </div>
+
+    <!-- fin sect1 -->
+  </div>
+
+  <statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>
