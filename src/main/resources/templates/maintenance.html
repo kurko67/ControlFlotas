@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="px-4 py-3 border-bottom">
+                <h5 class="card-title fw-semibold mb-0" th:text="'Idvehiculo ' + ${vehiculo.idVehiculo}"></h5>
+              </div>
+              <form th:action="@{/mantenimiento/nuevo}" th:object="${mantenimiento}" method="post">
+                <div class="card-body p-4">
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Tipo</label>
+                    <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}">
+                      <option value="preventivo">Preventivo</option>
+                      <option value="correctivo">Correctivo</option>
+                    </select>
+                  </div>
+                  <input type="hidden"id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
+                  <div class="mb-4">
+                    <label for="descripcion" class="form-label fw-semibold">Descripcion</label>
+                    <input type="text" class="form-control" id="descripcion" placeholder="Descripcion de la tarea"  th:field="*{descripcion}">
+                  </div>
+                  <div class="mb-4">
+                    <label for="costo" class="form-label fw-semibold">Costo</label>
+                    <input type="number" class="form-control" id="costo" placeholder="Costo del servicio"  th:field="*{costo}">
+                  </div>
+                  <div class="mb-4">
+                    <label for="dias_antes_alerta" class="form-label fw-semibold">Alerta</label>
+                    <input type="number" class="form-control" placeholder="Cuantos dias antes quieres recibir la alerta?" id="dias_antes_alerta" th:field="*{dias_antes_alerta}">
+                  </div>
+                  <div class="mb-4">
+                    <label for="fecha_vencimiento" class="form-label fw-semibold">Vencimiento</label>
+                    <input type="date" class="form-control" id="fecha_vencimiento" placeholder="Vencimiento de la alerta"  th:field="*{fecha_vencimiento}">
+                  </div>
+                  <BUtton class="btn btn-primary">Enviar</BUtton>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- fin contenido -->
+
+        <footer th:replace="layout/layout :: footer"></footer>
+        <!-- fin sect3 -->
+      </div>
+      <!-- fin sect2 -->
+    </div>
+
+    <!-- fin sect1 -->
+  </div>
+
+  <statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>

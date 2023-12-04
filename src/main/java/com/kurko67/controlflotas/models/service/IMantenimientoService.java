@@ -4,6 +4,7 @@ import com.kurko67.controlflotas.models.entity.Mantenimiento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
 public interface IMantenimientoService {
 
     public Page<Mantenimiento> findAll(Pageable pageable);

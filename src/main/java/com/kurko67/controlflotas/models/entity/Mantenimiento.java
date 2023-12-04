@@ -2,6 +2,7 @@ package com.kurko67.controlflotas.models.entity;
 
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +20,10 @@ public class Mantenimiento implements Serializable {
     private Double costo;
     private Date created_at;
     private Long dias_antes_alerta;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_vencimiento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fecha_realizacion;
     private double km;
     //Relacion muchos mantenimientos a un veichulo
     @ManyToOne

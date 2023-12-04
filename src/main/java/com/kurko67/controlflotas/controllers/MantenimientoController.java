@@ -11,9 +11,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/mantenimiento")
@@ -25,9 +27,23 @@ public class MantenimientoController {
     @Autowired
     private IMantenimientoService mantenimientoService;
 
+    @RequestMapping("/maintenance/new/{id}")
+    public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model){
+
+        Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);
+        Mantenimiento mantenimiento = new Mantenimiento();
+        model.addAttribute("mantenimiento", mantenimiento);
+        model.addAttribute("vehiculo", vehiculo);
+        return "maintenance";
+
+    }
+
+
     @PostMapping("/nuevo")
-    public String nuevoMantenimiento(@Valid Mantenimiento mantenimiento, @PathVariable(value = "id") Long idVehiculo, BindingResult result, Model model,
+    public String nuevoMantenimiento(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, BindingResult result, Model model,
                                      RedirectAttributes flash){
+
+        System.out.println(idVehiculo);
 
         if(result.hasErrors()){
             flash.addFlashAttribute("error", "Error en la carga de datos");
@@ -35,9 +51,10 @@ public class MantenimientoController {
         }
 
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
+        mantenimiento.setCreated_at(new Date());
         mantenimiento.setVehiculo(vehiculo);
         mantenimientoService.save(mantenimiento);
-        return "redirect:/view-vehicles/" + idVehiculo;
+        return "redirect:/vehiculo/view-vehicles/" + idVehiculo;
 
     }
 

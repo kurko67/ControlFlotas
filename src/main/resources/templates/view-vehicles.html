@@ -81,33 +81,29 @@
                                         </div>
                                       </div>
                                       <div class="border-bottom pb-7 mb-4">
-                                        <div th:if="${vehiculos != null and !vehiculos.empty}">
+                                        <div th:if="${vehiculo.mantenimientos != null and !vehiculo.mantenimientos.empty}">
                                           <div class="card card-body">
                                             <div class="table-responsive">
+                                              <span><h6>Mantenimientos programados</h6></span>
                                               <table class="table search-table align-middle text-nowrap">
                                                 <thead class="header-item">
-                                                <th>Patente</th>
-                                                <th>Marca</th>
-                                                <th>Modelo</th>
-                                                <th>Responsable</th>
-                                                <th>Action</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                                <th>Fecha inicio</th>
                                                 </thead>
                                                 <tbody>
                                                 <!-- start row -->
-                                                <tr class="search-items">
+                                                <tr class="search-items" th:each="mant: ${vehiculo.mantenimientos}">
                                                   <td>
                                                     <div class="user-meta-info">
-                                                      <h6 class="user-name mb-0" th:text=" 'SIN DATOS'  "></h6>
+                                                      <h6 class="user-name mb-0" th:text="${mant.tipo}"></h6>
                                                     </div>
                                                   </td>
                                                   <td>
-                                                    <span class="usr-email-addr" th:text=" 'SIN DATOS' "></span>
+                                                    <span class="usr-email-addr" th:text="${mant.descripcion}"></span>
                                                   </td>
                                                   <td>
-                                                    <span class="usr-location" th:text=" 'SIN DATOS'" ></span>
-                                                  </td>
-                                                  <td>
-                                                    <span class="usr-ph-no" th:text=" 'SIN DATOS'"></span>
+                                                    <span class="usr-location" th:text="${mant.created_at}"></span>
                                                   </td>
                                                 </tr>
                                                 <!-- end row -->
@@ -120,12 +116,12 @@
                                           <!-- fin tabla -->
                                         </div>
 
-                                        <div class="text-center p-2">
+                                        <div class="text-center p-2" th:if="${vehiculo.mantenimientos == null or vehiculo.mantenimientos.empty}">
                                           <span>No hay mantenimientos programados</span>
                                         </div>
                                       </div>
                                       <div class="d-flex align-items-center gap-2">
-                                        <button class="btn btn-primary fs-2" fdprocessedid="pk6kl8">Cargar mantenimiento</button>
+                                        <a th:href="@{/mantenimiento/maintenance/new/} + ${vehiculo.idVehiculo}" class="btn btn-primary fs-2">Nueva tarea</a>
                                       </div>
                                     </div>
 
