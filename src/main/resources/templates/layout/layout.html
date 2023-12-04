@@ -34,23 +34,19 @@
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                        <a class="sidebar-link" href="./" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
                             <span class="hide-menu">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">UI COMPONENTS</span>
-                    </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{/vehiculo/list-vehicles}" aria-expanded="false">
                 <span>
-                  <i class="ti ti-article"></i>
+                  <i class="ti ti-car"></i>
                 </span>
-                            <span class="hide-menu">Buttons</span>
+                            <span class="hide-menu">Vehiculos</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -164,7 +160,6 @@
                 </ul>
                 <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                aria-expanded="false">
@@ -174,15 +169,15 @@
                                 <div class="message-body">
                                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                         <i class="ti ti-user fs-6"></i>
-                                        <p class="mb-0 fs-3">My Profile</p>
+                                        <p class="mb-0 fs-3">Mi Perfil</p>
                                     </a>
                                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                         <i class="ti ti-mail fs-6"></i>
-                                        <p class="mb-0 fs-3">My Account</p>
+                                        <p class="mb-0 fs-3">Mi Cuenta</p>
                                     </a>
                                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                         <i class="ti ti-list-check fs-6"></i>
-                                        <p class="mb-0 fs-3">My Task</p>
+                                        <p class="mb-0 fs-3">Mis Tareas</p>
                                     </a>
                                     <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                                 </div>
@@ -545,7 +540,7 @@
 
             <footer th:fragment="footer">
                 <div class="py-6 px-6 text-center">
-                    <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a></p>
+
                 </div>
             </footer>
         </div>

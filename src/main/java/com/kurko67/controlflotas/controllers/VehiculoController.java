@@ -82,7 +82,6 @@ public class VehiculoController {
         Vehiculo vehiculo = null;
         vehiculo = vehiculoService.findOne(id);
 
-        System.out.println("ID " + vehiculo.getIdVehiculo());
 
         if(vehiculo == null || id < 0){
             flash.addFlashAttribute("error", "Vehiculo no econtrado");

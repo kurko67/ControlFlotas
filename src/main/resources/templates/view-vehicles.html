@@ -27,165 +27,111 @@
 
         <div class="row">
           <div class="col-lg-12">
-            <!-- ---------------------
-                                start Form with view only
-                            ---------------- -->
-            <div class="card">
-              <div class="card-header text-bg-primary">
-                <h5 class="mb-0 text-white" th:text="${vehiculo.tipo} + ' ' + ${vehiculo.marca} + ', Patente: ' + ${vehiculo.patente}"></h5>
-              </div>
-              <form class="form-horizontal">
-                <div class="form-body">
-                  <div class="card-body">
-                    <h5 class="card-title mb-0">Informacion General</h5>
-                  </div>
-                  <hr class="mt-0 mb-5" />
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Tipo:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static" th:text="${vehiculo.tipo}"></p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Patente:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static" th:text="${vehiculo.patente}"></p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
+
+            <div class="w-100">
+              <div class="chat-container h-100 w-100">
+                <div class="chat-box-inner-part h-100">
+                  <div class="chatting-box app-email-chatting-box">
+                    <div
+                            class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
+                      <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de vehiculo: ' + ${ vehiculo.patente }"></h5>
+                      <ul class="list-unstyled mb-0 d-flex align-items-center">
+                        <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Edit">
+                          <a class="d-block text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                             href="javascript:void(0)">
+                            <i class="ti ti-pencil"></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
-                    <!--/row-->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Marca/version:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static" th:text="${vehiculo.marca}"></p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Modelo/Año</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static" th:text="${vehiculo.anio}"></p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Km actual:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">Category1</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Membership:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">Free</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <h5 class="mb-0">Address</h5>
-                  </div>
-                  <hr class="mt-0 mb-5" />
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Address:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">
-                              E104, Dharti-2, Near silverstar mall
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">City:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">Bhavnagar</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">State:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">Gujarat</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                    </div>
-                    <!--/row-->
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Post Code:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">457890</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="control-label text-end col-md-3">Country:</label>
-                          <div class="col-md-9">
-                            <p class="form-control-static">India</p>
-                          </div>
-                        </div>
-                      </div>
-                      <!--/span-->
-                    </div>
-                  </div>
-                  <hr />
-                  <div class="form-actions">
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="row">
-                            <div class="col-md-offset-3 col-md-9">
-                              <button type="submit" class="btn btn-primary">
-                                <i class="ti ti-edit fs-5"></i>
-                                Edit
-                              </button>
-                              <button type="button" class="btn btn-danger">
-                                Cancel
-                              </button>
+                    <div class="position-relative overflow-hidden">
+                      <div class="position-relative">
+                        <div class="chat-box p-9" style="height: calc(100vh - 128px)" data-simplebar="init">
+                          <div class="simplebar-wrapper" style="margin: -20px;">
+                            <div class="simplebar-height-auto-observer-wrapper">
+                              <div class="simplebar-height-auto-observer"></div>
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+                            <div class="simplebar-mask">
+                              <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                     aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                                  <div class="simplebar-content" style="padding: 20px;">
+                                    <div class="chat-list chat active-chat" data-user-id="1">
+                                      <div class="row">
+                                        <div class="col-4 mb-7">
+                                          <p class="mb-1 fs-2">Tipo:</p>
+                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.tipo)}"></h6>
+                                        </div>
+                                        <div class="col-8 mb-7">
+                                          <p class="mb-1 fs-2">Marca/Version - Modelo</p>
+                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.marca + ', Modelo ' + vehiculo.anio)}"></h6>
+                                        </div>
+                                        <div class="col-12 mb-9">
+                                          <p class="mb-1 fs-2">Km al ultimo service:</p>
+                                          <h6 class="fw-semibold mb-0" th:text="${vehiculo.km}"></h6>
+                                        </div>
+                                        <div class="col-4 mb-7">
+                                          <p class="mb-1 fs-2">Ubicacion</p>
+                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.ubicacion)}"></h6>
+                                        </div>
+                                        <div class="col-8 mb-7">
+                                          <p class="mb-1 fs-2">Responsable</p>
+                                          <h6 class="fw-semibold mb-0" th:text="'Sin asignar'"></h6>
+                                        </div>
+                                      </div>
+                                      <div class="border-bottom pb-7 mb-4">
+                                        <div th:if="${vehiculos != null and !vehiculos.empty}">
+                                          <div class="card card-body">
+                                            <div class="table-responsive">
+                                              <table class="table search-table align-middle text-nowrap">
+                                                <thead class="header-item">
+                                                <th>Patente</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Responsable</th>
+                                                <th>Action</th>
+                                                </thead>
+                                                <tbody>
+                                                <!-- start row -->
+                                                <tr class="search-items">
+                                                  <td>
+                                                    <div class="user-meta-info">
+                                                      <h6 class="user-name mb-0" th:text=" 'SIN DATOS'  "></h6>
+                                                    </div>
+                                                  </td>
+                                                  <td>
+                                                    <span class="usr-email-addr" th:text=" 'SIN DATOS' "></span>
+                                                  </td>
+                                                  <td>
+                                                    <span class="usr-location" th:text=" 'SIN DATOS'" ></span>
+                                                  </td>
+                                                  <td>
+                                                    <span class="usr-ph-no" th:text=" 'SIN DATOS'"></span>
+                                                  </td>
+                                                </tr>
+                                                <!-- end row -->
+                                                <!-- start row -->
+
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                          <!-- fin tabla -->
+                                        </div>
+
+                                        <div class="text-center p-2">
+                                          <span>No hay mantenimientos programados</span>
+                                        </div>
+                                      </div>
+                                      <div class="d-flex align-items-center gap-2">
+                                        <button class="btn btn-primary fs-2" fdprocessedid="pk6kl8">Cargar mantenimiento</button>
+                                      </div>
+                                    </div>
+
+
             </div>
+        </div>
 
         <!-- fin contenido -->
 
