@@ -37,4 +37,9 @@ public class IVehiculoServiceImpl implements IVehiculoService{
     public void delete(Long id) {
         vehiculoDao.deleteById(id);
     }
+
+    @Override
+    public boolean existsByPatente(String patente) {
+        return true;
+    }
 }

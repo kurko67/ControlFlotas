@@ -11,5 +11,6 @@ public interface IVehiculoService {
     public Vehiculo findOne(Long id);
     public void delete(Long id);
 
+    public boolean existsByPatente(String patente);
 
 }

@@ -39,11 +39,15 @@ public class VehiculoController {
     }
 
     @PostMapping("/nuevo")
-    public String crearVehiculo(@Valid Vehiculo vehiculo, BindingResult result, Model model, RedirectAttributes flash){
+    public String crearVehiculo(@Valid Vehiculo vehiculo,@RequestParam String patente, BindingResult result, Model model, RedirectAttributes flash){
 
         if(result.hasErrors()){
             flash.addFlashAttribute("danger",  "Error en la carga de datos");
             return "form-vehiculos";
+        }
+
+        if(vehiculoService.existsByPatente(patente)){
+            System.out.println("la patente ya existe");
         }
 
         //Create object
