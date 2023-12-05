@@ -40,6 +40,6 @@ public class IVehiculoServiceImpl implements IVehiculoService{
 
     @Override
     public boolean existsByPatente(String patente) {
-        return true;
+        return vehiculoDao.existsByPatente(patente);
     }
 }
