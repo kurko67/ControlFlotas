@@ -29,7 +29,7 @@
           <div class="col-lg-6">
             <div class="card">
               <div class="px-4 py-3 border-bottom">
-                <h5 class="card-title fw-semibold mb-0" th:text="'Idvehiculo ' + ${vehiculo.idVehiculo}"></h5>
+                <h5 class="card-title fw-semibold mb-0" th:text="'Orden de trabajo ' + ${vehiculo.patente}"></h5>
               </div>
               <form th:action="@{/mantenimiento/nuevo}" th:object="${mantenimiento}" method="post">
                 <div class="card-body p-4">
@@ -41,6 +41,28 @@
                     </select>
                   </div>
                   <input type="hidden"id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
+                  <div class="mb-4">
+                    <label for="select1" class="form-label fw-semibold">Selecciona una categoría:</label>
+                    <select id="select1" onchange="actualizarSelect2()" class="form-select">
+                      <option value="sin-seleccion" selected>selecciona categoria</option>
+                      <option value="preventivo">Mantenimiento Preventivo</option>
+                      <option value="liquido-fluidos">Liquido y Fluidos</option>
+                      <option value="motor">Motor</option>
+                      <option value="electrico">Sistema Eléctrico</option>
+                      <option value="suspencion-direccion">Sistema de Suspensión y Dirección</option>
+                      <option value="frenos">Sistema de Frenos</option>
+                      <option value="transmision">Sistema de Transmisión</option>
+                      <option value="espejos">Espejos o Vidrios</option>
+                      <option value="cabina">Cabina</option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <!-- Segundo Select (Inicialmente Vacío) -->
+                    <label for="select2" class="form-label fw-semibold">Selecciona un elemento:</label>
+                    <select id="select2" class="form-select">
+                      <option value="" disabled selected>Selecciona primero una categoría</option>
+                    </select>
+                  </div>
                   <div class="mb-4">
                     <label for="descripcion" class="form-label fw-semibold">Descripcion</label>
                     <input type="text" class="form-control" id="descripcion" placeholder="Descripcion de la tarea"  th:field="*{descripcion}">
@@ -77,6 +99,7 @@
   </div>
 
   <statics th:replace="layout/layout :: statics"></statics>
+  <script th:src="@{/js/maintenance.js}"></script>
 
 </body>
 </html>
