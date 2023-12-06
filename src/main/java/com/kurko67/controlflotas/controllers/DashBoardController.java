@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller("/adm")
+@Controller()
 public class DashBoardController {
 
 
-    @GetMapping("/control")
+    @GetMapping("/")
     public String panelAdministrador(Model model, RedirectAttributes flash){
 
         return "index";

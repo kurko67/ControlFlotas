@@ -31,7 +31,7 @@
               <div class="px-4 py-3 border-bottom">
                 <h5 class="card-title fw-semibold mb-0" th:text="'Orden de trabajo ' + ${vehiculo.patente}"></h5>
               </div>
-              <form th:action="@{/mantenimiento/nuevo}" th:object="${mantenimiento}" method="post">
+              <form th:action="@{/maintenance/nuevo}" th:object="${mantenimiento}" method="post">
                 <div class="card-body p-4">
                   <div class="mb-4">
                     <label class="form-label fw-semibold">Tipo</label>

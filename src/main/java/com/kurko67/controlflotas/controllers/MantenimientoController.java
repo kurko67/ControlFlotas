@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/mantenimiento")
+@RequestMapping("/maintenance")
 public class MantenimientoController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class MantenimientoController {
     @Autowired
     private IMantenimientoService mantenimientoService;
 
-    @RequestMapping("/maintenance/new/{id}")
+    @RequestMapping("/new/{id}")
     public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model){
 
         Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);
@@ -54,7 +54,7 @@ public class MantenimientoController {
         mantenimiento.setCreated_at(new Date());
         mantenimiento.setVehiculo(vehiculo);
         mantenimientoService.save(mantenimiento);
-        return "redirect:/vehiculo/view-vehicles/" + idVehiculo;
+        return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
     }
 

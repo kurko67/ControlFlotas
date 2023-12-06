@@ -18,10 +18,11 @@ public class LoginController {
     public String login(@RequestParam(value="error",required = false ) String error,
                         Model model, Principal principal, RedirectAttributes flash){
 
+        System.out.println(principal.getName());
 
         if(principal != null){
             flash.addFlashAttribute("info", "Hola de nuevo: " + principal.getName().toString());
-            return "redirect:/administrador/admin";
+            return "redirect:/";
         }
 
         if(error != null){

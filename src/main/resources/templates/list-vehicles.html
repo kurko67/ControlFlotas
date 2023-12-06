@@ -40,7 +40,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-8 col-xl-9 text-end d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                                    <a th:href="@{/vehiculo/vehicles/new}" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
+                                    <a th:href="@{/vehicles/new}" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
                                         <i class="ti ti-car text-white me-1 fs-5"></i> Nuevo Vehiculo
                                     </a>
                                 </div>
@@ -77,11 +77,8 @@
                                         </td>
                                         <td>
                                             <div class="action-btn">
-                                                <a th:href="@{/vehiculo/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
+                                                <a th:href="@{/vehicles/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
                                                     <i class="ti ti-eye fs-5"></i>
-                                                </a>
-                                                <a href="#" class="text-dark delete ms-2">
-                                                    <i class="ti ti-trash fs-5"></i>
                                                 </a>
                                             </div>
                                         </td>

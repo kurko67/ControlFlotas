@@ -22,19 +22,19 @@ import java.util.Date;
 
 @Controller
 @SessionAttributes("vehiculo")
-@RequestMapping("/vehiculo")
+@RequestMapping("/vehicles")
 public class VehiculoController {
 
     @Autowired
     private IVehiculoService vehiculoService;
 
 
-    @RequestMapping("/vehicles/new")
+    @RequestMapping("/new")
     public String formVehicles(Model model){
 
         Vehiculo vehiculo = new Vehiculo();
         model.addAttribute("vehiculo", vehiculo);
-        return "/vehicles";
+        return "vehicles";
 
     }
 
@@ -57,13 +57,8 @@ public class VehiculoController {
         vehiculoService.save(vehiculo);
 
         flash.addFlashAttribute("success", "Vehiculo cargado con éxito");
-        return "redirect:/vehiculo/list-vehicles";
+        return "redirect:/vehicles/list-vehicles";
 
-    }
-
-    @GetMapping("/listado3")
-    public String listadoVehiculos(){
-        return "/";
     }
 
 

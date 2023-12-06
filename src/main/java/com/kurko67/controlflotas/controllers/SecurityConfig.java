@@ -31,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/")
+                .hasAnyRole("ADMIN", "USER")
                 .antMatchers("/adm/**")
                 .hasRole("ADMIN")
                 .antMatchers("/usr/**")
@@ -38,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login?error=true")
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403");

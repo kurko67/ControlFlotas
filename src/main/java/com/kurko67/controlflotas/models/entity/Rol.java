@@ -17,6 +17,10 @@ public class Rol {
     @NonNull
     private String nombre;
 
+    public Rol(){
+
+    }
+
     private static final long serialVersionUID = 1L;
 
 

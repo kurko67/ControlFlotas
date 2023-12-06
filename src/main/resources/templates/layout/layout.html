@@ -35,7 +35,7 @@
                         <span class="hide-menu">Home</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="./" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{/}" aria-expanded="false">
                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" th:href="@{/vehiculo/list-vehicles}" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{/vehicles/list-vehicles}" aria-expanded="false">
                 <span>
                   <i class="ti ti-car"></i>
                 </span>
@@ -107,12 +107,16 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                                aria-expanded="false">
+                                <span th:text="'User: ' + ${#authentication.name}" class="me-2"></span>
                                 <img th:src="@{/images/profile/user-1.jpg}" alt="" width="35" height="35" class="rounded-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                 <div class="message-body">
                                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                                        <i class="ti ti-user fs-6"></i>
+                                        <p class="mb-0 fs-3" th:text="'User: ' + ${#authentication.name}">User login</p>
+                                    </a>
+                                    </hr>
+                                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                                         <p class="mb-0 fs-3">Mi Perfil</p>
                                     </a>
                                     <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
