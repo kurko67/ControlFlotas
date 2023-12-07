@@ -1,6 +1,8 @@
 package com.kurko67.controlflotas.models.entity;
 
 import javax.persistence.*;
+
+import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import lombok.Data;
 import lombok.NonNull;
 import java.io.Serializable;
@@ -31,6 +33,8 @@ public class Usuario implements Serializable {
     public Usuario(){
 
     }
+
+
 
     private static final long serialVersionUID = 1L;
 }

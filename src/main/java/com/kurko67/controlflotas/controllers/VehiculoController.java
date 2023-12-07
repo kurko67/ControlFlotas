@@ -85,11 +85,13 @@ public class VehiculoController {
 
         if(vehiculo == null || id < 0){
             flash.addFlashAttribute("error", "Vehiculo no econtrado");
-            return "redirect:/vehiculo/list-vehicles";
+            return "redirect:/vehicles/list-vehicles";
         }
 
         model.addAttribute("vehiculo", vehiculo);
         return "view-vehicles";
+
+
     }
 
 }

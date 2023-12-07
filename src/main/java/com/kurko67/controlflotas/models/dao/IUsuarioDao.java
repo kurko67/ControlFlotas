@@ -1,6 +1,8 @@
 package com.kurko67.controlflotas.models.dao;
 
 import com.kurko67.controlflotas.models.entity.Usuario;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,8 @@ import javax.transaction.Transactional;
 public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
 
     Usuario findByUsername(String username);
+
+    Page<Usuario> findAll(Pageable pageable);
 
     @Modifying
     @Transactional
