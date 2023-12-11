@@ -1,7 +1,10 @@
 package com.kurko67.controlflotas.controllers;
 
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
+import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Usuario;
+import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,11 +12,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -22,6 +32,9 @@ public class UsuarioController {
 
     @Autowired
     IUsuarioDao usuariodao;
+
+    @Autowired
+    IConductorService conductorService;
 
     @RequestMapping(value = "/list-users")
     public String listaUsuarios(@RequestParam(name="page", defaultValue="0") int page, Model model, @AuthenticationPrincipal User user){
@@ -38,6 +51,55 @@ public class UsuarioController {
         return "list-users";
 
     }
+
+    @RequestMapping("/new")
+    public String formVehicles(Model model, @AuthenticationPrincipal User user){
+
+        Usuario usuario = new Usuario();
+        model.addAttribute("usuario", usuario);
+        return "users";
+
+    }
+
+
+    @PostMapping(value = "/create_user")
+    public String NuevoUser(@Valid Usuario usuario, BindingResult result, RedirectAttributes flash, SessionStatus status,
+                            @RequestParam(name = "password") String newPasword,
+                            @RequestParam(name = "nombreApellido") String nombreApellido,
+                            @RequestParam(name = "cuil") String cuil,
+                            @RequestParam(name = "numeroTelefono") String numeroTelefono,
+                            @RequestParam(name = "direccion") String direccion,
+                            @RequestParam(name = "vencimientoLicencia") String vencimientoLicencia){
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        usuario.setPassword(encoder.encode(newPasword));
+
+        usuario.setHabilitado(true);
+        usuariodao.save(usuario);
+        Long iduser = usuario.getIdUsuario();
+        usuariodao.InsertRol(iduser);
+
+        //Create class conductor
+
+        Conductor conductor = new Conductor();
+
+        conductor.setUsuario(usuario);
+        conductor.setNombreApellido(nombreApellido);
+        conductor.setCuil(cuil);
+        conductor.setNumeroTelefono(numeroTelefono);
+        conductor.setDireccion(direccion);
+        conductor.setVencimientoLicencia(vencimientoLicencia);
+
+        conductorService.save(conductor);
+
+        status.setComplete();
+        flash.addFlashAttribute("success", "¡Usuario " + usuario.getUsername() + " generado con exito!");
+        return "redirect:/users/list-users";
+
+    }
+
+
+
 
 
 }

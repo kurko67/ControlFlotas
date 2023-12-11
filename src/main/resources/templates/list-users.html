@@ -40,8 +40,8 @@
                   </form>
                 </div>
                 <div class="col-md-8 col-xl-9 text-end d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                  <a th:href="@{/vehicles/new}" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
-                    <i class="ti ti-car text-white me-1 fs-5"></i> Nuevo Usuario
+                  <a th:href="@{/users/new}" id="btn-add-contact" class="btn btn-info d-flex align-items-center">
+                    <i class="ti ti-car text-white me-1 fs-5"></i> Nuevo Conductor
                   </a>
                 </div>
               </div>
@@ -66,12 +66,11 @@
                         </div>
                       </td>
                       <td th:each=" roles: ${users.roles}">
-                        <span class="usr-email-addr" th:text="${roles.nombre}"></span>
+                        <span class="usr-email-addr" th:text="${roles.nombre == 'ROLE_ADMIN' ? 'ADMIN' : 'CONDUCTOR' }"></span>
                       </td>
                       <td th:text="${users.habilitado == true ? 'SI' : 'NO'}">
-                        <span class="usr-location" th:text="${vehiculo.anio}"></span>
                       </td>
-                      <td><a class="btn btn-info btn-xs" th:href="@{/users/editar_usuario/} + ${users.idUsuario}">Cambiar Password</a>
+                      <td><a class="btn btn-info btn-xs" th:href="@{/users/editar_usuario/} + ${users.idUsuario}">Editar Usuario</a>
                         <span><a th:text="${users.habilitado == true ? 'Deshabilitar': 'Habilitar'}"  th:class="${users.habilitado == true} ? 'button btn btn-danger btn-xs' : 'button btn btn-success btn-xs'"  th:href="@{/users/users/editar/} + ${users.idUsuario}" role="button"
                                  onclick="return confirm('¿Estas seguro que quieres habilitar/deshabilitar el usuario?');" >Habilitar</a></span>
                       </td>

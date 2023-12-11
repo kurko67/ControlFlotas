@@ -1,6 +1,8 @@
 package com.kurko67.controlflotas.controllers;
 
+import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @SessionAttributes("vehiculo")
@@ -28,18 +31,27 @@ public class VehiculoController {
     @Autowired
     private IVehiculoService vehiculoService;
 
+    @Autowired
+    private IConductorService conductorService;
+
 
     @RequestMapping("/new")
-    public String formVehicles(Model model){
+    public String formVehicles(Model model, @AuthenticationPrincipal User user){
 
         Vehiculo vehiculo = new Vehiculo();
+        List<Conductor> conductores = conductorService.findAll();
         model.addAttribute("vehiculo", vehiculo);
+        model.addAttribute("conductores", conductores);
         return "vehicles";
 
     }
 
     @PostMapping("/nuevo")
-    public String crearVehiculo(@Valid Vehiculo vehiculo,BindingResult result, @RequestParam String patente, Model model, RedirectAttributes flash){
+    public String crearVehiculo(@Valid Vehiculo vehiculo,BindingResult result, @RequestParam(value = "conductorid") Long idconductor, @RequestParam String patente, Model model, RedirectAttributes flash,
+                                @AuthenticationPrincipal User user){
+
+
+        System.out.println("Idconductor: " + idconductor);
 
         if(result.hasErrors()){
             flash.addFlashAttribute("danger",  "Error en la carga de datos");
@@ -51,7 +63,15 @@ public class VehiculoController {
             return "vehicles";
         }
 
+
         //Create object
+        // idconductor == 0 > Quiere decir que no se especifico conductor asignado
+        if(idconductor > 0){
+            Conductor conductor = new Conductor();
+            conductor = conductorService.findOne(idconductor);
+            vehiculo.setConductor(conductor);
+        }
+
         vehiculo.setCreated_at(new Date());
         vehiculo.setUpdated_at(new Date());
         vehiculoService.save(vehiculo);
@@ -77,7 +97,8 @@ public class VehiculoController {
     }
 
     @GetMapping("/view-vehicles/{id}")
-    public String viewVehicles(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash){
+    public String viewVehicles(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash,
+                               @AuthenticationPrincipal User user){
 
         Vehiculo vehiculo = null;
         vehiculo = vehiculoService.findOne(id);

@@ -1,6 +1,7 @@
 package com.kurko67.controlflotas.models.entity;
 import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.io.Serializable;
@@ -17,6 +18,7 @@ public class Conductor implements Serializable {
     private String cuil;
     private String numeroTelefono;
     private String direccion;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String vencimientoLicencia;
 
     @OneToOne

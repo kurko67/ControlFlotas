@@ -35,6 +35,13 @@
               <form th:action="@{/vehicles/nuevo}" th:object="${vehiculo}" method="post">
               <div class="card-body p-4">
                 <div class="mb-4">
+                  <label class="form-label fw-semibold">Selecciona un conductor:</label>
+                  <select id="conductorid" name="conductorid" class="form-select" aria-label="Seleccionar opción">
+                    <option value="0" selected>Sin conductor asignado</option>
+                    <option th:each="conductor : ${conductores}"  th:value="${conductor.idConductor}"  th:text="${conductor.nombreApellido}"></option>
+                  </select>
+                </div>
+                <div class="mb-4">
                   <label class="form-label fw-semibold">Tipo</label>
                   <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}" required>
                     <option value="camion">Camion</option>

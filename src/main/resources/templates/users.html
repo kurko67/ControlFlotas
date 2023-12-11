@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+    <!-- sect2 -->
+    <div class="body-wrapper">
+
+        <aside th:replace="layout/layout :: header"></aside>
+
+        <!-- sect3 -->
+        <div class="container-fluid">
+
+            <!-- contenido -->
+            <div class="container-fluid">
+                <!--  Row 1 -->
+
+                <div class="row">
+                    <div th:replace="layout/layout :: notifications"></div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="px-4 py-3 border-bottom">
+                                <h5 class="card-title fw-semibold mb-0">Cargar nuevo usuario</h5>
+                            </div>
+                            <form th:action="@{/users/create_user}" th:object="${usuario}" method="post">
+                                <div class="card-body p-4">
+                                    <div class="mb-4">
+                                        <label for="username" class="form-label fw-semibold">Nombre de usuario</label>
+                                        <input type="text" th:field="*{username}" class="form-control" placeholder="Nombre de usuario" id="username"/>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="password" class="form-label fw-semibold">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña"  th:field="*{password}" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="nombreApellido" class="form-label fw-semibold">Nombre y Apellido</label>
+                                        <input type="text" class="form-control" name = "nombreApellido" id="nombreApellido" placeholder="Nombre y apellido" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="cuil" class="form-label fw-semibold">CUIL</label>
+                                        <input type="number" class="form-control" placeholder="CUIL" id="cuil" name="cuil" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="numeroTelefono" class="form-label fw-semibold">Número Telefono</label>
+                                        <input type="number" class="form-control" id="numeroTelefono" name="numeroTelefono" placeholder="Número teléfono" required>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="direccion" class="form-label fw-semibold">Direccion</label>
+                                        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Dirección" required>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label for="vencimientoLicencia" class="form-label fw-semibold">Próximo vencimiento licencia</label>
+                                        <input type="Date" class="form-control" name="vencimientoLicencia" id="vencimientoLicencia" placeholder="Vencimiento licencia de conducir">
+                                    </div>
+                                    <BUtton class="btn btn-primary">Generar usuario</BUtton>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- fin contenido -->
+
+                <footer th:replace="layout/layout :: footer"></footer>
+                <!-- fin sect3 -->
+            </div>
+            <!-- fin sect2 -->
+        </div>
+
+        <!-- fin sect1 -->
+    </div>
+
+    <statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>

@@ -23,12 +23,12 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into rol(nombre, id_usuario) values ('ROLE_USER', :valor1)", nativeQuery = true)
+    @Query(value = "insert into roles(nombre, id_usuario) values ('ROLE_USER', :valor1)", nativeQuery = true)
     void InsertRol(@Param("valor1") Long idUsuario);
 
     @Modifying
     @Transactional
-    @Query(value = "delete from rol where id_usuario = :valor1 ", nativeQuery = true)
+    @Query(value = "delete from roles where id_usuario = :valor1 ", nativeQuery = true)
     void DeleteRol(@Param("valor1") Long id);
 
     @Modifying
