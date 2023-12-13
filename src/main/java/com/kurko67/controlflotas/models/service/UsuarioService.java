@@ -47,6 +47,10 @@ public class UsuarioService implements UserDetailsService {
         usuarioDao.UpdatePassword(password, idsuario);
     }
 
+    public void ResetPassword(Long idsuario){
+        usuarioDao.ResetPassword(idsuario);
+    }
+
     public void InsertRol(Long idUsuario){
         usuarioDao.InsertRol(idUsuario);
     }

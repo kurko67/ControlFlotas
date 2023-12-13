@@ -18,8 +18,13 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "update usuario set password = ?1 where id_usuario = ?2", nativeQuery = true)
+    @Query(value = "update usuarios set password = ?1 where id_usuario = ?2", nativeQuery = true)
     void UpdatePassword(String password, Long idUsuario);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update usuarios set password = '$2a$10$561esWd5wPWJ.8ocbqMJnuZ4RmVPUTdPPpJMt4b5qnZ6wD9rM/Wn2' where id_usuario = ?1", nativeQuery = true)
+    void ResetPassword(Long idUsuario);
 
     @Modifying
     @Transactional
@@ -33,7 +38,7 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "update usuario set habilitado = :valor1 where id_usuario = :valor2 ", nativeQuery = true)
+    @Query(value = "update usuarios set habilitado = :valor1 where id_usuario = :valor2 ", nativeQuery = true)
     void HabilitarDeshabilitarUser(@Param("valor1") boolean habilitado,@Param("valor2") Long id);
 
 

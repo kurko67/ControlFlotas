@@ -70,8 +70,8 @@
                       </td>
                       <td th:text="${users.habilitado == true ? 'SI' : 'NO'}">
                       </td>
-                      <td><a class="btn btn-info btn-xs" th:href="@{/users/editar_usuario/} + ${users.idUsuario}">Editar Usuario</a>
-                        <span><a th:text="${users.habilitado == true ? 'Deshabilitar': 'Habilitar'}"  th:class="${users.habilitado == true} ? 'button btn btn-danger btn-xs' : 'button btn btn-success btn-xs'"  th:href="@{/users/users/editar/} + ${users.idUsuario}" role="button"
+                      <td><a class="btn btn-info btn-xs" th:href="@{/users/edit_user/reset_password/} + ${users.idUsuario}" onclick="return confirm('¿Estas seguro que quieres resetear la contraseña del usuario?');">Reset Password</a>
+                        <span><a th:text="${users.habilitado == true ? 'Deshabilitar': 'Habilitar'}"  th:class="${users.habilitado == true} ? 'button btn btn-danger btn-xs' : 'button btn btn-success btn-xs'"  th:href="@{/users/edit_user/enabledisabled/} + ${users.idUsuario}" role="button"
                                  onclick="return confirm('¿Estas seguro que quieres habilitar/deshabilitar el usuario?');" >Habilitar</a></span>
                       </td>
                     </tr>

@@ -16,10 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -98,8 +95,54 @@ public class UsuarioController {
 
     }
 
+    @GetMapping("/edit_user/reset_password/{id}")
+    public String editUser(@PathVariable(value = "id") Long id, RedirectAttributes flash, Model model){
+        Usuario usuario = null;
+        usuario = usuariodao.getOne(id);
+
+        if(usuario.getUsername().equals(null)){
+            flash.addFlashAttribute("error", "Usuario no encontrado");
+            return "redirect:/users/list-users";
+        }else{
+            if(id > 0){
+                usuariodao.ResetPassword(id);
+                flash.addFlashAttribute("success", "La contraseña predeterminada es 123");
+                return "redirect:/users/list-users";
+            }else{
+                flash.addFlashAttribute("error", "Usuario no encontrado");
+                return "redirect:/users/list-users";
+            }
+        }
+
+    }
 
 
+    @GetMapping("/edit_user/enabledisabled/{id}")
+    public String enabledDisabledUsuario(@PathVariable(value = "id") Long id, RedirectAttributes flash){
+
+        Usuario usuario = null;
+        usuario = usuariodao.getOne(id);
+
+        if(usuario == null){
+            flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
+            return "redirect:/users/list-users";
+        }
+
+        boolean habilitado;
+
+        if(usuario.isHabilitado() == true){
+            habilitado = false;
+            flash.addFlashAttribute("warning", "Usuario dado de baja");
+        }else{
+            habilitado = true;
+            flash.addFlashAttribute("success", "Usuario habilitado");
+        }
+
+
+        usuariodao.HabilitarDeshabilitarUser(habilitado,id);
+        return "redirect:/users/list-users";
+
+    }
 
 
 }
