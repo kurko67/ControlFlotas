@@ -12,6 +12,8 @@ import java.util.Date;
 @Table(name="mantenimientos")
 public class Mantenimiento implements Serializable {
 
+    //Esta clase en realidad es una "orden de trabajo"
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Forma de generacion de la llave primaria ya que especificamos en la bd q AI
     private Long idMantenimiento;
@@ -19,7 +21,6 @@ public class Mantenimiento implements Serializable {
     private String descripcion;
     private Double costo;
     private Date created_at;
-    private Long dias_antes_alerta;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_vencimiento;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
