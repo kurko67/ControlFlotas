@@ -1,7 +1,9 @@
 package com.kurko67.controlflotas.controllers;
 
+import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Mantenimiento;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +12,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/maintenance")
@@ -29,21 +29,27 @@ public class MantenimientoController {
     @Autowired
     private IMantenimientoService mantenimientoService;
 
+    @Autowired
+    private IConductorService conductorService;
+
     @RequestMapping("/new/{id}")
     public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model,
                                @AuthenticationPrincipal User user){
 
+        List<Conductor> conductores = conductorService.findAll();
         Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);
         Mantenimiento mantenimiento = new Mantenimiento();
+        mantenimiento.setEstado("ACTIVO");
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("vehiculo", vehiculo);
+        model.addAttribute("conductores", conductores);
         return "maintenance";
 
     }
 
 
     @PostMapping("/nuevo")
-    public String nuevoMantenimiento(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, BindingResult result, Model model,
+    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, BindingResult result, Model model,
                                      RedirectAttributes flash,@AuthenticationPrincipal User user){
 
         System.out.println(idVehiculo);
@@ -59,6 +65,22 @@ public class MantenimientoController {
         mantenimientoService.save(mantenimiento);
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
+    }
+
+    @GetMapping("/view-maintenance/{id}")
+    public String viewMaintenanceById(@PathVariable(value = "id") Long idMaintenance, Model model,
+                                  @AuthenticationPrincipal User user, RedirectAttributes flash){
+
+        Mantenimiento mantenimiento = null;
+        mantenimiento = mantenimientoService.findOne(idMaintenance);
+
+        if(mantenimiento == null || idMaintenance < 0){
+            flash.addFlashAttribute("error", "No se encuentra mantenimiento");
+            return "redirect:/vehicles/list-vehicles";
+        }
+
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "view-maintenance";
     }
 
 

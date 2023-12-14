@@ -34,8 +34,15 @@
               <form th:action="@{/maintenance/nuevo}" th:object="${mantenimiento}" method="post">
                 <div class="card-body p-4">
                   <div class="mb-4">
+                    <label class="form-label fw-semibold">Quien realizara la Orden de Trabajo?</label>
+                    <select id="conductorid" name="conductorid" class="form-select" aria-label="Seleccionar opción" th:field="*{conductor}"  required>
+                      <option value="0" selected>Sin responsable asignado</option>
+                      <option th:each="conductor : ${conductores}"  th:value="${conductor.idConductor}"  th:text="${conductor.nombreApellido}"></option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
                     <label class="form-label fw-semibold">Tipo</label>
-                    <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}">
+                    <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}" required>
                       <option value="preventivo">Preventivo</option>
                       <option value="correctivo">Correctivo</option>
                     </select>
@@ -43,7 +50,7 @@
                   <input type="hidden"id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
                   <div class="mb-4">
                     <label for="select1" class="form-label fw-semibold">Selecciona una categoría:</label>
-                    <select id="select1" onchange="actualizarSelect2()" class="form-select">
+                    <select id="select1" onchange="actualizarSelect2()" class="form-select" th:field="*{categoriaAveria}" required>
                       <option value="sin-seleccion" selected>selecciona categoria</option>
                       <option value="preventivo">Mantenimiento Preventivo</option>
                       <option value="liquido-fluidos">Liquido y Fluidos</option>
@@ -59,27 +66,19 @@
                   <div class="mb-4">
                     <!-- Segundo Select (Inicialmente Vacío) -->
                     <label for="select2" class="form-label fw-semibold">Selecciona un elemento:</label>
-                    <select id="select2" class="form-select">
+                    <select id="select2" class="form-select" th:field="*{subCategoriaAveria}" required>
                       <option value="" disabled selected>Selecciona primero una categoría</option>
                     </select>
                   </div>
                   <div class="mb-4">
                     <label for="descripcion" class="form-label fw-semibold">Descripcion</label>
-                    <input type="text" class="form-control" id="descripcion" placeholder="Descripcion de la tarea"  th:field="*{descripcion}">
-                  </div>
-                  <div class="mb-4">
-                    <label for="costo" class="form-label fw-semibold">Costo</label>
-                    <input type="number" class="form-control" id="costo" placeholder="Costo del servicio"  th:field="*{costo}">
-                  </div>
-                  <div class="mb-4">
-                    <label for="dias_antes_alerta" class="form-label fw-semibold">Alerta</label>
-                    <input type="number" class="form-control" placeholder="Cuantos dias antes quieres recibir la alerta?" id="dias_antes_alerta" th:field="*{dias_antes_alerta}">
+                    <textarea class="form-control" id="descripcion" placeholder="De mas detalles de la anomalia, cuando hace la falla, etc."  th:field="*{descripcion}" rows="4" cols="50" ></textarea>
                   </div>
                   <div class="mb-4">
                     <label for="fecha_vencimiento" class="form-label fw-semibold">Vencimiento</label>
-                    <input type="date" class="form-control" id="fecha_vencimiento" placeholder="Vencimiento de la alerta"  th:field="*{fecha_vencimiento}">
+                    <input type="date" class="form-control" id="fecha_vencimiento" placeholder="Fecha limite de OT"  th:field="*{fecha_vencimiento}" required>
                   </div>
-                  <BUtton class="btn btn-primary">Enviar</BUtton>
+                  <button class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>

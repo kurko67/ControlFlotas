@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <!-- contenido -->
+    <div class="container-fluid">
+      <!--  Row 1 -->
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="w-100">
+            <div class="chat-container h-100 w-100">
+              <div class="chat-box-inner-part h-100">
+                <div class="chatting-box app-email-chatting-box">
+                  <div
+                          class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
+                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + 'Estado: ' + ${mantenimiento.estado}"></h5>
+                    <ul class="list-unstyled mb-0 d-flex align-items-center">
+                      <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-title="Edit">
+                        <a class="d-block text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                           href="javascript:void(0)">
+                          <i class="ti ti-pencil"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="position-relative overflow-hidden">
+                    <div class="position-relative">
+                      <div class="chat-box p-9" style="height: calc(100vh - 128px)" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: -20px;">
+                          <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                          </div>
+                          <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                              <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                   aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                                <div class="simplebar-content" style="padding: 20px;">
+                                  <div class="chat-list chat active-chat" data-user-id="1">
+                                    <!-- Informacion sobre el vehicyulo -->
+                                    <div class="row">
+                                      <div class="col-4 mb-7">
+                                        <p class="mb-1 fs-2">Responsable:</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(mantenimiento.conductor.nombreApellido)}"></h6>
+                                      </div>
+                                      <div class="col-8 mb-7">
+                                        <p class="mb-1 fs-2">Fecha inicio</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.created_at, 'dd-MM-yyyy')}"></h6>
+                                        <p class="mb-1 fs-2">Fecha Vencimiento</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.fecha_vencimiento, 'dd-MM-yyyy')}"></h6>
+                                        <p class="mb-1 fs-2">Fecha Realización</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}"></h6>
+                                      </div>
+                                      <div class="col-12 mb-9">
+                                        <p class="mb-1 fs-2">Vehiculo:</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.vehiculo.patente}"></h6>
+                                      </div>
+                                      <div class="col-4 mb-7">
+                                        <p class="mb-1 fs-2">Costo</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.costo}"></h6>
+                                      </div>
+                                      <div class="col-8 mb-7">
+                                        <p class="mb-1 fs-2">Categoria Averia</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.categoriaAveria}"></h6>
+                                        <p class="mb-1 fs-2">Avería</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.subCategoriaAveria}"></h6>
+                                        <p class="mb-1 fs-2">Avería</p>
+                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.descripcion}"></h6>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <!-- fin contenido -->
+
+                              <footer th:replace="layout/layout :: footer"></footer>
+                              <!-- fin sect3 -->
+                            </div>
+                            <!-- fin sect2 -->
+                          </div>
+
+                          <!-- fin sect1 -->
+                        </div>
+
+                        <statics th:replace="layout/layout :: statics"></statics>
+
+
+
+</body>
+</html>

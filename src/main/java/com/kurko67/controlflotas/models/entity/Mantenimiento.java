@@ -20,16 +20,25 @@ public class Mantenimiento implements Serializable {
     private String tipo; //Preventivo  o Correctivo
     private String descripcion;
     private Double costo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_vencimiento;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_realizacion;
-    private double km;
     //Relacion muchos mantenimientos a un veichulo
     @ManyToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
+
+    private String estado; // activo, finalizado
+    private String categoriaAveria;
+    private String subCategoriaAveria;
+
+    //Relacion muchos mantenimientos a un veichulo
+    @ManyToOne
+    @JoinColumn(name = "conductor_id")
+    private Conductor conductor;
 
     private static final long serialVersionUID = 1L;
 
