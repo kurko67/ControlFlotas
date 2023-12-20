@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class IMantenimientoServiceImpl implements IMantenimientoService{
 
@@ -21,6 +23,18 @@ public class IMantenimientoServiceImpl implements IMantenimientoService{
     @Transactional(readOnly = true)
     public Page<Mantenimiento> findAll(Pageable pageable) {
         return mantenimientoDao.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Mantenimiento> findAll() {
+        return (List<Mantenimiento>) mantenimientoDao.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Mantenimiento> findAllShort() {
+        return (List<Mantenimiento>) mantenimientoDao.findAllShort();
     }
 
     @Override

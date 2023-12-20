@@ -31,7 +31,7 @@
                 <div class="chatting-box app-email-chatting-box">
                   <div
                           class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
-                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + 'Estado: ' + ${mantenimiento.estado}"></h5>
+                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + ', Estado: ' + ${mantenimiento.estado}"></h5>
                     <ul class="list-unstyled mb-0 d-flex align-items-center">
                       <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-title="Edit">
@@ -58,38 +58,61 @@
                                   <div class="chat-list chat active-chat" data-user-id="1">
                                     <!-- Informacion sobre el vehicyulo -->
                                     <div class="row">
-                                      <div class="col-4 mb-7">
-                                        <p class="mb-1 fs-2">Responsable:</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(mantenimiento.conductor.nombreApellido)}"></h6>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="patente" class="form-label fs-2">Patente:</label>
+                                        <input type="text" class="form-control" id="patente" th:value="${#strings.capitalize(mantenimiento.vehiculo.patente)}" readonly>
                                       </div>
-                                      <div class="col-8 mb-7">
-                                        <p class="mb-1 fs-2">Fecha inicio</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.created_at, 'dd-MM-yyyy')}"></h6>
-                                        <p class="mb-1 fs-2">Fecha Vencimiento</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.fecha_vencimiento, 'dd-MM-yyyy')}"></h6>
-                                        <p class="mb-1 fs-2">Fecha Realización</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}"></h6>
+
+
+                                      <div class="col-12 mb-3">
+                                        <label for="responsable" class="form-label fs-2">Responsable:</label>
+                                        <input type="text" class="form-control" id="responsable" th:value="${#strings.capitalize(mantenimiento.conductor.nombreApellido)}" readonly>
                                       </div>
-                                      <div class="col-12 mb-9">
-                                        <p class="mb-1 fs-2">Vehiculo:</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.vehiculo.patente}"></h6>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="fechaInicio" class="form-label fs-2">Fecha inicio:</label>
+                                        <input type="text" class="form-control" id="fechaInicio" th:value="${#dates.format(mantenimiento.created_at, 'dd-MM-yyyy')}" readonly>
                                       </div>
-                                      <div class="col-4 mb-7">
-                                        <p class="mb-1 fs-2">Costo</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.costo}"></h6>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="fechaVencimiento" class="form-label fs-2">Fecha Vencimiento:</label>
+                                        <input type="text" class="form-control" id="fechaVencimiento" th:value="${#dates.format(mantenimiento.fecha_vencimiento, 'dd-MM-yyyy')}" readonly>
                                       </div>
-                                      <div class="col-8 mb-7">
-                                        <p class="mb-1 fs-2">Categoria Averia</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.categoriaAveria}"></h6>
-                                        <p class="mb-1 fs-2">Avería</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.subCategoriaAveria}"></h6>
-                                        <p class="mb-1 fs-2">Avería</p>
-                                        <h6 class="fw-semibold mb-0" th:text="${mantenimiento.descripcion}"></h6>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="fechaRealizacion" class="form-label fs-2">Fecha Realizacion:</label>
+                                        <input type="text" class="form-control" id="fechaRealizacion" th:value="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}" readonly>
                                       </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="categoriaAveria" class="form-label fs-2">Zona averia:</label>
+                                        <input type="text" class="form-control" id="categoriaAveria" th:value="${#strings.capitalize(mantenimiento.categoriaAveria)}" readonly>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="averiaprincipal" class="form-label fs-2">Averia:</label>
+                                        <input type="text" class="form-control" id="averiaprincipal" th:value="${#strings.capitalize(mantenimiento.subCategoriaAveria)}" readonly>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="descripcion" class="form-label fs-2">Descripcion:</label>
+                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion)}" readonly></textarea>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="costo" class="form-label fs-2">Costo:</label>
+                                        <input type="number" class="form-control" id="costo" th:value="${#strings.capitalize(mantenimiento.costo)}" readonly>
+                                      </div>
+
+                                      <!-- Agrega más bloques similares para cada campo -->
+
                                     </div>
                                   </div>
                                 </div>
                               </div>
+
+
 
                               <!-- fin contenido -->
 

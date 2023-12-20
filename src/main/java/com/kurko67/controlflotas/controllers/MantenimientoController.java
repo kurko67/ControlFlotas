@@ -39,7 +39,6 @@ public class MantenimientoController {
         List<Conductor> conductores = conductorService.findAll();
         Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);
         Mantenimiento mantenimiento = new Mantenimiento();
-        mantenimiento.setEstado("ACTIVO");
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("vehiculo", vehiculo);
         model.addAttribute("conductores", conductores);
@@ -60,6 +59,7 @@ public class MantenimientoController {
         }
 
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
+        mantenimiento.setEstado("ACTIVO");
         mantenimiento.setCreated_at(new Date());
         mantenimiento.setVehiculo(vehiculo);
         mantenimientoService.save(mantenimiento);

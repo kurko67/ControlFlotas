@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:fragment="head">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
+  <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+  <link rel="stylesheet" th:href="@{/css/flotas.css}" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css"/>
+</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+
+
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+
+          <div th:replace="layout/layout :: notifications"></div>
+
+          <h2>Calendario de Tareas</h2>
+
+          <div id="calendar"></div>
+
+          <!-- Lista de tareas -->
+
+          <h3>Tareas:</h3>
+
+          <ul>
+
+            <li th:each="mantenimiento : ${mantenimientos}">
+              <span th:text="${mantenimiento.created_at}"></span> - <span th:text="${mantenimiento.descripcion}"></span>
+            </li>
+
+          </ul>
+
+
+
+      <!-- fin contenido -->
+
+
+
+    </div>
+
+
+
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- fin sect3 -->
+  </div>
+  <!-- fin sect2 -->
+</div>
+
+<!-- fin sect1 -->
+</div>
+
+<statics th:replace="layout/layout :: statics"></statics>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
+
+  <!-- Configuración FullCalendar -->
+  <script th:inline="javascript">
+    $(document).ready(function () {
+        var mantenimientos = /*[[${mantenimientos}]]*/ [];
+        alert(JSON.stringify(mantenimientos)); // Agrega una alerta para depuración
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            events: mantenimientos,
+            eventClick: function (event) {
+                alert('Mantenimiento: ' + event.title);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

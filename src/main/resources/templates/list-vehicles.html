@@ -73,8 +73,7 @@
                                             <span class="usr-location" th:text="${vehiculo.anio}"></span>
                                         </td>
                                         <td>
-                                            <span class="usr-ph-no" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"
-                                            ></span>
+                                            <span class="usr-ph-no" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"></span>
                                         </td>
                                         <td>
                                             <div class="action-btn">

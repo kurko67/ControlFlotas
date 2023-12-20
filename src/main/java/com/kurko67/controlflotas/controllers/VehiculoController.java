@@ -92,7 +92,6 @@ public class VehiculoController {
 
         model.addAttribute("vehiculos", vehiculos);
         model.addAttribute("page", pageRender);
-        //model.addAttribute("user", user.getUsername());
         return "list-vehicles";
     }
 
