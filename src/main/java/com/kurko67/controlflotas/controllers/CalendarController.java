@@ -1,31 +1,42 @@
 package com.kurko67.controlflotas.controllers;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.kurko67.controlflotas.models.dao.IMantenimientoDao;
 import com.kurko67.controlflotas.models.entity.Mantenimiento;
-import com.kurko67.controlflotas.models.service.IMantenimientoService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-@Controller
-@RequestMapping("/calendar")
+
+@RestController
 public class CalendarController {
 
+
     @Autowired
-    IMantenimientoService mantenimientoService;
+    IMantenimientoDao er;
 
-    @GetMapping("/view")
-    public String viewCalendar(Model model){
 
-        List<Mantenimiento> mantenimientos = mantenimientoService.findAllShort();
-        System.out.println("mantenimientos :" + mantenimientos );
-        model.addAttribute("mantenimientos", mantenimientos);
-        return "calendar";
+    @GetMapping("/api/events")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    Iterable<Object[]> events(@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) throws UnsupportedEncodingException {
+
+        return er.findBetween(start, end);
 
     }
+
+
+
+
+
 
 
 }

@@ -7,6 +7,7 @@ import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+
+import static com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat.DATE_TIME;
 
 @Controller
 @RequestMapping("/maintenance")
@@ -61,6 +65,8 @@ public class MantenimientoController {
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
         mantenimiento.setEstado("ACTIVO");
         mantenimiento.setCreated_at(new Date());
+        mantenimiento.setStart(LocalDateTime.now());
+        mantenimiento.setEnd(LocalDateTime.now());
         mantenimiento.setVehiculo(vehiculo);
         mantenimientoService.save(mantenimiento);
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;

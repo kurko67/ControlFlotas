@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,7 +19,7 @@ public class Mantenimiento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Forma de generacion de la llave primaria ya que especificamos en la bd q AI
     private Long idMantenimiento;
     private String tipo; //Preventivo  o Correctivo
-    private String descripcion;
+    private String text;
     private Double costo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
@@ -26,6 +27,10 @@ public class Mantenimiento implements Serializable {
     private Date fecha_vencimiento;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_realizacion;
+    @Column(name = "event_start")
+    LocalDateTime start;
+    @Column(name = "event_end")
+    LocalDateTime end;
     //Relacion muchos mantenimientos a un veichulo
     @ManyToOne
     @JoinColumn(name = "vehiculo_id")
@@ -39,6 +44,10 @@ public class Mantenimiento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
+
+    public Mantenimiento() {
+
+    }
 
     private static final long serialVersionUID = 1L;
 

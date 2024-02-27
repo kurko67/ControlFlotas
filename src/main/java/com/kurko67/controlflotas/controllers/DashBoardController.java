@@ -17,4 +17,11 @@ public class DashBoardController {
 
     }
 
+    @GetMapping("/events")
+    public String viewCalendar(Model model){
+
+        return "calendar";
+
+    }
+
 }
