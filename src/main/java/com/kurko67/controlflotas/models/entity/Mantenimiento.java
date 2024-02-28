@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Data
@@ -47,6 +48,13 @@ public class Mantenimiento implements Serializable {
 
     public Mantenimiento() {
 
+    }
+
+    public Mantenimiento(Long id, String text, LocalDateTime start, LocalDateTime end) {
+        this.idMantenimiento = id;
+        this.text = text;
+        this.start = start;
+        this.end = end;
     }
 
     private static final long serialVersionUID = 1L;
