@@ -50,12 +50,12 @@
       <script th:src="@{/js/daypilot/daypilot-all.min.js}"></script>
 
       <script>
-        const datePicker = new DayPilot.Navigator("nav", {
-   showMonths: 2,
-   skipMonths: 2,
-   selectMode: "Month",
-   onTimeRangeSelected: args => {
-     calendar.update({
+       const datePicker = new DayPilot.Navigator("nav", {
+       showMonths: 2,
+       skipMonths: 2,
+       selectMode: "Month",
+       onTimeRangeSelected: args => {
+       calendar.update({
        startDate: args.day
      });
      calendar.events.load("/api/events");
@@ -213,6 +213,7 @@
 
 
       <style>
+
         .month_default_event_inner {
             border-radius: 20px;
         }
