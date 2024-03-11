@@ -17,7 +17,7 @@ public interface IMantenimientoDao extends PagingAndSortingRepository<Mantenimie
     List<Mantenimiento> findAllShort();
 
     @Query("select e.idMantenimiento, e.text, e.start, e.end FROM Mantenimiento e WHERE e.end > :from AND e.start < :to")
-    public List<Object[]> findBetween(@Param("from") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, @Param("to") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime end);
+    public List<Object[]> findBetween(@Param("from") LocalDateTime start, @Param("to") @DateTimeFormat(iso= DateTimeFormat.ISO.DATE_TIME) LocalDateTime end);
 
 
 }

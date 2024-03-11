@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,14 +22,6 @@ public class CalendarController {
     @Autowired
     IMantenimientoDao er;
 
-
-    @RequestMapping(value = "/api/eventss", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    Iterable<Object[]> events(@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) throws UnsupportedEncodingException {
-
-        return er.findBetween(start, end);
-
-    }
 
     @RequestMapping(value = "/api/events", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonSerialize(using = LocalDateTimeSerializer.class)

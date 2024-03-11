@@ -25,11 +25,12 @@ public class Mantenimiento implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fecha_vencimiento;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_realizacion;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "event_start")
     LocalDateTime start;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "event_end")
     LocalDateTime end;
     //Relacion muchos mantenimientos a un veichulo

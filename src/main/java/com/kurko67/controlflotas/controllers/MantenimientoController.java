@@ -1,8 +1,8 @@
 package com.kurko67.controlflotas.controllers;
 
-import com.kurko67.controlflotas.models.entity.Conductor;
-import com.kurko67.controlflotas.models.entity.Mantenimiento;
-import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.dao.INotificacionDao;
+import com.kurko67.controlflotas.models.dao.IUsuarioDao;
+import com.kurko67.controlflotas.models.entity.*;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
@@ -36,6 +36,12 @@ public class MantenimientoController {
     @Autowired
     private IConductorService conductorService;
 
+    @Autowired
+    private INotificacionDao notificacionDao;
+
+    @Autowired
+    private IUsuarioDao usuarioDao;
+
     @RequestMapping("/new/{id}")
     public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model,
                                @AuthenticationPrincipal User user){
@@ -52,22 +58,34 @@ public class MantenimientoController {
 
 
     @PostMapping("/nuevo")
-    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, BindingResult result, Model model,
+    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, BindingResult result, Model model,
                                      RedirectAttributes flash,@AuthenticationPrincipal User user){
 
-        System.out.println(idVehiculo);
+
 
         if(result.hasErrors()){
             flash.addFlashAttribute("error", "Error en la carga de datos");
             return "redirect:/view-vehicles/" + idVehiculo;
         }
 
+        System.out.println(user);
+
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
         mantenimiento.setEstado("ACTIVO");
         mantenimiento.setCreated_at(new Date());
-        mantenimiento.setStart(LocalDateTime.now());
-        mantenimiento.setEnd(LocalDateTime.now());
         mantenimiento.setVehiculo(vehiculo);
+        mantenimiento.setStart(start);
+        mantenimiento.setEnd(start);
+
+        Notificacion notificacion = new Notificacion();
+
+        //Buscar emisor
+        Usuario emisor = usuarioDao.findByUsername(user.getUsername());
+        notificacion.setEmisor(emisor);
+
+
+
+
         mantenimientoService.save(mantenimiento);
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 

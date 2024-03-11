@@ -75,8 +75,8 @@
                     <textarea class="form-control" id="text" placeholder="De mas detalles de la anomalia, cuando hace la falla, etc."  th:field="*{text}" rows="4" cols="50" ></textarea>
                   </div>
                   <div class="mb-4">
-                    <label for="fecha_vencimiento" class="form-label fw-semibold">Vencimiento</label>
-                    <input type="date" class="form-control" id="fecha_vencimiento" placeholder="Fecha limite de OT"  th:field="*{fecha_vencimiento}" required>
+                    <label for="start" class="form-label fw-semibold">Fecha programada para el ingreso del vehiculo al taller</label>
+                    <input type="datetime-local" class="form-control" id="start" name="start" placeholder="Fecha programada para el ingreso del vehiculo al taller" required>
                   </div>
                   <button class="btn btn-primary">Enviar</button>
                 </div>

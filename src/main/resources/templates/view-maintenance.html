@@ -71,13 +71,8 @@
                                       </div>
 
                                       <div class="col-12 mb-3">
-                                        <label for="fechaInicio" class="form-label fs-2">Fecha inicio:</label>
-                                        <input type="text" class="form-control" id="fechaInicio" th:value="${#dates.format(mantenimiento.created_at, 'dd-MM-yyyy')}" readonly>
-                                      </div>
-
-                                      <div class="col-12 mb-3">
-                                        <label for="fechaVencimiento" class="form-label fs-2">Fecha Vencimiento:</label>
-                                        <input type="text" class="form-control" id="fechaVencimiento" th:value="${#dates.format(mantenimiento.fecha_vencimiento, 'dd-MM-yyyy')}" readonly>
+                                        <label for="start" class="form-label fs-2">Ingreso:</label>
+                                        <input type="text" class="form-control" id="start" th:value="${#dates.format(mantenimiento.start, 'dd-MM-yyyy')}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
@@ -97,7 +92,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="descripcion" class="form-label fs-2">Descripcion:</label>
-                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion)}" readonly></textarea>
+                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.text)}" readonly></textarea>
                                       </div>
 
                                       <div class="col-12 mb-3">
