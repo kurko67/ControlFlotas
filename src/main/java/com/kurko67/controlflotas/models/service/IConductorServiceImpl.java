@@ -2,6 +2,7 @@ package com.kurko67.controlflotas.models.service;
 
 import com.kurko67.controlflotas.models.dao.IConductorDao;
 import com.kurko67.controlflotas.models.entity.Conductor;
+import com.kurko67.controlflotas.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,4 +45,8 @@ public class IConductorServiceImpl implements IConductorService{
     public void delete(Long id) {
         conductorDao.deleteById(id);
     }
+
+
+
+
 }

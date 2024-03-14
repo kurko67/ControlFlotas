@@ -26,7 +26,7 @@ public class Notificacion implements Serializable {
     private String asunto;
     private String mensaje;
 
-    private String tipo; //por ejemplo, mensaje, alerta, recordatorio
+    private String tipo; //por ejemplo, mensaje, alerta, recordatorio, orden_trabajo
 
     private Date created_at;
 

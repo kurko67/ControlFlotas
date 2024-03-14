@@ -58,7 +58,7 @@ public class MantenimientoController {
 
 
     @PostMapping("/nuevo")
-    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo, @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, BindingResult result, Model model,
+    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo,@RequestParam Long conductor,  @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, BindingResult result, Model model,
                                      RedirectAttributes flash,@AuthenticationPrincipal User user){
 
 
@@ -76,17 +76,30 @@ public class MantenimientoController {
         mantenimiento.setVehiculo(vehiculo);
         mantenimiento.setStart(start);
         mantenimiento.setEnd(start);
+        mantenimientoService.save(mantenimiento);
 
         Notificacion notificacion = new Notificacion();
 
-        //Buscar emisor
+        //Buscar emisor y definir emisor
         Usuario emisor = usuarioDao.findByUsername(user.getUsername());
         notificacion.setEmisor(emisor);
 
+        //buscar conductor usuario y definir receptor
+        Conductor conductor_id = conductorService.findOne(conductor);
+        Usuario receptor = conductor_id.getUsuario();
+        notificacion.setReceptor(receptor);
 
+        notificacion.setAsunto("Nueva Orden de Trabajo");
+        notificacion.setMensaje("Se asigno la OT para el vehiculo: "
+        + vehiculo.getMarca() + " " + vehiculo.getPatente() + " Para realizar el sgte" +
+                "mantenimiento: " + mantenimiento.getCategoriaAveria() + mantenimiento.getSubCategoriaAveria() + "" +
+                "para la fecha:" + mantenimiento.getStart() + " Principal problema: " + mantenimiento.getText());
 
+        notificacion.setTipo("ORDEN_TRABAJO");
+        notificacion.setCreated_at(new Date());
 
-        mantenimientoService.save(mantenimiento);
+        notificacionDao.save(notificacion);
+
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
     }

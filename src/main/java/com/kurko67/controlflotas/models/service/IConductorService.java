@@ -1,6 +1,7 @@
 package com.kurko67.controlflotas.models.service;
 
 import com.kurko67.controlflotas.models.entity.Conductor;
+import com.kurko67.controlflotas.models.entity.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -13,6 +14,7 @@ public interface IConductorService {
     public void save(Conductor conductor);
     public Conductor findOne(Long id);
     public void delete(Long id);
+
 
 
 }
