@@ -21,32 +21,7 @@
     </div>
 </li>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Realizar la solicitud AJAX a /notificaciones
-        cargarNotificaciones();
-    });
 
-    function cargarNotificaciones() {
-    fetch('/notificaciones')
-    .then(response => response.json())
-    .then(notificaciones => {
-        // Procesar las notificaciones
-        const container = document.getElementById('notificaciones-container');
-        notificaciones.forEach(asunto => {
-            // Crear un elemento div para cada notificación
-            const div = document.createElement('div');
-            // Agregar el asunto de la notificación como texto
-            const asuntoElement = document.createElement('p');
-            asuntoElement.textContent = 'Asunto: ' + asunto;
-            div.appendChild(asuntoElement);
-            // Agregar el div al contenedor
-            container.appendChild(div);
-        });
-    })
-    .catch(error => console.error('Error al cargar las notificaciones:', error));
-}
-</script>
 
 </body>
 </html>
