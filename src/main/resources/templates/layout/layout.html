@@ -97,36 +97,13 @@
                 </ul>
                 <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                     <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-primary rounded-circle"></div>
-                            </a>
-                            <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up"
-                                 aria-labelledby="drop2">
-                                <div class="d-flex align-items-center justify-content-between py-3 px-7">
-                                    <h5 class="mb-0 fs-5 fw-semibold">Notificaciones</h5>
-                                </div>
-                                <div class="message-body" data-simplebar>
-                                    <a href="javascript:void(0)"
-                                       class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <div class="w-75 d-inline-block v-middle">
-                                            <h6 class="mb-1 fw-semibold lh-base">CheckList #1</h6>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)"
-                                       class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <div class="w-75 d-inline-block v-middle">
-                                            <h6 class="mb-1 fw-semibold lh-base">Finalizacion de servicio</h6>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="py-6 px-7 mb-1">
-                                    <button class="btn btn-outline-primary w-100">Ver todas las notificaciones</button>
-                                </div>
 
-                            </div>
+                    <!-- notificaciones -->
+
+                        <li th:replace="layout/notifications :: notifications"></li>
+
+                        <!-- notificaciones -->
+
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop"
                                data-bs-toggle="dropdown" aria-expanded="false">
