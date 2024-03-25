@@ -35,6 +35,8 @@ public class NotificationsController {
         Usuario receptor = usuariodao.findByUsername(user.getUsername());
         Pageable pageable = PageRequest.of(0, 5); // Obtener las primeras 5 notificaciones
 
+
+
         List<Object[]> asuntosYMensajes = notificacionDao.findLastFiveByReceptor(receptor, pageable);
         Map<Long, String> notificaciones = new HashMap<>();
         for (Object[] asuntoYMensaje : asuntosYMensajes) {
