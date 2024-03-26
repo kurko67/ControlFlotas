@@ -31,5 +31,5 @@ function cargarNotificaciones() {
 }
 function mostrarMensaje(id) {
     // Redireccionar a otra página HTML donde se pueda ver el mensaje completo
-    window.location.href = '/ver-mensaje.html?id=' + id; // Reemplaza 'ver-mensaje.html' con la ruta de tu HTML de destino
+    window.location.href = '/view-notifications/' + id; // Reemplaza 'ver-mensaje.html' con la ruta de tu HTML de destino
 }

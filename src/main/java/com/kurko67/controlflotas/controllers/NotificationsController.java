@@ -12,14 +12,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class NotificationsController {
@@ -37,8 +35,6 @@ public class NotificationsController {
         Usuario receptor = usuariodao.findByUsername(user.getUsername());
         Pageable pageable = PageRequest.of(0, 5); // Obtener las primeras 5 notificaciones
 
-
-
         List<Object[]> asuntosYMensajes = notificacionDao.findLastFiveByReceptor(receptor, pageable);
         Map<Long, String> notificaciones = new HashMap<>();
         for (Object[] asuntoYMensaje : asuntosYMensajes) {
@@ -50,8 +46,13 @@ public class NotificationsController {
     }
 
     @GetMapping("/view-notifications/{id}")
-    public String ver_notificaciones(){
-        return "view-notifications";
+    public String ver_notificaciones(@PathVariable(value = "id") Long idNotificacion, Model model){
+
+       Notificacion notificacion = notificacionDao.findNotificacionById(idNotificacion);
+
+       model.addAttribute("notificacion", notificacion);
+
+       return "view-notifications";
     }
 
 
