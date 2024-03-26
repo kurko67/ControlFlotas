@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 public class NotificationsController {
 
     @Autowired
@@ -30,6 +31,7 @@ public class NotificationsController {
     IUsuarioDao usuariodao;
 
     @GetMapping("/notificaciones")
+    @ResponseBody
     public Map<Long, String> mostrarNotificaciones(@AuthenticationPrincipal User user) {
 
         Usuario receptor = usuariodao.findByUsername(user.getUsername());
@@ -45,6 +47,11 @@ public class NotificationsController {
             notificaciones.put(id, asunto);
         }
         return notificaciones;
+    }
+
+    @GetMapping("/view-notifications/{id}")
+    public String ver_notificaciones(){
+        return "view-notifications";
     }
 
 

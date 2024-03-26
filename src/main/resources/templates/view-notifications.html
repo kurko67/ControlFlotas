@@ -23,138 +23,589 @@
       <div class="container-fluid">
         <!--  Row 1 -->
 
-        <div class="row">
-          <div class="col-lg-12">
+        <div class="card overflow-hidden chat-application">
+        <div class="d-flex align-items-center justify-content-between gap-6 m-3 d-lg-none">
+
+        </div>
+        <div class="d-flex w-100">
+          <div class="left-part border-end w-20 flex-shrink-0 d-none d-lg-block h-auto">
+
+          </div>
+          <div class="d-flex w-100">
+            <div class="min-width-340">
+              <div class="border-end user-chat-box h-100">
+                <div class="px-4 pt-9 pb-6 d-none d-lg-block">
+                  <form class="position-relative">
+                    <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search" /><i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
+                  </form>
+                </div>
+                <div class="app-chat">
+                  <ul class="chat-users mh-n100" data-simplebar>
+                    <li>
+                      <a href="javascript:void(0)" class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light-subtle" id="chat_user_1" data-user-id="1">
+
+                        <div class="position-relative w-100 ms-2">
+                          <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ml-2">Juan Pablo</span>
+                          <div class="d-flex align-items-center justify-content-between mb-2 mt-2">
+                            <h6 class="mb-0">Mantenimiento programado</h6>
+                          </div>
+                          <h6 class="fw-semibold text-dark">Scania ABC123</h6>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
             <div class="w-100">
               <div class="chat-container h-100 w-100">
                 <div class="chat-box-inner-part h-100">
                   <div class="chatting-box app-email-chatting-box">
-                    <div
-                            class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
-                      <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de vehiculo: ' + ${ vehiculo.patente }"></h5>
+                    <div class="p-9 py-3 border-bottom chat-meta-user">
                       <ul class="list-unstyled mb-0 d-flex align-items-center">
+                        <li class="d-lg-none d-block">
+                          <a class="text-dark back-btn px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                             href="javascript:void(0)">
+                            <i class="ti ti-arrow-left"></i>
+                          </a>
+                        </li>
                         <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
-                            data-bs-title="Edit">
+                            data-bs-title="Star">
+                          <a class="text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                             href="javascript:void(0)">
+                            <i class="ti ti-star"></i>
+                          </a>
+                        </li>
+                        <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="important">
                           <a class="d-block text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
                              href="javascript:void(0)">
-                            <i class="ti ti-pencil"></i>
+                            <i class="ti ti-alert-circle"></i>
+                          </a>
+                        </li>
+                        <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-title="Delete">
+                          <a class="text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                             href="javascript:void(0)">
+                            <i class="ti ti-trash"></i>
                           </a>
                         </li>
                       </ul>
                     </div>
-
                     <div class="position-relative overflow-hidden">
                       <div class="position-relative">
-                        <div class="chat-box p-9" style="height: calc(100vh - 128px)" data-simplebar="init">
-                          <div class="simplebar-wrapper" style="margin: -20px;">
-                            <div class="simplebar-height-auto-observer-wrapper">
-                              <div class="simplebar-height-auto-observer"></div>
+                        <div class="chat-box email-box mh-n100 p-9"
+                             data-simplebar="init">
+
+                          <div class="chat-list chat active-chat" data-user-id="1">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-8.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
                             </div>
-                            <div class="simplebar-mask">
-                              <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
-                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
-                                     aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
-                                  <div class="simplebar-content" style="padding: 20px;">
-                                    <div class="chat-list chat active-chat" data-user-id="1">
-                                      <!-- Informacion sobre el vehicyulo -->
-                                      <div class="row">
-                                        <div class="col-4 mb-7">
-                                          <p class="mb-1 fs-2">Tipo:</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.tipo)}"></h6>
-                                        </div>
-                                        <div class="col-8 mb-7">
-                                          <p class="mb-1 fs-2">Marca/Version - Modelo</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.marca + ', Modelo ' + vehiculo.anio)}"></h6>
-                                        </div>
-                                        <div class="col-12 mb-9">
-                                          <p class="mb-1 fs-2">Km al ultimo service:</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${vehiculo.km}"></h6>
-                                        </div>
-                                        <div class="col-4 mb-7">
-                                          <p class="mb-1 fs-2">Ubicacion</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#strings.capitalize(vehiculo.ubicacion)}"></h6>
-                                        </div>
-                                        <div class="col-8 mb-7">
-                                          <p class="mb-1 fs-2">Responsable</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"
-                                          ></h6>
-                                        </div>
-                                        <div class="col-4 mb-7">
-                                          <p class="mb-1 fs-2">Proximo Vencimiento VTV</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#dates.format(vehiculo.vencimientoVtv, 'dd-MM-yyyy')}"></h6>
-                                        </div>
-                                        <div class="col-8 mb-7">
-                                          <p class="mb-1 fs-2">Proximo Vencimiento Ruta</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#dates.format(vehiculo.vencimientoRuta, 'dd-MM-yyyy')}"></h6>
-                                        </div>
-                                        <div class="col-4 mb-7">
-                                          <p class="mb-1 fs-2">Proximo Vencimiento del Seguro</p>
-                                          <h6 class="fw-semibold mb-0" th:text="${#dates.format(vehiculo.vencimientoSeguro, 'dd-MM-yyyy')}"></h6>
-                                        </div>
-                                      </div>
-
-                                      <div class="d-flex align-items-center gap-2">
-                                        <a th:href="@{/maintenance/new/} + ${vehiculo.idVehiculo}" class="btn btn-primary fs-2">Nueva OT</a>
-                                      </div>
-
-                                      <br/>
-
-                                      <!-- Tabla de datos -->
-
-                                      <div class="border-bottom pb-7 mb-4">
-                                        <div th:if="${vehiculo.mantenimientos != null and !vehiculo.mantenimientos.empty}">
-                                          <div class="card card-body">
-                                            <div class="table-responsive">
-                                              <span><h6>Mantenimientos programados</h6></span>
-                                              <table class="table search-table align-middle text-nowrap">
-                                                <thead class="header-item">
-                                                <th>Tipo</th>
-                                                <th>Descripción</th>
-                                                <th>Fecha inicio</th>
-                                                <th>Action</th>
-                                                </thead>
-                                                <tbody>
-                                                <!-- start row -->
-                                                <tr class="search-items" th:each="mant: ${vehiculo.mantenimientos}">
-                                                  <td>
-                                                    <div class="user-meta-info">
-                                                      <h6 class="user-name mb-0" th:text="${mant.tipo}"></h6>
-                                                    </div>
-                                                  </td>
-                                                  <td>
-                                                    <span class="usr-email-addr" th:text="${mant.text}"></span>
-                                                  </td>
-                                                  <td>
-                                                    <span class="usr-location" th:text="${mant.start}"></span>
-                                                  </td>
-                                                  <td>
-                                                    <div class="action-btn">
-                                                      <a th:href="@{/maintenance/view-maintenance/} + ${mant.idMantenimiento}" class="btn btn-primary fs-2"> <i class="ti ti-eye fs-5"></i></a>
-                                                      </a>
-                                                    </div>
-                                                  </td>
-                                                </tr>
-                                                <!-- end row -->
-                                                <!-- start row -->
-
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                          </div>
-                                          <!-- fin tabla -->
-                                        </div>
-                                        <div class="text-center p-2" th:if="${vehiculo.mantenimientos == null or vehiculo.mantenimientos.empty}">
-                                          <span>No hay mantenimientos programados</span>
-                                        </div>
-                                      </div>
-
-                                      <!-- Fin Tabla de datos -->
-
-
-
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
                                     </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="2">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-2.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="3">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-3.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="4">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-4.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="5">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-5.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="6">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-6.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="7">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-7.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="chat-list chat" data-user-id="8">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <img src="../assets/images/profile/user-9.jpg" alt="user8" width="48"
+                                     height="48" class="rounded-circle">
+                                <div>
+                                  <h6 class="fw-semibold mb-0">Alexandra Flintoff</h6>
+                                  <p class="mb-0">hello@loremipsum.com</p>
+                                </div>
+                              </div>
+                              <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2">Promotional</span>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3">Kindly check this latest updated</h4>
+                              <p class="mb-3 text-dark">Hello Andrew,</p>
+                              <p class="mb-3 text-dark">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum
+                                hendrerit lobortis. Nullam ut lacus eros. Sed at luctus urna, eu fermentum
+                                diam.
+                                In et tristique mauris.
+                              </p>
+                              <p class="mb-3 text-dark">Ut id ornare metus, sed auctor enim. Pellentesque
+                                nisi
+                                magna, laoreet a augue eget, tempor volutpat diam.</p>
+                              <p class="mb-0 text-dark">Regards,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Alexandra Flintoff</h6>
+                            </div>
+                            <div class="mb-3">
+                              <h6 class="fw-semibold mb-0 text-dark mb-3">Attachments</h6>
+                              <div class="d-block d-sm-flex align-items-center gap-4">
+                                <a href="javascript:void(0)" class="hstack gap-3 mb-2 mb-sm-0">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-adobe.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">service-task.pdf</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                                <a href="javascript:void(0)" class="hstack gap-3 file-chat-hover">
+                                  <div class="d-flex align-items-center gap-3">
+                                    <div class="rounded-1 text-bg-light p-6">
+                                      <img src="../assets/images/chat/icon-zip-folder.svg" alt="" width="24"
+                                           height="24">
+                                    </div>
+                                    <div>
+                                      <h6 class="fw-semibold">work-project.zip</h6>
+                                      <div class="d-flex align-items-center gap-3 fs-2 text-muted"><span>2
+                                              MB</span><span>2 Dec 2023</span></div>
+                                    </div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="px-9 py-3 border-top chat-send-message-footer">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <ul class="list-unstyled mb-0 d-flex align-items-center gap-7">
+                              <li>
+                                <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
+                                   href="javascript:void(0)">
+                                  <i class="ti ti-arrow-back-up fs-5"></i>
+                                  Reply
+                                </a>
+                              </li>
+                              <li>
+                                <a class="text-dark bg-hover-primary d-flex align-items-center gap-1"
+                                   href="javascript:void(0)">
+                                  <i class="ti ti-arrow-forward-up fs-5"></i>
+                                  Forward
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
 
         <!-- fin contenido -->
 
