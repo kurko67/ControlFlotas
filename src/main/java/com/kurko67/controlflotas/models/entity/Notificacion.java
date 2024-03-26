@@ -24,6 +24,7 @@ public class Notificacion implements Serializable {
     private Usuario receptor;
 
     private String asunto;
+    @Column(length = 500)
     private String mensaje;
 
     private String tipo; //por ejemplo, mensaje, alerta, recordatorio, orden_trabajo

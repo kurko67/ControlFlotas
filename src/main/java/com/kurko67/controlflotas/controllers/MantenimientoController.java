@@ -90,11 +90,13 @@ public class MantenimientoController {
         notificacion.setReceptor(receptor);
 
         notificacion.setAsunto("Nueva Orden de Trabajo");
-        notificacion.setMensaje("Se asigno la OT para el vehiculo: "
-        + vehiculo.getMarca() + " " + vehiculo.getPatente() + " Para realizar el sgte" +
-                "mantenimiento: " + mantenimiento.getCategoriaAveria() + mantenimiento.getSubCategoriaAveria() + "" +
-                "para la fecha:" + mantenimiento.getStart() + " Principal problema: " + mantenimiento.getText());
 
+        notificacion.setMensaje("Te hemos asignado un mantenimiento '" + mantenimiento.getTipo() + "'. Para el vehiculo: " + vehiculo.getMarca() +
+                " " + vehiculo.getAnio() + ", DOMINIO: " + vehiculo.getPatente() +
+                "  * Categoria:  " + mantenimiento.getCategoriaAveria() +
+                "  Orientacion del problema:  " + mantenimiento.getSubCategoriaAveria() +
+                " *** Mas detalles: *** " + mantenimiento.getText() +
+                " *** Fecha programada: *** " + mantenimiento.getStart());
         notificacion.setTipo("ORDEN_TRABAJO");
         notificacion.setCreated_at(new Date());
 

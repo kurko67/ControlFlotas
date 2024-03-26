@@ -71,19 +71,18 @@
                                     class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
                               <div class="d-flex align-items-center gap-2">
                                 <div>
-                                  <h6 class="fw-semibold mb-0" th:text="${'Enviado por: ' + notificacion.emisor.username}">username</h6>
+                                  <h6 class="fw-semibold mb-0" th:text="${'Creado por: ' + notificacion.emisor.username}">username</h6>
                                 </div>
                               </div>
                             </div>
                             <div class="border-bottom pb-7 mb-7">
                               <h4 class="fw-semibold text-dark mb-3" th:text="${notificacion.asunto}">asunto</h4>
-                              <p class="mb-3 text-dark" th:text="${'Hola, ' + notificacion.receptor.username}">Hola Daniel,</p>
-                              <p class="mb-3 text-dark">
-                                Se asigno la OT para el vehiculo: Scania 1114 ABC1232 Para realizar el sgte mantenimiento: electrico Luces Defectuosas para la fecha:2024-03-20T11:32 Principal problema: Revisar luces
+                              <p class="mb-3 text-dark" th:text="${'Hola, ' + notificacion.receptor.username}">Hola user,</p>
+                              <p class="mb-3 text-dark" th:text="${notificacion.mensaje}"> Cuerpo del mensaje
                               </p>
                               <p class="mb-3 text-dark">Te deseamos un excelente dia!</p>
                               <p class="mb-0 text-dark">Saludos,</p>
-                              <h6 class="fw-semibold mb-0 text-dark pb-1">Administracións</h6>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Administración</h6>
                             </div>
                               </div>
                             </div>
