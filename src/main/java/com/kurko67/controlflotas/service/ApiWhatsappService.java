@@ -23,7 +23,7 @@ public class ApiWhatsappService {
     }
 
     public void sendMessage(){
-        RequestMessage request = new RequestMessage("whatsapp", "5492613438409", "hola");
+        //RequestMessage request = new RequestMessage("whatsapp", "5492613438409", "hola");
     }
 
 }

@@ -32,31 +32,6 @@
 
           </div>
           <div class="d-flex w-100">
-            <div class="min-width-340">
-              <div class="border-end user-chat-box h-100">
-                <div class="px-4 pt-9 pb-6 d-none d-lg-block">
-                  <form class="position-relative">
-                    <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search" /><i class="ti ti-search position-absolute top-50 start-0 translate-middle-y fs-6 text-dark ms-3"></i>
-                  </form>
-                </div>
-                <div class="app-chat">
-                  <ul class="chat-users mh-n100" data-simplebar>
-                    <li>
-                      <a href="javascript:void(0)" class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user bg-light-subtle" id="chat_user_1" data-user-id="1">
-
-                        <div class="position-relative w-100 ms-2">
-                          <span class="badge text-bg-primary fs-2 rounded-4 py-1 px-2 ml-2">Juan Pablo</span>
-                          <div class="d-flex align-items-center justify-content-between mb-2 mt-2">
-                            <h6 class="mb-0">Mantenimiento programado</h6>
-                          </div>
-                          <h6 class="fw-semibold text-dark">Scania ABC123</h6>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
             <div class="w-100">
               <div class="chat-container h-100 w-100">
                 <div class="chat-box-inner-part h-100">
@@ -71,7 +46,7 @@
                                     class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
                               <div class="d-flex align-items-center gap-2">
                                 <div>
-                                  <h6 class="fw-semibold mb-0" th:text="${'Creado por: ' + notificacion.emisor.username}">username</h6>
+                                  <h6 class="fw-semibold mb-0" th:text="${'Creado por: ' + notificacion.emisor.username + ' el ' + {#dates.format(notificacion.created_at, 'yyyy-MM-dd')} }">username</h6>
                                 </div>
                               </div>
                             </div>

@@ -4,17 +4,17 @@ import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.Notificacion;
 import com.kurko67.controlflotas.models.entity.Usuario;
+import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.*;
@@ -46,14 +46,36 @@ public class NotificationsController {
     }
 
     @GetMapping("/view-notifications/{id}")
-    public String ver_notificaciones(@PathVariable(value = "id") Long idNotificacion, Model model){
+    public String ver_notificaciones(@PathVariable(value = "id") Long idNotificacion, Model model,
+                                     @AuthenticationPrincipal User user){
 
        Notificacion notificacion = notificacionDao.findNotificacionById(idNotificacion);
-
        model.addAttribute("notificacion", notificacion);
 
        return "view-notifications";
     }
+
+
+    @GetMapping("/list-notifications")
+    public String ver_todas_notificaciones(@RequestParam(name="page", defaultValue="0") int page, Model model, @AuthenticationPrincipal User user){
+
+        Usuario receptor = usuariodao.findByUsername(user.getUsername());
+
+        Pageable pageRequest = PageRequest.of(page, 8);
+        Page<Notificacion> pageNotificaciones = notificacionDao.findAllByReceptor(receptor, pageRequest);
+
+        List<Notificacion> notificaciones = pageNotificaciones.getContent(); // Obtener la lista de notificaciones de la página actual
+
+        System.out.println(notificaciones);
+
+        PageRender<Notificacion> pageRender = new PageRender<Notificacion>("/list-notifications", pageNotificaciones);
+
+        model.addAttribute("notificaciones", notificaciones);
+        model.addAttribute("page", pageRender);
+        return "list-notifications";
+    }
+
+
 
 
 }
