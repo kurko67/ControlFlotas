@@ -47,59 +47,67 @@
                             </div>
                         </div>
 
-                    <div th:if="${vehiculos != null and !vehiculos.empty}">
-                        <div class="card card-body">
-                            <div class="table-responsive">
-                                <table class="table search-table align-middle text-nowrap">
-                                    <thead class="header-item">
-                                    <th>Patente</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th>Responsable</th>
-                                    <th>Action</th>
-                                    </thead>
-                                    <tbody>
-                                    <!-- start row -->
-                                    <tr class="search-items" th:each="vehiculo: ${vehiculos}">
-                                        <td>
-                                            <div class="user-meta-info">
-                                                <h6 class="user-name mb-0" th:text="${vehiculo.patente}"></h6>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <span class="usr-email-addr" th:text="${vehiculo.marca}"></span>
-                                        </td>
-                                        <td>
-                                            <span class="usr-location" th:text="${vehiculo.anio}"></span>
-                                        </td>
-                                        <td>
-                                            <span class="usr-ph-no" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"></span>
-                                        </td>
-                                        <td>
-                                            <div class="action-btn">
-                                                <a th:href="@{/vehicles/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
-                                                    <i class="ti ti-eye fs-5"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- end row -->
-                                    <!-- start row -->
+                        <div class="card">
 
-                                    </tbody>
-                                </table>
+                            <div class="card-header">
+                                <h3>Vehiculos</h3>
                             </div>
-                        </div>
-                        <!-- fin tabla -->
-                        </div>
 
-                        <div class="text-center p-2" th:if="${vehiculos == null or vehiculos.empty}">
-                            <span>No hay vehiculos cargados</span>
-                        </div>
+                            <div th:if="${vehiculos != null and !vehiculos.empty}">
+                            <div class="card card-body">
+                                <div class="table-responsive">
+                                    <table class="table search-table align-middle text-nowrap">
+                                        <thead class="header-item">
+                                        <th>Patente</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Responsable</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                        <!-- start row -->
+                                        <tr class="search-items" th:each="vehiculo: ${vehiculos}">
+                                            <td>
+                                                <div class="user-meta-info">
+                                                    <h6 class="user-name mb-0" th:text="${vehiculo.patente}"></h6>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="usr-email-addr" th:text="${vehiculo.marca}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="usr-location" th:text="${vehiculo.anio}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="usr-ph-no" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"></span>
+                                            </td>
+                                            <td>
+                                                <div class="action-btn">
+                                                    <a th:href="@{/vehicles/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
+                                                        <i class="ti ti-eye fs-5"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- end row -->
+                                        <!-- start row -->
 
-                        <div class="card-footer" th:if="${vehiculos != null and !vehiculos.empty}">
-                            <nav th:replace="layout/paginator :: paginator"></nav>
-                        </div>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- fin tabla -->
+                            </div>
+
+                            <div class="text-center p-2" th:if="${vehiculos == null or vehiculos.empty}">
+                                <span>No hay vehiculos cargados</span>
+                            </div>
+
+                            <div class="card-footer" th:if="${vehiculos != null and !vehiculos.empty}">
+                                <nav th:replace="layout/paginator :: paginator"></nav>
+                            </div>
+
+                     </div>
 
                     </div>
                 </div>

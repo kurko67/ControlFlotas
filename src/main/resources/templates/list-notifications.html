@@ -23,60 +23,62 @@
       <div class="container-fluid">
         <!--  Row 1 -->
 
-        <div th:if="${notificaciones != null}">
+        <div class="card">
 
           <div class="card-header">
-
-            <h3 class="card-title">Mis notificaciones</h3>
-
+            <h3>Notificaciones</h3>
           </div>
-          <div class="card card-body">
-            <div class="table-responsive">
-              <table class="table search-table align-middle text-nowrap">
-                  <thead class="header-item">
-                  <th>Fecha</th>
-                  <th>Creador</th>
-                  <th>Asunto</th>
-                  <th>Action</th>
-                </thead>
-                <tbody>
-                <!-- start row -->
-                <tr class="search-items" th:each="notificacion: ${notificaciones}">
-                  <td>
-                    <div class="user-meta-info">
-                      <h6 class="user-name mb-0" th:text="${{#dates.format(notificacion.created_at, 'yyyy-MM-dd')}}"></h6>
-                    </div>
-                  </td>
-                  <td>
-                    <span class="usr-email-addr" th:text="${notificacion.emisor.username}"></span>
-                  </td>
-                  <td>
-                    <span class="usr-location" th:text="${notificacion.asunto}"></span>
-                  </td>
-                  <td>
-                    <div class="action-btn">
-                      <a th:href="@{/view-notifications/} + ${notificacion.idNotificacion}" class="text-info edit">
-                        <i class="ti ti-eye fs-5"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                <!-- end row -->
-                <!-- start row -->
 
-                </tbody>
-              </table>
+          <div th:if="${notificaciones != null}">
+            <div class="card card-body">
+              <div class="table-responsive">
+                <table class="table search-table align-middle text-nowrap">
+                    <thead class="header-item">
+                    <th>Fecha</th>
+                    <th>Enviado</th>
+                    <th>Asunto</th>
+                    <th>Abrir</th>
+                  </thead>
+                  <tbody>
+                  <!-- start row -->
+                  <tr class="search-items" th:each="notificacion: ${notificaciones}">
+                    <td>
+                      <div class="user-meta-info">
+                        <h6 class="user-name mb-0" th:text="${{#dates.format(notificacion.created_at, 'yyyy-MM-dd')}}"></h6>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="usr-email-addr" th:text="${notificacion.emisor.username}"></span>
+                    </td>
+                    <td>
+                      <span class="usr-location" th:text="${notificacion.asunto}"></span>
+                    </td>
+                    <td>
+                      <div class="action-btn">
+                        <a th:href="@{/view-notifications/} + ${notificacion.idNotificacion}" class="text-info edit">
+                          <i class="ti ti-eye fs-5"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- end row -->
+                  <!-- start row -->
+
+                  </tbody>
+                </table>
+              </div>
             </div>
+            <!-- fin tabla -->
           </div>
-          <!-- fin tabla -->
-        </div>
 
-        <div class="text-center p-2" th:if="${notificaciones == null}">
-          <span>No hay notificaciones cargadas</span>
-        </div>
+          <div class="text-center p-2" th:if="${notificaciones == null}">
+            <span>No hay notificaciones cargadas</span>
+          </div>
 
-        <div class="card-footer" th:if="${notificaciones != null}">
-          <nav th:replace="layout/paginator :: paginator"></nav>
+          <div class="card-footer" th:if="${notificaciones != null}">
+            <nav th:replace="layout/paginator :: paginator"></nav>
+          </div>
+
         </div>
 
 

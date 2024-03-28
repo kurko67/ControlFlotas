@@ -51,16 +51,14 @@ public class VehiculoController {
                                 @AuthenticationPrincipal User user){
 
 
-        System.out.println("Idconductor: " + idconductor);
-
         if(result.hasErrors()){
             flash.addFlashAttribute("danger",  "Error en la carga de datos");
-            return "vehicles";
+            return "redirect:/vehicles/new";
         }
 
         if(vehiculoService.existsByPatente(patente)){
-            flash.addFlashAttribute("warning","La patente ya existe");
-            return "vehicles";
+            flash.addFlashAttribute("warning","La patente ingresada ingresada ya existe");
+            return "redirect:/vehicles/new";
         }
 
 

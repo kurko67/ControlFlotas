@@ -1,12 +1,15 @@
 package com.kurko67.controlflotas.models.service;
 
 import com.kurko67.controlflotas.models.dao.IVehiculoDao;
+import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class IVehiculoServiceImpl implements IVehiculoService{
@@ -18,6 +21,24 @@ public class IVehiculoServiceImpl implements IVehiculoService{
     @Transactional(readOnly = true)
     public Page<Vehiculo> findAll(Pageable pageable) {
         return vehiculoDao.findAll(pageable);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Vehiculo> findVehiculoByVtvExpire() {
+        return (List<Vehiculo>) vehiculoDao.findVehiculoByVtvExpire();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Vehiculo> findVehiculoByRutaExpire() {
+        return (List<Vehiculo>) vehiculoDao.findVehiculoByRutaExpire();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Vehiculo> findVehiculoBySeguroExpire() {
+        return (List<Vehiculo>) vehiculoDao.findVehiculoBySeguroExpire();
     }
 
     @Override

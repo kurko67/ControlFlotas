@@ -72,7 +72,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="start" class="form-label fs-2">Ingreso:</label>
-                                        <input type="text" class="form-control" id="start" th:value="${#dates.format(mantenimiento.start, 'dd-MM-yyyy')}" readonly>
+                                        <input type="text" class="form-control" id="start" th:value="${mantenimiento.start}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">

@@ -1,8 +1,11 @@
 package com.kurko67.controlflotas.models.service;
 
+
 import com.kurko67.controlflotas.models.entity.Vehiculo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface IVehiculoService {
 
@@ -10,7 +13,9 @@ public interface IVehiculoService {
     public void save(Vehiculo vehiculo);
     public Vehiculo findOne(Long id);
     public void delete(Long id);
-
     public boolean existsByPatente(String patente);
+    public List<Vehiculo> findVehiculoByVtvExpire();
+    public List<Vehiculo> findVehiculoByRutaExpire();
+    public List<Vehiculo> findVehiculoBySeguroExpire();
 
 }

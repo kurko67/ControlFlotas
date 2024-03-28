@@ -47,50 +47,58 @@
               </div>
             </div>
 
-            <div th:if="${usuarios != null and !usuarios.empty}">
-              <div class="card card-body">
-                <div class="table-responsive">
-                  <table class="table search-table align-middle text-nowrap">
-                    <thead class="header-item">
-                    <th>Usuario</th>
-                    <th>Rol</th>
-                    <th>Habilitado</th>
-                    <th>Action</th>
-                    </thead>
-                    <tbody>
-                    <!-- start row -->
-                    <tr class="search-items" th:each="users: ${usuarios}">
-                      <td>
-                        <div class="user-meta-info">
-                          <h6 class="user-name mb-0" th:text="${users.username}"></h6>
-                        </div>
-                      </td>
-                      <td th:each=" roles: ${users.roles}">
-                        <span class="usr-email-addr" th:text="${roles.nombre == 'ROLE_ADMIN' ? 'ADMIN' : 'CONDUCTOR' }"></span>
-                      </td>
-                      <td th:text="${users.habilitado == true ? 'SI' : 'NO'}">
-                      </td>
-                      <td><a class="btn btn-info btn-xs" th:href="@{/users/edit_user/reset_password/} + ${users.idUsuario}" onclick="return confirm('¿Estas seguro que quieres resetear la contraseña del usuario?');">Reset Password</a>
-                        <span><a th:text="${users.habilitado == true ? 'Deshabilitar': 'Habilitar'}"  th:class="${users.habilitado == true} ? 'button btn btn-danger btn-xs' : 'button btn btn-success btn-xs'"  th:href="@{/users/edit_user/enabledisabled/} + ${users.idUsuario}" role="button"
-                                 onclick="return confirm('¿Estas seguro que quieres habilitar/deshabilitar el usuario?');" >Habilitar</a></span>
-                      </td>
-                    </tr>
-                    <!-- end row -->
-                    <!-- start row -->
+            <div class="card">
 
-                    </tbody>
-                  </table>
+                  <div class="card-header">
+                    <h3>Usuarios/Conductores</h3>
+                  </div>
+
+                  <div th:if="${usuarios != null and !usuarios.empty}">
+                  <div class="card card-body">
+                    <div class="table-responsive">
+                      <table class="table search-table align-middle text-nowrap">
+                        <thead class="header-item">
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Habilitado</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                        <!-- start row -->
+                        <tr class="search-items" th:each="users: ${usuarios}">
+                          <td>
+                            <div class="user-meta-info">
+                              <h6 class="user-name mb-0" th:text="${users.username}"></h6>
+                            </div>
+                          </td>
+                          <td th:each=" roles: ${users.roles}">
+                            <span class="usr-email-addr" th:text="${roles.nombre == 'ROLE_ADMIN' ? 'ADMIN' : 'CONDUCTOR' }"></span>
+                          </td>
+                          <td th:text="${users.habilitado == true ? 'SI' : 'NO'}">
+                          </td>
+                          <td><a class="btn btn-info btn-xs" th:href="@{/users/edit_user/reset_password/} + ${users.idUsuario}" onclick="return confirm('¿Estas seguro que quieres resetear la contraseña del usuario?');">Reset Password</a>
+                            <span><a th:text="${users.habilitado == true ? 'Deshabilitar': 'Habilitar'}"  th:class="${users.habilitado == true} ? 'button btn btn-danger btn-xs' : 'button btn btn-success btn-xs'"  th:href="@{/users/edit_user/enabledisabled/} + ${users.idUsuario}" role="button"
+                                     onclick="return confirm('¿Estas seguro que quieres habilitar/deshabilitar el usuario?');" >Habilitar</a></span>
+                          </td>
+                        </tr>
+                        <!-- end row -->
+                        <!-- start row -->
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <!-- fin tabla -->
                 </div>
-              </div>
-              <!-- fin tabla -->
-            </div>
 
-            <div class="text-center p-2" th:if="${usuarios == null or usuarios.empty}">
-              <span>No hay usuarios cargados</span>
-            </div>
+                  <div class="text-center p-2" th:if="${usuarios == null or usuarios.empty}">
+                    <span>No hay usuarios cargados</span>
+                  </div>
 
-            <div class="card-footer" th:if="${usuarios != null and !usuarios.empty}">
-              <nav th:replace="layout/paginator :: paginator"></nav>
+                  <div class="card-footer" th:if="${usuarios != null and !usuarios.empty}">
+                    <nav th:replace="layout/paginator :: paginator"></nav>
+                  </div>
+
             </div>
 
           </div>

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,6 +27,11 @@ public class IConductorServiceImpl implements IConductorService{
     @Override
     public List<Conductor> findAll() {
         return (List<Conductor>) conductorDao.findAll();
+    }
+
+    @Override
+    public List<Conductor> findConductoresPorVencerLicencia() {
+        return (List<Conductor>) conductorDao.findConductoresPorVencerLicencia();
     }
 
     @Override

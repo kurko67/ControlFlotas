@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public interface INotificacionDao extends CrudRepository<Notificacion, Long> {
 
-    @Query("SELECT n.idNotificacion, n.asunto FROM Notificacion n WHERE n.receptor = :receptor ORDER BY n.created_at ASC")
+    @Query("SELECT n.idNotificacion, n.asunto FROM Notificacion n WHERE n.receptor = :receptor ORDER BY n.created_at DESC")
     List<Object[]> findLastFiveByReceptor(@Param("receptor") Usuario receptor, Pageable pageable);
 
-    @Query("SELECT n FROM Notificacion n WHERE n.receptor = :receptor ORDER BY n.created_at ASC")
+    @Query("SELECT n FROM Notificacion n WHERE n.receptor = :receptor ORDER BY n.created_at DESC")
     Page<Notificacion> findAllByReceptor(@Param("receptor") Usuario receptor, Pageable pageable);
 
     @Query("SELECT n.idNotificacion, n.asunto FROM Notificacion n")
