@@ -42,6 +42,12 @@ public class IVehiculoServiceImpl implements IVehiculoService{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Object[]> find30daysExpires() {
+        return (List<Object[]>) vehiculoDao.find30daysExpires();
+    }
+
+    @Override
     @Transactional
     public void save(Vehiculo vehiculo) {
          vehiculoDao.save(vehiculo);

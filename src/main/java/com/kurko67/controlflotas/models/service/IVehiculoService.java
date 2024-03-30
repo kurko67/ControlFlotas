@@ -18,4 +18,6 @@ public interface IVehiculoService {
     public List<Vehiculo> findVehiculoByRutaExpire();
     public List<Vehiculo> findVehiculoBySeguroExpire();
 
+    public List<Object[]> find30daysExpires();
+
 }

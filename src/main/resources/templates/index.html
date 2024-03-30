@@ -93,47 +93,43 @@
               <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Próximos Vencimientos de VTV, RUTA y Seguro</h5>
                 <div class="table-responsive">
-                  <table class="table text-nowrap mb-0 align-middle">
+                  <table class="table text-nowrap mb-0 align-middle"  th:if="${vehiculos != null and !vehiculos.empty}">
                     <thead class="text-dark fs-4">
                     <tr>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Id</h6>
+                        <h6 class="fw-semibold mb-0">Vehiculo</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Assigned</h6>
+                        <h6 class="fw-semibold mb-0">Patente</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Name</h6>
+                        <h6 class="fw-semibold mb-0">TIPO</h6>
                       </th>
                       <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Priority</h6>
-                      </th>
-                      <th class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0">Budget</h6>
+                        <h6 class="fw-semibold mb-0">Fecha Vencimiento</h6>
                       </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                    <tr th:each="vehiculo : ${vehiculos}">
                       <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                        <span class="fw-normal">Web Designer</span>
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[1]}">vehiculo</h6>
                       </td>
                       <td class="border-bottom-0">
-                        <p class="mb-0 fw-normal">Elite Admin</p>
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[2]}">patente</h6>
                       </td>
                       <td class="border-bottom-0">
-                        <div class="d-flex align-items-center gap-2">
-                          <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                        </div>
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[3]}">tipo_vencimiento</h6>
                       </td>
                       <td class="border-bottom-0">
-                        <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[4]}">vencimiento</h6>
                       </td>
                     </tr>
                     </tbody>
                   </table>
+                  <div>
+                    <h5 th:if="${vehiculos == null or vehiculos.empty}">No hay vencimientos para los proximos 30 dias.</h5>
+                  </div>
                 </div>
               </div>
             </div>

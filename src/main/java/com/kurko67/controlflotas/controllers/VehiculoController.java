@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @SessionAttributes("vehiculo")
@@ -42,6 +43,7 @@ public class VehiculoController {
         List<Conductor> conductores = conductorService.findAll();
         model.addAttribute("vehiculo", vehiculo);
         model.addAttribute("conductores", conductores);
+        model.addAttribute("titulo", "Cargar nuevo vehiculo ");
         return "vehicles";
 
     }
@@ -56,25 +58,27 @@ public class VehiculoController {
             return "redirect:/vehicles/new";
         }
 
-        if(vehiculoService.existsByPatente(patente)){
-            flash.addFlashAttribute("warning","La patente ingresada ingresada ya existe");
+        if(vehiculoService.existsByPatente(patente) && vehiculo.getIdVehiculo() == null ){
+            flash.addFlashAttribute("warning","La patente ingresada ya existe (" + vehiculo.getMarca() +")");
             return "redirect:/vehicles/new";
         }
 
 
-        //Create object
         // idconductor == 0 > Quiere decir que no se especifico conductor asignado
+
         if(idconductor > 0){
             Conductor conductor = new Conductor();
             conductor = conductorService.findOne(idconductor);
             vehiculo.setConductor(conductor);
         }
 
+        String mensajeFlash = (vehiculo.getIdVehiculo() != null) ? "Vehiculo " + vehiculo.getMarca() + " editado con exito" : "Vehiculo " + vehiculo.getMarca() + " creado con exito";
+
         vehiculo.setCreated_at(new Date());
         vehiculo.setUpdated_at(new Date());
         vehiculoService.save(vehiculo);
 
-        flash.addFlashAttribute("success", "Vehiculo cargado con éxito");
+        flash.addFlashAttribute("success", mensajeFlash);
         return "redirect:/vehicles/list-vehicles";
 
     }
@@ -110,6 +114,25 @@ public class VehiculoController {
         return "view-vehicles";
 
 
+    }
+
+    @RequestMapping(value = "/edit-vehicles/{id}")
+    public String editar(@PathVariable(value = "id") Long id, Model model, RedirectAttributes flash, @AuthenticationPrincipal User user) {
+
+        Vehiculo vehiculo = null;
+        vehiculo = vehiculoService.findOne(id);
+
+            if (vehiculo == null) {
+                flash.addFlashAttribute("error", "Vehiculo no encontrado");
+                return "redirect:/vehicles/list-vehicles";
+            }
+
+
+        List<Conductor> conductores = conductorService.findAll();
+        model.addAttribute("conductores", conductores);
+        model.addAttribute("vehiculo", vehiculo);
+        model.addAttribute("titulo", "Editar vehiculo " + vehiculo.getMarca());
+        return "vehicles";
     }
 
 }

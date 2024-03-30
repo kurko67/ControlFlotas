@@ -20,12 +20,15 @@ public class Mantenimiento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Forma de generacion de la llave primaria ya que especificamos en la bd q AI
     private Long idMantenimiento;
     private String tipo; //Preventivo  o Correctivo
-    private String text;
+    private String descripcion_problema;
+    private String text; //Solo para el calendario
     private Double costo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created_at;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_realizacion;
+
+    private String descripcion_mantenimiento;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "event_start")

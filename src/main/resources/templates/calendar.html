@@ -67,108 +67,19 @@
    eventEndSpec: "Date",
    eventHeight: 30,
    eventBarVisible: false,
-   onTimeRangeSelected: async (args) => {
-     const modal = await DayPilot.Modal.prompt("Create a new event:", "Event");
-     calendar.clearSelection();
-     if (modal.canceled) {
-       return;
-     }
-     const params = {
-       start: args.start,
-       end: args.end,
-       text: modal.result
-     };
-     const {data} = await DayPilot.Http.post('/api/events/create', params);
-     calendar.events.add(data);
-   },
-   onEventMove: async (args) => {
-       const params = {
-         id: args.e.id(),
-         start: args.newStart,
-         end: args.newEnd
-       };
-       const {data} = await DayPilot.Http.post('/api/events/move', params);
-   },
-   onEventResize: async (args) => {
-       const params = {
-         id: args.e.id(),
-         start: args.newStart,
-         end: args.newEnd
-       };
-       const {data} = await DayPilot.Http.post('/api/events/move', params);
-   },
-   onBeforeEventRender: args => {
-     const color = args.data.color || app.colors.gray;
-     args.data.backColor = color;
-     args.data.borderColor = "darker";
-     args.data.fontColor = "#ffffff";
-     args.data.areas = [
-       {
-         top: 6,
-         right: 6,
-         width: 18,
-         height: 18,
-         symbol: "../icons/daypilot.svg#minichevron-down-2",
-         action: "ContextMenu",
-         backColor: "#ffffff",
-         fontColor: "#666666",
-         style: "border: 1px solid #ccc; cursor:pointer; border-radius: 15px;"
-       }
-     ];
-   },
-   contextMenu: new DayPilot.Menu({
-     items: [
-       {
-         text: "Delete",
-         onClick: async (args) => {
-           const e = args.source;
-           const params = {
-             id: e.id()
-           };
 
-           const {data} = await DayPilot.Http.post('/api/events/delete', params);
-           calendar.events.remove(e);
-         }
-       },
-       {
-         text: "-"
-       },
-       {
-         text: "Blue",
-         icon: "icon icon-blue",
-         onClick: (args) => {
-           app.updateColor(args.source, app.colors.blue);
-         }
-       },
-       {
-         text: "Green",
-         icon: "icon icon-green",
-         onClick: (args) => {
-           app.updateColor(args.source, app.colors.green);
-         }
-       },
-       {
-         text: "Yellow",
-         icon: "icon icon-yellow",
-         onClick: (args) => {
-           app.updateColor(args.source, app.colors.yellow);
-         }
-       },
-       {
-         text: "Red",
-         icon: "icon icon-red",
-         onClick: (args) => {
-           app.updateColor(args.source, app.colors.red);
-         }
-       }, {
-         text: "Auto",
-         onClick: (args) => {
-           app.updateColor(args.source, "auto");
-         }
-       },
+   onEventClick: async (args) => {
+        const event = args.e.data; // Obtener los datos del evento seleccionado
+        const modal = new DayPilot.Modal({
+            onClosed: function(result) {
+                if (result) {
+                    // Aquí puedes realizar alguna acción después de cerrar el modal si lo necesitas
+                }
+            }
+        });
+        modal.showUrl("/maintenance/view-maintenance/" + event.idMantenimiento); // URL de la página que muestra los detalles de la tarea
+    },
 
-     ]
-   })
  });
  calendar.init();
 
@@ -215,7 +126,7 @@
       <style>
 
         .month_default_event_inner {
-            border-radius: 20px;
+            border-radius: 10px;
         }
 
       </style>

@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,8 +27,9 @@ public class Conductor implements Serializable {
     private Usuario usuario;
 
     //un conductor, un vehiculo
-    @OneToOne(mappedBy = "conductor", cascade = CascadeType.ALL)
-    private Vehiculo vehiculo;
+    // Relación uno a muchos con Vehiculo
+    @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
+    private List<Vehiculo> vehiculos;
 
     private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,7 @@ package com.kurko67.controlflotas.controllers;
 import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.Conductor;
+import com.kurko67.controlflotas.models.entity.Vehiculo;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,10 @@ public class DashBoardController {
     public String panelAdministrador(Model model, RedirectAttributes flash){
 
         List<Conductor> conductores = conductorService.findConductoresPorVencerLicencia();
+        List<Object[]> vehiculos = vehiculoService.find30daysExpires();
 
         model.addAttribute("conductores", conductores);
+        model.addAttribute("vehiculos", vehiculos);
 
         return "index";
 
