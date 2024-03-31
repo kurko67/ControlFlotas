@@ -40,6 +40,10 @@ public class Vehiculo implements Serializable {
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<Mantenimiento> mantenimientos;
 
+    //Un vehiculo muchos checklist
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    private List<CheckList> checkLists;
+
     // Relación muchos a uno con Conductor
     @ManyToOne
     @JoinColumn(name = "conductor_id")

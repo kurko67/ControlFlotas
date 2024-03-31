@@ -26,10 +26,14 @@ public class Conductor implements Serializable {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    //un conductor, un vehiculo
+
     // Relación uno a muchos con Vehiculo
     @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
     private List<Vehiculo> vehiculos;
+
+    // Relación uno a muchos con CheckList
+    @OneToMany(mappedBy = "conductor", cascade = CascadeType.ALL)
+    private List<CheckList> checkLists;
 
     private static final long serialVersionUID = 1L;
 

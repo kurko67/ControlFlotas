@@ -71,6 +71,7 @@ public class MantenimientoController {
         System.out.println(user);
 
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
+        mantenimiento.setText(vehiculo.getPatente());
         mantenimiento.setEstado("ACTIVO");
         mantenimiento.setCreated_at(new Date());
         mantenimiento.setVehiculo(vehiculo);
@@ -121,6 +122,24 @@ public class MantenimientoController {
         model.addAttribute("mantenimiento", mantenimiento);
         return "view-maintenance";
     }
+
+
+    @GetMapping("/modal-maintenance/{id}")
+    public String viewMaintenanceByIdModal(@PathVariable(value = "id") Long idMaintenance, Model model,
+                                           @AuthenticationPrincipal User user, RedirectAttributes flash){
+
+        Mantenimiento mantenimiento = null;
+        mantenimiento = mantenimientoService.findOne(idMaintenance);
+
+        if(mantenimiento == null || idMaintenance < 0){
+            flash.addFlashAttribute("error", "No se encuentra mantenimiento");
+            return "redirect:/events";
+        }
+
+        model.addAttribute("mantenimiento", mantenimiento);
+        return "layout/modal_calendar";
+    }
+
 
 
 

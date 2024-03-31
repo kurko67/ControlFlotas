@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+</head>
+<body>
+
+  <div class="card">
+
+    <div class="card-header">
+      <h5 th:text="${mantenimiento.vehiculo.marca} + ' ' +  ${mantenimiento.vehiculo.anio}  + ', dominio: ' +  ${mantenimiento.vehiculo.patente} " ></h5>
+    </div>
+
+    <div class="card-body">
+      <span class="side-stick"></span>
+      <h6 class="note-title text-truncate w-75 mb-0" data-noteHeading="Book a Ticket for Movie" th:text="'Responsable ' + ${mantenimiento.conductor.nombreApellido}">  </h6>
+      <p class="note-date fs-2" th:text="'Mantenimiento Programado fecha ' + ${mantenimiento.start}">fecha</p>
+      <div class="note-content">
+        <p class="note-inner-content" th:text="${mantenimiento.descripcion_mantenimiento}"></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

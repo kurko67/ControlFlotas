@@ -30,18 +30,23 @@
 
       <!-- contenido -->
 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 d-none d-md-block">
 
-      <div class="main">
-        <div class="wrap">
-          <div class="left">
-            <div id="nav"></div>
+            <div class="left">
+              <div id="nav"></div>
+            </div>
+
           </div>
-          <div class="right">
+          <div class="col-md-9">
+
             <div class="toolbar">
               <button id="previous">Previous</button>
               <button id="next">Next</button>
             </div>
             <div id="dp"></div>
+
           </div>
         </div>
       </div>
@@ -52,7 +57,7 @@
       <script>
        const datePicker = new DayPilot.Navigator("nav", {
        showMonths: 2,
-       skipMonths: 2,
+       skipMonths: 1,
        selectMode: "Month",
        onTimeRangeSelected: args => {
        calendar.update({
@@ -77,7 +82,7 @@
                 }
             }
         });
-        modal.showUrl("/maintenance/view-maintenance/" + event.idMantenimiento); // URL de la página que muestra los detalles de la tarea
+        modal.showUrl("/maintenance/modal-maintenance/" + event.idMantenimiento); // URL de la página que muestra los detalles de la tarea
     },
 
  });
