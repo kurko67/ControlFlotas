@@ -2,6 +2,8 @@ package com.kurko67.controlflotas.models.dao;
 
 import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -29,6 +31,12 @@ public interface IVehiculoDao extends PagingAndSortingRepository<Vehiculo, Long>
             " UNION SELECT id_vehiculo, marca, patente, 'SEGURO' as 'tipo_vencimiento', vencimiento_seguro as 'vencimiento' FROM vehiculos WHERE vencimiento_seguro between current_date and current_date + interval 30 day " +
             " UNION SELECT id_vehiculo, marca, patente, 'RUTA' as 'tipo_vencimiento', vencimiento_ruta as 'vencimiento' FROM vehiculos WHERE vencimiento_ruta between current_date and current_date + interval 30 day", nativeQuery = true)
     List<Object[]> find30daysExpires();
+
+    /* Section users */
+    /* find vehicles list of users */
+
+    @Query(value = "select * from vehiculos where conductor_id = ?1", nativeQuery = true)
+    Page<Vehiculo> findVehiculoByConductorId(Long conductor_id, Pageable pageable);
 
 
 }

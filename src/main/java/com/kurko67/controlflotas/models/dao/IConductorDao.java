@@ -17,6 +17,9 @@ public interface IConductorDao extends PagingAndSortingRepository<Conductor, Lon
     @Query(value = "select * from conductores where vencimiento_licencia between current_date and current_date + interval 30 day", nativeQuery = true)
     List<Conductor> findConductoresPorVencerLicencia();
 
+    @Query(value = "select * from conductores where usuario_id = ?1", nativeQuery = true)
+    Conductor findConductorByIdUsuario(Long idUsuario);
+
 
 
 

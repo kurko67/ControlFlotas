@@ -11,6 +11,7 @@ import java.util.List;
 public interface IMantenimientoService {
 
     public Page<Mantenimiento> findAll(Pageable pageable);
+    public Page<Mantenimiento> findMantenimientosByConductorId(Long conductor_id, String estado, Pageable pageable);
 
     public List<Mantenimiento> findAll();
 

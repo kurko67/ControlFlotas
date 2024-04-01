@@ -48,6 +48,12 @@ public class IVehiculoServiceImpl implements IVehiculoService{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Page<Vehiculo> findVehiculoByConductorId(Long conductor_id, Pageable pageable) {
+        return (Page<Vehiculo>) vehiculoDao.findVehiculoByConductorId(conductor_id, pageable);
+    }
+
+    @Override
     @Transactional
     public void save(Vehiculo vehiculo) {
          vehiculoDao.save(vehiculo);

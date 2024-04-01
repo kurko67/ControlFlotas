@@ -17,6 +17,8 @@ public interface IConductorService {
     public void delete(Long id);
     public List<Conductor> findConductoresPorVencerLicencia();
 
+    public Conductor findConductorByIdUsuario(Long idUsuario);
+
 
 
 }

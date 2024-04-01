@@ -25,6 +25,13 @@ public class IMantenimientoServiceImpl implements IMantenimientoService{
         return mantenimientoDao.findAll(pageable);
     }
 
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Mantenimiento> findMantenimientosByConductorId(Long conductor_id, String estado, Pageable pageable) {
+        return mantenimientoDao.findMantenimientosByConductorId(conductor_id, estado,pageable);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<Mantenimiento> findAll() {

@@ -20,6 +20,7 @@ public class Mantenimiento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Forma de generacion de la llave primaria ya que especificamos en la bd q AI
     private Long idMantenimiento;
     private String tipo; //Preventivo  o Correctivo
+    @Column(length = 500)
     private String descripcion_problema;
     private String text; //Solo para el calendario
     private Double costo;
@@ -28,6 +29,7 @@ public class Mantenimiento implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha_realizacion;
 
+    @Column(length = 500)
     private String descripcion_mantenimiento;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -35,7 +37,7 @@ public class Mantenimiento implements Serializable {
     LocalDateTime start;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(name = "event_end")
-    LocalDateTime end;
+    LocalDateTime end; // solo para calendar
     //Relacion muchos mantenimientos a un veichulo
     @ManyToOne
     @JoinColumn(name = "vehiculo_id")

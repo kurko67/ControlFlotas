@@ -31,16 +31,7 @@
                 <div class="chatting-box app-email-chatting-box">
                   <div
                           class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
-                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + ', Estado: ' + ${mantenimiento.estado}"></h5>
-                    <ul class="list-unstyled mb-0 d-flex align-items-center">
-                      <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-title="Edit">
-                        <a class="d-block text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
-                           href="javascript:void(0)">
-                          <i class="ti ti-pencil"></i>
-                        </a>
-                      </li>
-                    </ul>
+                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + ', Vehiculo: ' + ${mantenimiento.vehiculo.marca} + ' Dominio ' + ${mantenimiento.vehiculo.patente}"></h5>
                   </div>
 
                   <div class="position-relative overflow-hidden">
@@ -60,27 +51,6 @@
                                     <div class="row">
 
                                       <div class="col-12 mb-3">
-                                        <label for="patente" class="form-label fs-2">Patente:</label>
-                                        <input type="text" class="form-control" id="patente" th:value="${#strings.capitalize(mantenimiento.vehiculo.patente)}" readonly>
-                                      </div>
-
-
-                                      <div class="col-12 mb-3">
-                                        <label for="responsable" class="form-label fs-2">Responsable:</label>
-                                        <input type="text" class="form-control" id="responsable" th:value="${#strings.capitalize(mantenimiento.conductor.nombreApellido)}" readonly>
-                                      </div>
-
-                                      <div class="col-12 mb-3">
-                                        <label for="start" class="form-label fs-2">Ingreso al taller:</label>
-                                        <input type="text" class="form-control" id="start" th:value="${mantenimiento.start}" readonly>
-                                      </div>
-
-                                      <div class="col-12 mb-3">
-                                        <label for="fechaRealizacion" class="form-label fs-2">Fecha Realizacion:</label>
-                                        <input type="text" class="form-control" id="fechaRealizacion" th:value="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}" readonly>
-                                      </div>
-
-                                      <div class="col-12 mb-3">
                                         <label for="categoriaAveria" class="form-label fs-2">Zona averia:</label>
                                         <input type="text" class="form-control" id="categoriaAveria" th:value="${#strings.capitalize(mantenimiento.categoriaAveria)}" readonly>
                                       </div>
@@ -92,21 +62,33 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="descripcion" class="form-label fs-2">Descripcion:</label>
-                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_mantenimiento)}" readonly></textarea>
+                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
                                       </div>
 
-                                      <div class="col-12 mb-3">
-                                        <label for="costo" class="form-label fs-2">Costo:</label>
-                                        <input type="number" class="form-control" id="costo" th:value="${#strings.capitalize(mantenimiento.costo)}" readonly>
-                                      </div>
-
-                                      <div class="col-12 mb-3">
-                                        <label for="descripcionMantenimiento" class="form-label fs-2">Descripcion del trabajo realizado:</label>
-                                        <textarea class="form-control" id="descripcionMantenimiento" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
-                                      </div>
 
 
                                       <!-- Agrega más bloques similares para cada campo -->
+
+                                    </div>
+
+                                    <div class="row">
+
+                                      <form th:action="@{/maintenance/update}" method="post" th:object="${mantenimiento}">
+
+                                        <input type="hidden"id="idMantenimiento" th:value="${mantenimiento.idMantenimiento}" name="idMantenimiento">
+
+                                        <div class="col-12 mb-3">
+                                          <label for="descripcion_mantenimiento" class="form-label fs-2">Describa el trabajo realizado:</label>
+                                          <input type="text" class="form-control" id="descripcion_mantenimiento" name="descripcion_mantenimiento" th:field="*{descripcion_mantenimiento}" >
+                                        </div>
+
+                                        <div class="col-12 mb-3">
+                                          <label for="costo" class="form-label fs-2">Costo del servicio:</label>
+                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Finalizar trabajo</button>
+                                      </form>
 
                                     </div>
                                   </div>

@@ -145,4 +145,24 @@ public class UsuarioController {
     }
 
 
+    @GetMapping("profile")
+    public String userProfile(Model model, RedirectAttributes flash,
+                              @AuthenticationPrincipal User user){
+
+        Usuario usuario = null;
+        usuario = usuariodao.findByUsername(user.getUsername());
+
+        if(usuario.equals(null)){
+            flash.addFlashAttribute("waring","usuario invalido");
+            return "redirect:/";
+        }
+
+        Conductor conductor = null;
+        conductor = conductorService.findConductorByIdUsuario(usuario.getIdUsuario());
+        model.addAttribute("conductor", conductor);
+
+        return "user-profile";
+    }
+
+
 }

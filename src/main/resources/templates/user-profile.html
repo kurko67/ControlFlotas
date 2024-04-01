@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+
+      <div class="container">
+        <div class="row gutters">
+          <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary" th:text="'Información usuario: ' + ${conductor.usuario.username}">Info user</h6>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div>
+                      <input type="hidden" class="form-control" id="idconductor" th:value="${conductor.idConductor}">
+                    </div>
+                    <div class="form-group">
+                      <label for="nombreApellido">Nombre y Apellido</label>
+                      <input type="text" class="form-control" id="nombreApellido" th:value="${conductor.nombreApellido}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="cuil">Cuil</label>
+                      <input type="text" class="form-control" id="cuil" th:value="${conductor.cuil}" readonly>
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutters">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="telefono">Teléfono</label>
+                      <input type="name" class="form-control" id="telefono" th:value="${conductor.numeroTelefono}">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="licencia">Vencimiento Licencia</label>
+                      <input type="name" class="form-control" id="licencia"  th:value="${conductor.vencimientoLicencia}" readonly>
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="direccion">Dirección</label>
+                      <input type="text" class="form-control" id="direccion" th:value="${conductor.direccion}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutters my-2">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                      <button type="button" id="submit" name="submit" class="btn btn-primary">Actualizar información</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gutters mt-3">
+          <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h6 class="mb-2 text-primary">Actualizar Contraseña</h6>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="new_password">Nueva Contraseña</label>
+                      <input type="password" class="form-control" id="new_password">
+                    </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="form-group">
+                      <label for="repeat_password">Ingrese de nuevo la contraseña</label>
+                      <input type="password" class="form-control" id="repeat_password">
+                    </div>
+                  </div>
+                </div>
+                <div class="row gutters my-2">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="text-right">
+                      <button type="button" id="enviar" name="submit" class="btn btn-secondary">Actualizar contraseña</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+
+
+
+      <!-- fin contenido -->
+    </div>
+
+
+
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- fin sect3 -->
+  </div>
+  <!-- fin sect2 -->
+</div>
+
+<!-- fin sect1 -->
+</div>
+
+<statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ public interface IVehiculoService {
     public List<Vehiculo> findVehiculoByVtvExpire();
     public List<Vehiculo> findVehiculoByRutaExpire();
     public List<Vehiculo> findVehiculoBySeguroExpire();
-
     public List<Object[]> find30daysExpires();
+    public Page<Vehiculo> findVehiculoByConductorId(Long conductor_id, Pageable pageable);
 
 }

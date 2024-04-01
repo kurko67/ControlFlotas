@@ -1,11 +1,14 @@
 package com.kurko67.controlflotas.controllers;
 
+import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.Conductor;
+import com.kurko67.controlflotas.models.entity.Usuario;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import javax.validation.Valid;
 
+import com.kurko67.controlflotas.models.service.UsuarioService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -34,6 +37,9 @@ public class VehiculoController {
 
     @Autowired
     private IConductorService conductorService;
+
+     @Autowired
+     private IUsuarioDao usuarioService;
 
 
     @RequestMapping("/new")
@@ -133,6 +139,23 @@ public class VehiculoController {
         model.addAttribute("vehiculo", vehiculo);
         model.addAttribute("titulo", "Editar vehiculo " + vehiculo.getMarca());
         return "vehicles";
+    }
+
+    @GetMapping("/my")
+    public String mylistVehicles(@RequestParam(name="page", defaultValue="0") int page, Model model, @AuthenticationPrincipal User user){
+
+        Usuario usuario_logueado = usuarioService.findByUsername(user.getUsername());
+        Conductor conductor = conductorService.findConductorByIdUsuario(usuario_logueado.getIdUsuario());
+
+        Pageable pageRequest = PageRequest.of(page, 8);
+        Page<Vehiculo> vehiculos = vehiculoService.findVehiculoByConductorId(conductor.getIdConductor(), pageRequest);
+
+        PageRender<Vehiculo> pageRender = new PageRender<Vehiculo>("/my", vehiculos);
+
+        model.addAttribute("vehiculos", vehiculos);
+        model.addAttribute("page", pageRender);
+        return "list-my-vehicles";
+
     }
 
 }

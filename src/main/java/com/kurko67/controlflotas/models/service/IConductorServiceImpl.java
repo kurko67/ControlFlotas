@@ -47,6 +47,12 @@ public class IConductorServiceImpl implements IConductorService{
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Conductor findConductorByIdUsuario(Long idUsuario) {
+        return conductorDao.findConductorByIdUsuario(idUsuario);
+    }
+
+    @Override
     @Transactional()
     public void delete(Long id) {
         conductorDao.deleteById(id);
