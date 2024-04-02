@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,17 +15,18 @@ public class CheckList implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idChecklist;
 
+    private Long idChecklist;
     private boolean neumaticos;
     private boolean fluidos;
     private boolean luces;
     private boolean frenos;
     private boolean suspension;
-    private boolean kit_seguridad;
-    private boolean estado_carroceria;
+    private boolean seguridad;
+    private boolean carroceria;
     private boolean documentacion;
     private String comentarios;
+    private Date created_at;
 
     //Relacion muchos checklist a un vehiculo
     @ManyToOne

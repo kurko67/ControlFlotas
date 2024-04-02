@@ -1,9 +1,11 @@
 package com.kurko67.controlflotas.controllers;
 
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
+import com.kurko67.controlflotas.models.entity.CheckList;
 import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Usuario;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.service.ICheckListService;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
 import javax.validation.Valid;
@@ -40,6 +42,9 @@ public class VehiculoController {
 
      @Autowired
      private IUsuarioDao usuarioService;
+
+     @Autowired
+     private ICheckListService checkListService;
 
 
     @RequestMapping("/new")
@@ -157,5 +162,16 @@ public class VehiculoController {
         return "list-my-vehicles";
 
     }
+
+    @GetMapping("/checklist/new/")
+    public String NewCheckList(Model model, @AuthenticationPrincipal User user){
+
+        CheckList  checkList = new CheckList();
+
+
+        return "list-my-vehicles";
+
+    }
+
 
 }
