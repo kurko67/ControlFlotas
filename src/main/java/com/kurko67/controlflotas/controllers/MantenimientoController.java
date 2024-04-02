@@ -99,9 +99,9 @@ public class MantenimientoController {
 
         notificacion.setMensaje("Te hemos asignado un mantenimiento '" + mantenimiento.getTipo() + "'. Para el vehiculo: " + vehiculo.getMarca() +
                 " " + vehiculo.getAnio() + ", DOMINIO: " + vehiculo.getPatente() +
-                "  * Categoria:  " + mantenimiento.getCategoriaAveria() +
-                "  Orientacion del problema:  " + mantenimiento.getSubCategoriaAveria() +
-                " *** Mas detalles: *** " + mantenimiento.getText() +
+                " *** Categoría:  " + mantenimiento.getCategoriaAveria() +
+                " -- Sub Categoría:  " + mantenimiento.getSubCategoriaAveria() +
+                " *** Mas detalles: *** " + mantenimiento.getDescripcion_problema() +
                 " *** Fecha programada: *** " + mantenimiento.getStart());
         notificacion.setTipo("ORDEN_TRABAJO");
         notificacion.setCreated_at(new Date());
@@ -215,19 +215,19 @@ public class MantenimientoController {
         Usuario emisor = usuarioService.findByUsername(user.getUsername());
         notificacion.setEmisor(emisor);
 
-        //esto debe ser momentaneo y se deben mapear todos los usuarios don rol admin y enviar la notificacion a todos
+        //esto debe ser momentaneo y se deben mapear todos los usuarios con rol admin y enviar la notificacion a todos
         Integer entero = 1;
         Long largo = entero.longValue();
 
         Usuario receptor = usuarioService.getOne(largo);
         notificacion.setReceptor(receptor);
 
-        notificacion.setAsunto("Fin Orden de Trabajo");
+        notificacion.setAsunto("Fin orden de Trabajo");
 
-        notificacion.setMensaje("Te informamos que se ha finalizado la ORDEN DE TRABAJO N°: '" + mantenimiento.getIdMantenimiento() +
-                " del vehiculo: " + mantenimiento.getVehiculo().getMarca() + " Dominio: " + mantenimiento.getVehiculo().getPatente() +
-                " ****** Descripcion del mantenimiento ****** " + mantenimiento.getDescripcion_mantenimiento()
-                + " ******* Costo del servicio ******* " + mantenimiento.getCosto());
+        notificacion.setMensaje("Te informamos que se ha finalizado la ORDEN DE TRABAJO N°: " + mantenimiento.getIdMantenimiento() +
+                " , del vehiculo: " + mantenimiento.getVehiculo().getMarca() + " Dominio: " + mantenimiento.getVehiculo().getPatente() +
+                " ****** Descripcion del mantenimiento: " + mantenimiento.getDescripcion_mantenimiento()
+                + " ******* Costo del servicio: $" + mantenimiento.getCosto());
         notificacion.setTipo("NOTIFICACION");
         notificacion.setCreated_at(new Date());
 

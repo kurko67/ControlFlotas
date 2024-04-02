@@ -75,24 +75,26 @@
                                         <input type="text" class="form-control" id="start" th:value="${mantenimiento.start}" readonly>
                                       </div>
 
-                                      <div class="col-12 mb-3">
-                                        <label for="fechaRealizacion" class="form-label fs-2">Fecha Realizacion:</label>
-                                        <input type="text" class="form-control" id="fechaRealizacion" th:value="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}" readonly>
-                                      </div>
+
 
                                       <div class="col-12 mb-3">
-                                        <label for="categoriaAveria" class="form-label fs-2">Zona averia:</label>
+                                        <label for="categoriaAveria" class="form-label fs-2">Categoria:</label>
                                         <input type="text" class="form-control" id="categoriaAveria" th:value="${#strings.capitalize(mantenimiento.categoriaAveria)}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
-                                        <label for="averiaprincipal" class="form-label fs-2">Averia:</label>
+                                        <label for="averiaprincipal" class="form-label fs-2">Subcategoria:</label>
                                         <input type="text" class="form-control" id="averiaprincipal" th:value="${#strings.capitalize(mantenimiento.subCategoriaAveria)}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
-                                        <label for="descripcion" class="form-label fs-2">Descripcion:</label>
-                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_mantenimiento)}" readonly></textarea>
+                                        <label for="descripcion" class="form-label fs-2">Descripcion del mantenimiento a realizar.</label>
+                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="fechaRealizacion" class="form-label fs-2">Fecha Realizacion:</label>
+                                        <input type="text" class="form-control" id="fechaRealizacion" th:value="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
@@ -102,7 +104,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="descripcionMantenimiento" class="form-label fs-2">Descripcion del trabajo realizado:</label>
-                                        <textarea class="form-control" id="descripcionMantenimiento" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
+                                        <textarea class="form-control" id="descripcionMantenimiento" th:text="${#strings.capitalize(mantenimiento.descripcion_mantenimiento)}" readonly></textarea>
                                       </div>
 
 

@@ -128,7 +128,7 @@ public class VehiculoController {
         Vehiculo vehiculo = null;
         vehiculo = vehiculoService.findOne(id);
 
-            if (vehiculo == null) {
+            if (vehiculo == null || id < 0) {
                 flash.addFlashAttribute("error", "Vehiculo no encontrado");
                 return "redirect:/vehicles/list-vehicles";
             }

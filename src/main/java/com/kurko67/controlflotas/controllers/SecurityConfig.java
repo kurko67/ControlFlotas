@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationSuccessHandler successHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -50,7 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/")
+                    .successHandler(successHandler)
+                    .permitAll()
                 .failureUrl("/login?error=true")
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403");

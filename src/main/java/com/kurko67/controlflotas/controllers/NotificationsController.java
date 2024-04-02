@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.*;
@@ -47,9 +48,26 @@ public class NotificationsController {
 
     @GetMapping("/view-notifications/{id}")
     public String ver_notificaciones(@PathVariable(value = "id") Long idNotificacion, Model model,
-                                     @AuthenticationPrincipal User user){
+                                     @AuthenticationPrincipal User user, RedirectAttributes flash){
+
+        String rol = "";
+
+        for(int i=0; i < user.getAuthorities().size(); i++){
+            rol = user.getAuthorities().toString();
+        }
 
        Notificacion notificacion = notificacionDao.findNotificacionById(idNotificacion);
+
+       if(notificacion == null || idNotificacion < 0){
+           flash.addFlashAttribute("error", "No se encuentra notificacion");
+           if(rol.equals("[ROLE_ADMIN]")){
+               return "redirect:/vehicles/list-vehicles";
+           }else{
+               return "redirect:/vehicles/my";
+           }
+        }
+
+
        model.addAttribute("notificacion", notificacion);
 
        return "view-notifications";

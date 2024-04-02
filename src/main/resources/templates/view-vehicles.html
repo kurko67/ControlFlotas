@@ -108,21 +108,21 @@
                                               <span><h6>Mantenimientos programados</h6></span>
                                               <table class="table search-table align-middle text-nowrap">
                                                 <thead class="header-item">
-                                                <th>Tipo</th>
+                                                <th>Estado</th>
                                                 <th>Descripción</th>
                                                 <th>Fecha inicio</th>
-                                                <th>Action</th>
+                                                <th>Ver mas</th>
                                                 </thead>
                                                 <tbody>
                                                 <!-- start row -->
                                                 <tr class="search-items" th:each="mant: ${vehiculo.mantenimientos}">
                                                   <td>
                                                     <div class="user-meta-info">
-                                                      <h6 class="user-name mb-0" th:text="${mant.tipo}"></h6>
+                                                      <h6 class="user-name mb-0" th:text="${mant.estado}"></h6>
                                                     </div>
                                                   </td>
                                                   <td>
-                                                    <span class="usr-email-addr" th:text="${mant.descripcion_mantenimiento}"></span>
+                                                    <span class="usr-email-addr" th:text="${mant.descripcion_problema}"></span>
                                                   </td>
                                                   <td>
                                                     <span class="usr-location" th:text="${mant.start}"></span>

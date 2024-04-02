@@ -51,17 +51,17 @@
                                     <div class="row">
 
                                       <div class="col-12 mb-3">
-                                        <label for="categoriaAveria" class="form-label fs-2">Zona averia:</label>
+                                        <label for="categoriaAveria" class="form-label fs-2">Categoria:</label>
                                         <input type="text" class="form-control" id="categoriaAveria" th:value="${#strings.capitalize(mantenimiento.categoriaAveria)}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
-                                        <label for="averiaprincipal" class="form-label fs-2">Averia:</label>
+                                        <label for="averiaprincipal" class="form-label fs-2">Sub Categoria:</label>
                                         <input type="text" class="form-control" id="averiaprincipal" th:value="${#strings.capitalize(mantenimiento.subCategoriaAveria)}" readonly>
                                       </div>
 
                                       <div class="col-12 mb-3">
-                                        <label for="descripcion" class="form-label fs-2">Descripcion:</label>
+                                        <label for="descripcion" class="form-label fs-2">Descripcion del trabajo a realizar:</label>
                                         <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
                                       </div>
 
@@ -84,10 +84,10 @@
 
                                         <div class="col-12 mb-3">
                                           <label for="costo" class="form-label fs-2">Costo del servicio:</label>
-                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}">
+                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}" onkeypress="return soloNumeros(event)">
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">Finalizar trabajo</button>
+                                        <button type="submit" class="btn btn-primary" th:if="${mantenimiento.estado == 'ACTIVO'}">Finalizar trabajo</button>
                                       </form>
 
                                     </div>
