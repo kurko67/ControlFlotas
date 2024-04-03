@@ -3,6 +3,8 @@ package com.kurko67.controlflotas.models.service;
 import com.kurko67.controlflotas.models.dao.ICheckListDao;
 import com.kurko67.controlflotas.models.entity.CheckList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +18,8 @@ public class ICheckListServiceImpl implements ICheckListService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<CheckList> findAll() {
-        return (List<CheckList>) checkListDao.findAll();
+    public Page<CheckList> findAll(Pageable pageable) {
+        return (Page<CheckList>) checkListDao.findAll(pageable);
     }
 
     @Override

@@ -17,15 +17,23 @@ public class CheckList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long idChecklist;
-    private boolean neumaticos;
-    private boolean fluidos;
-    private boolean luces;
-    private boolean frenos;
-    private boolean suspension;
-    private boolean seguridad;
-    private boolean carroceria;
-    private boolean documentacion;
-    private String comentarios;
+    private Boolean neumaticos;
+    private String neumaticosDdetalles;
+    private Boolean fluidos;
+    private String fluidosDetalles;
+    private Boolean luces;
+    private String lucesDetalles;
+    private Boolean frenos;
+    private String frenosDetalles;
+    private Boolean trenDelantero;
+    private String trenDelanteroDetalles;
+    private Boolean seguridad;
+    private String seguridadDetalles;
+    private Boolean carroceria;
+    private String carroceriaDetalles;
+    private Boolean documentacion;
+    private String documentacionDetalles;
+    private String comentariosAdicionales;
     private Date created_at;
 
     //Relacion muchos checklist a un vehiculo

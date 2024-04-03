@@ -40,7 +40,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/vehicles/my}" sec:authorize="hasRole('ROLE_USER')" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-layout-dashboard"></i>
+                                    <i class="ti ti-car"></i>
                                 </span>
                             <span class="hide-menu">Mis vehiculos</span>
                         </a>
@@ -49,7 +49,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/maintenance/my}" sec:authorize="hasRole('ROLE_USER')" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-layout-dashboard"></i>
+                                    <i class="ti ti-settings"></i>
                                 </span>
                             <span class="hide-menu">Ordenes de trabajo</span>
                         </a>
@@ -58,7 +58,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/vehicles/my/problems}" sec:authorize="hasRole('ROLE_USER')" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-layout-dashboard"></i>
+                                    <i class="ti ti-work"></i>
                                 </span>
                             <span class="hide-menu">Informar Problema</span>
                         </a>
@@ -71,17 +71,17 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" sec:authorize="hasRole('ROLE_ADMIN')" aria-expanded="false">
+                        <a class="sidebar-link" th:href="@{/checklist/list-checklist}" sec:authorize="hasRole('ROLE_ADMIN')" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-car"></i>
+                                    <i class="ti ti-check"></i>
                                 </span>
-                            <span class="hide-menu">Problematicas</span>
+                            <span class="hide-menu">CheckLists</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/events}" sec:authorize="hasRole('ROLE_ADMIN')" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-settings"></i>
+                                    <i class="ti ti-calendar"></i>
                                 </span>
                             <span class="hide-menu">Calendario de trabajo</span>
                         </a>

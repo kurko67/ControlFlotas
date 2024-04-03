@@ -1,10 +1,8 @@
 package com.kurko67.controlflotas.controllers;
 
+import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
-import com.kurko67.controlflotas.models.entity.CheckList;
-import com.kurko67.controlflotas.models.entity.Conductor;
-import com.kurko67.controlflotas.models.entity.Usuario;
-import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.entity.*;
 import com.kurko67.controlflotas.models.service.ICheckListService;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
@@ -45,6 +43,9 @@ public class VehiculoController {
 
      @Autowired
      private ICheckListService checkListService;
+
+    @Autowired
+    private INotificacionDao notificacionDao;
 
 
     @RequestMapping("/new")
@@ -163,13 +164,82 @@ public class VehiculoController {
 
     }
 
-    @GetMapping("/checklist/new/")
-    public String NewCheckList(Model model, @AuthenticationPrincipal User user){
+    @GetMapping("/checklist/new/{id}")
+    public String NewCheckList(Model model,@PathVariable(value = "id") Long id,
+                               @AuthenticationPrincipal User user,
+                               RedirectAttributes flash){
 
-        CheckList  checkList = new CheckList();
+        CheckList checkList = new CheckList();
+
+        Vehiculo vehiculo = null;
+        vehiculo = vehiculoService.findOne(id);
+
+        if (vehiculo == null || id < 0) {
+            flash.addFlashAttribute("error", "Vehiculo no encontrado");
+            return "redirect:/vehicles/my";
+        }
+
+        model.addAttribute("vehiculo", vehiculo);
+        model.addAttribute("checklist", checkList);
+
+        return "new-checklist";
+
+    }
+
+    @PostMapping("/checklist/nuevo")
+    public String crearCheckList(@Valid CheckList checklist,BindingResult result,
+                                 @RequestParam(value = "idVehiculo") Long idVehiculo,
+                                 Model model, RedirectAttributes flash,
+                                @AuthenticationPrincipal User user){
 
 
-        return "list-my-vehicles";
+        if(result.hasErrors()){
+            flash.addFlashAttribute("danger",  "Error en la carga de datos");
+            return "redirect:/vehicles/my";
+        }
+
+        Vehiculo vehiculo = null;
+        vehiculo = vehiculoService.findOne(idVehiculo);
+
+        Conductor conductor = null;
+        conductor = conductorService.findOne(vehiculo.getConductor().getIdConductor());
+
+        // idconductor == 0 > Quiere decir que no se especifico conductor asignado
+
+
+        //String mensajeFlash = (vehiculo.getIdVehiculo() != null) ? "Vehiculo " + vehiculo.getMarca() + " editado con exito" : "Vehiculo " + vehiculo.getMarca() + " creado con exito";
+
+
+        checklist.setCreated_at(new Date());
+        checklist.setVehiculo(vehiculo);
+        checklist.setConductor(conductor);
+        checkListService.save(checklist);
+
+        Notificacion notificacion = new Notificacion();
+
+        //Buscar emisor y definir emisor
+        Usuario emisor = usuarioService.findByUsername(user.getUsername());
+        notificacion.setEmisor(emisor);
+
+        //esto debe ser momentaneo y se deben mapear todos los usuarios con rol admin y enviar la notificacion a todos
+        Integer entero = 1;
+        Long largo = entero.longValue();
+
+        Usuario receptor = usuarioService.getOne(largo);
+        notificacion.setReceptor(receptor);
+
+        notificacion.setAsunto("Checklist #" + checklist.getIdChecklist());
+
+        notificacion.setMensaje("Te informamos que se ha realizado el control del vehiculo: " + vehiculo.getMarca() + " Dominio: " + vehiculo.getPatente() +
+                " Puede ver los resultados desde el Menu Principal, Checklists");
+        notificacion.setTipo("NOTIFICACION");
+        notificacion.setCreated_at(new Date());
+
+        notificacionDao.save(notificacion);
+
+
+        flash.addFlashAttribute("success", "Gracias por enviarnos sus comentarios !");
+        return "redirect:/vehicles/my";
 
     }
 
