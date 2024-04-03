@@ -36,7 +36,7 @@
                   <div class="mb-4">
                     <label class="form-label fw-semibold">Quien realizara la Orden de Trabajo?</label>
                     <select id="conductorid" name="conductorid" class="form-select" aria-label="Seleccionar opción" th:field="*{conductor}"  required>
-                      <option value="0" selected>Sin responsable asignado</option>
+                      <option th:value="${vehiculo.conductor.nombreApellido}" th:text="${vehiculo.conductor.nombreApellido}" selected></option>
                       <option th:each="conductor : ${conductores}"  th:value="${conductor.idConductor}"  th:text="${conductor.nombreApellido}"></option>
                     </select>
                   </div>

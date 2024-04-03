@@ -4,7 +4,7 @@
 <head th:fragment="head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modernize Free</title>
+    <title>Control de Flotas</title>
     <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
     <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
     <link rel="stylesheet" th:href="@{/css/flotas.css}" />
@@ -20,7 +20,7 @@
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between">
                 <a th:href="@{/}" class="text-nowrap logo-img">
-                    <img th:src="@{/images/logos/dark-logo.svg}" width="180" alt="" />
+                    <img th:src="@{/images/logos/logo-flotas.png}" width="180" alt="" />
                 </a>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
@@ -145,9 +145,9 @@
                                        class="d-flex align-items-center gap-2 dropdown-item">
                                         <p class="mb-0 fs-3">Mi Perfil</p>
                                     </a>
-                                    <span class="btn btn-outline-primary mx-3 mt-2 d-block">
+                                    <span class="mx-3 mt-2 d-block">
                                         <form method="POST" th:action="@{/logout}">
-                                            <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                                             <a class="btn btn-outline-primary w-100" href="#" onclick="this.parentNode.submit();">Salir</a>
                                         </form>
                                     </span>
                                 </div>

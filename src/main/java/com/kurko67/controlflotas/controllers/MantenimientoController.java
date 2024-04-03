@@ -6,6 +6,7 @@ import com.kurko67.controlflotas.models.entity.*;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
+import com.kurko67.controlflotas.models.service.WhatsAppService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,6 +46,9 @@ public class MantenimientoController {
 
     @Autowired
     private IUsuarioDao usuarioService;
+
+    @Autowired
+    private WhatsAppService whatsAppService;
 
 
     @RequestMapping("/new/{id}")
@@ -106,7 +110,12 @@ public class MantenimientoController {
         notificacion.setTipo("ORDEN_TRABAJO");
         notificacion.setCreated_at(new Date());
 
+        whatsAppService.enviarMensaje();
+
+
         notificacionDao.save(notificacion);
+
+
 
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
