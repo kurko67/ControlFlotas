@@ -62,7 +62,8 @@
                                         <th>Marca</th>
                                         <th>Modelo</th>
                                         <th>Responsable</th>
-                                        <th>Action</th>
+                                        <th>Ver</th>
+                                        <th>Editar</th>
                                         </thead>
                                         <tbody>
                                         <!-- start row -->
@@ -86,6 +87,10 @@
                                                     <a th:href="@{/vehicles/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
                                                         <i class="ti ti-eye fs-5" title="Ver vehiculo"></i>
                                                     </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="action-btn">
                                                     <a th:href="@{/vehicles/edit-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
                                                         <i class="ti ti-edit fs-5" title="Editar vehiculo"></i>
                                                     </a>

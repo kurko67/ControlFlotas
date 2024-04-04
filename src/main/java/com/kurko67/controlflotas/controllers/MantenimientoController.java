@@ -6,7 +6,6 @@ import com.kurko67.controlflotas.models.entity.*;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
-import com.kurko67.controlflotas.models.service.WhatsAppService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,8 +24,6 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
-
-import static com.fasterxml.jackson.databind.jsonFormatVisitors.JsonValueFormat.DATE_TIME;
 
 @Controller
 @RequestMapping("/maintenance")
@@ -47,9 +44,6 @@ public class MantenimientoController {
     @Autowired
     private IUsuarioDao usuarioService;
 
-    @Autowired
-    private WhatsAppService whatsAppService;
-
 
     @RequestMapping("/new/{id}")
     public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model,
@@ -58,6 +52,7 @@ public class MantenimientoController {
         List<Conductor> conductores = conductorService.findAll();
         Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);
         Mantenimiento mantenimiento = new Mantenimiento();
+        model.addAttribute("conductorSeleccionado", vehiculo.getConductor().getIdConductor());
         model.addAttribute("mantenimiento", mantenimiento);
         model.addAttribute("vehiculo", vehiculo);
         model.addAttribute("conductores", conductores);
@@ -109,9 +104,6 @@ public class MantenimientoController {
                 " *** Fecha programada: *** " + mantenimiento.getStart());
         notificacion.setTipo("ORDEN_TRABAJO");
         notificacion.setCreated_at(new Date());
-
-        whatsAppService.enviarMensaje();
-
 
         notificacionDao.save(notificacion);
 
