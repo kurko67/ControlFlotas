@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <!-- contenido -->
+    <div class="container-fluid">
+      <!--  Row 1 -->
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="w-100">
+            <div class="chat-container h-100 w-100">
+              <div class="chat-box-inner-part h-100">
+                <div class="chatting-box app-email-chatting-box">
+                  <div
+                          class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
+                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de OT: ' + ${ mantenimiento.idMantenimiento } + ', Vehiculo: ' + ${mantenimiento.vehiculo.marca} + ' Dominio ' + ${mantenimiento.vehiculo.patente}"></h5>
+                  </div>
+
+                  <div class="position-relative overflow-hidden">
+                    <div class="position-relative">
+                      <div class="chat-box p-9" style="height: calc(100vh - 128px)" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: -20px;">
+                          <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                          </div>
+                          <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                              <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                   aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                                <div class="simplebar-content" style="padding: 20px;">
+                                  <div class="chat-list chat active-chat" data-user-id="1">
+                                    <!-- Informacion sobre el vehicyulo -->
+                                    <div class="row">
+
+                                      <div class="col-12 mb-3">
+                                        <label for="categoriaAveria" class="form-label fs-2">Categoria:</label>
+                                        <input type="text" class="form-control" id="categoriaAveria" th:value="${#strings.capitalize(mantenimiento.categoriaAveria)}" readonly>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="averiaprincipal" class="form-label fs-2">Sub Categoria:</label>
+                                        <input type="text" class="form-control" id="averiaprincipal" th:value="${#strings.capitalize(mantenimiento.subCategoriaAveria)}" readonly>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="descripcion" class="form-label fs-2">Descripcion del trabajo a realizar:</label>
+                                        <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
+                                      </div>
+
+
+
+                                      <!-- Agrega más bloques similares para cada campo -->
+
+                                    </div>
+
+                                    <div class="row">
+
+                                      <form th:action="@{/maintenance/update}" method="post" th:object="${mantenimiento}">
+
+                                        <input type="hidden"id="idMantenimiento" th:value="${mantenimiento.idMantenimiento}" name="idMantenimiento">
+
+                                        <div class="col-12 mb-3">
+                                          <label for="descripcion_mantenimiento" class="form-label fs-2">Describa el trabajo realizado:</label>
+                                          <input type="text" class="form-control" id="descripcion_mantenimiento" name="descripcion_mantenimiento" th:field="*{descripcion_mantenimiento}" >
+                                        </div>
+
+                                        <div class="col-12 mb-3">
+                                          <label for="costo" class="form-label fs-2">Costo del servicio:</label>
+                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}" onkeypress="return soloNumeros(event)">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary" th:if="${mantenimiento.estado == 'ACTIVO'}">Finalizar trabajo</button>
+                                      </form>
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                              <!-- fin contenido -->
+
+                              <footer th:replace="layout/layout :: footer"></footer>
+                              <!-- fin sect3 -->
+                            </div>
+                            <!-- fin sect2 -->
+                          </div>
+
+                          <!-- fin sect1 -->
+                        </div>
+
+                        <statics th:replace="layout/layout :: statics"></statics>
+
+
+
+</body>
+</html>

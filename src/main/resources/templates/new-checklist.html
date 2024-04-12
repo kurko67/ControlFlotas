@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="px-4 py-3 border-bottom">
+                <h5 class="card-title fw-semibold mb-0" th:text="'Control semanal vehiculo ' + ${vehiculo.patente}"></h5>
+              </div>
+              <form th:action="@{/vehicles/checklist/nuevo}" th:object="${checklist}" method="post">
+                <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
+                <div class="card-body p-4">
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Neumaticos</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Verificar la presión de aire en los neumáticos, asegurándose de que estén inflados correctamente según las especificaciones del fabricante.</li>
+                      <li class="list-group-item">Revisar el desgaste de la banda de rodadura para garantizar que estén en buenas condiciones y que no haya signos de desgaste irregular.</li>
+                      <li class="list-group-item">Inspeccionar visualmente los neumáticos en busca de pinchazos, cortes u otros daños.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Neumaticos en condiciones?</label>
+                    <select id="neumaticos" name="neumaticos" class="form-select" aria-label="Seleccionar opción" th:field="*{neumaticos}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="neumaticosDdetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="neumaticosDdetalles" placeholder="Detalles sobre el problema"  th:field="*{neumaticosDdetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de fluidos</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Verificar el nivel de aceite del motor y rellenar si es necesario.</li>
+                      <li class="list-group-item">Revisar el nivel de refrigerante del motor y agregar si es necesario.</li>
+                      <li class="list-group-item">Comprobar el nivel del líquido de frenos y del líquido de dirección asistida.</li>
+                      <li class="list-group-item">Asegurarse de que no haya fugas de fluidos debajo del vehículo.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Fluidos en condiciones?</label>
+                    <select id="fluidos" name="fluidos" class="form-select" aria-label="Seleccionar opción" th:field="*{fluidos}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="fluidosDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="fluidosDetalles" placeholder="Detalles sobre el problema"  th:field="*{fluidosDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Luces</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Comprobar que todas las luces exteriores funcionen correctamente, incluyendo luces delanteras, traseras, intermitentes, luces de freno y luces de marcha atrás.</li>
+                      <li class="list-group-item">Asegurarse de que las luces interiores y los indicadores del tablero también estén funcionando correctamente.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Luces en condiciones?</label>
+                    <select id="luces" name="luces" class="form-select" aria-label="Seleccionar opción" th:field="*{luces}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="lucesDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="lucesDetalles" placeholder="Detalles sobre el problema"  th:field="*{lucesDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Frenos</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Probar los frenos para asegurarse de que respondan correctamente y de que no haya chirridos ni ruidos inusuales.</li>
+                      <li class="list-group-item">Inspeccionar visualmente los discos de freno y las pastillas en busca de desgaste excesivo.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Frenos en condiciones?</label>
+                    <select id="frenos" name="frenos" class="form-select" aria-label="Seleccionar opción" th:field="*{frenos}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="frenosDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="frenosDetalles" placeholder="Detalles sobre el problema"  th:field="*{frenosDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Tren delantero</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Comprobar la suspensión del vehículo para detectar cualquier problema, como amortiguadores desgastados o dañados.</li>
+                      <li class="list-group-item">Asegurarse de que no haya holguras en la dirección y de que el volante no esté vibrando anormalmente.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Tren delantero en condiciones?</label>
+                    <select id="trenDelantero" name="trenDelantero" class="form-select" aria-label="Seleccionar opción" th:field="*{trenDelantero}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="trenDelanteroDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="trenDelanteroDetalles" placeholder="Detalles sobre el problema"  th:field="*{trenDelanteroDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Seguridad</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Verificar que el vehículo esté equipado con un kit de herramientas básicas, un gato, un neumático de repuesto y otros elementos de emergencia, como un botiquín de primeros auxilios y un extintor de incendios.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Posee los elementos de seguridad?</label>
+                    <select id="seguridad" name="seguridad" class="form-select" aria-label="Seleccionar opción" th:field="*{seguridad}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="seguridadDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="seguridadDetalles" placeholder="Detalles sobre el problema"  th:field="*{seguridadDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Limpieza y Carroceria</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Verificar el estado general exterior e interior de la unidad.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Limpieza y Carroceria en condiciones?</label>
+                    <select id="carroceria" name="carroceria" class="form-select" aria-label="Seleccionar opción" th:field="*{carroceria}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="carroceriaDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="carroceriaDetalles" placeholder="Detalles sobre el problema"  th:field="*{carroceriaDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Control de Documentación del vehículo.</label>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Asegurarse de tener todos los documentos del vehículo, RUTA, VTV o RTO, seguro del vehículo o cualquier documentación adicional requerida por la ley.</li>
+                    </ul>
+                    <label class="form-label fw-semibold">Documentacion en condiciones?</label>
+                    <select id="documentacion" name="documentacion" class="form-select" aria-label="Seleccionar opción" th:field="*{documentacion}"  required>
+                      <option value="true" selected>SI</option>
+                      <option value="false">NO</option>
+                    </select>
+                    <div class="mb-4">
+                      <label for="documentacionDetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
+                      <textarea class="form-control" id="documentacionDetalles" placeholder="Detalles sobre el problema"  th:field="*{documentacionDetalles}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <div class="mb-4">
+                      <label for="comentariosAdicionales" class="form-label fw-semibold mt-1">Si lo desea, agregue algun comentario adicional</label>
+                      <textarea class="form-control" id="comentariosAdicionales" placeholder="Detalles sobre el problema"  th:field="*{comentariosAdicionales}" rows="2" cols="50" ></textarea>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary">Enviar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- fin contenido -->
+
+        <footer th:replace="layout/layout :: footer"></footer>
+        <!-- fin sect3 -->
+      </div>
+      <!-- fin sect2 -->
+    </div>
+
+    <!-- fin sect1 -->
+  </div>
+
+  <statics th:replace="layout/layout :: statics"></statics>
+  <script th:src="@{/js/maintenance.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="px-4 py-3 border-bottom">
+                <h5 class="card-title fw-semibold mb-0" th:text="'Orden de trabajo ' + ${vehiculo.patente} + ', Responsable: ' + ${vehiculo.conductor.nombreApellido} "></h5>
+              </div>
+              <form th:action="@{/maintenance/nuevo}" th:object="${mantenimiento}" method="post">
+                <div class="card-body p-4">
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Quien realizara la Orden de Trabajo?</label>
+                    <select id="conductorid" name="conductorid" class="form-select" aria-label="Seleccionar opción" required th:field="*{conductor}" >
+                      <option value="" selected>Seleccionar conductor</option> <!-- Opción predeterminada -->
+                      <option th:each="conductor : ${conductores}"
+                              th:value="${conductor.idConductor}"
+                              th:text="${conductor.nombreApellido}"
+                              th:selected="${conductor.idConductor == conductorSeleccionado ? 'selected' : ''}">
+                      </option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label fw-semibold">Tipo</label>
+                    <select class="form-select" aria-label="Seleccionar opción" id="tipo" th:field="*{tipo}" required>
+                      <option value="preventivo">Preventivo</option>
+                      <option value="correctivo">Correctivo</option>
+                    </select>
+                  </div>
+                  <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
+                  <div class="mb-4">
+                    <label for="select1" class="form-label fw-semibold">Selecciona una categoría:</label>
+                    <select id="select1" onchange="actualizarSelect2()" class="form-select" th:field="*{categoriaAveria}" required>
+                      <option value="" selected>selecciona categoria</option>
+                      <option value="preventivo">Mantenimiento Preventivo</option>
+                      <option value="liquido-fluidos">Liquido y Fluidos</option>
+                      <option value="motor">Motor</option>
+                      <option value="electrico">Sistema Eléctrico</option>
+                      <option value="suspencion-direccion">Sistema de Suspensión y Dirección</option>
+                      <option value="frenos">Sistema de Frenos</option>
+                      <option value="transmision">Sistema de Transmisión</option>
+                      <option value="espejos">Espejos o Vidrios</option>
+                      <option value="cabina">Cabina</option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <!-- Segundo Select (Inicialmente Vacío) -->
+                    <label for="select2" class="form-label fw-semibold">Selecciona un elemento:</label>
+                    <select id="select2" class="form-select" th:field="*{subCategoriaAveria}" required>
+                      <option value="" disabled selected>Selecciona primero una categoría</option>
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <label for="descripcion_problema" class="form-label fw-semibold">Descripcion</label>
+                    <textarea class="form-control" id="descripcion_problema" placeholder="Detalles sobre el problema, donde llevarlo, hora, etc.."  th:field="*{descripcion_problema}" rows="4" cols="50" required></textarea>
+                  </div>
+                  <div class="mb-4">
+                    <label for="start" class="form-label fw-semibold">Fecha programada para el ingreso del vehiculo al taller</label>
+                    <input type="datetime-local" class="form-control" id="start" name="start" placeholder="Fecha programada para el ingreso del vehiculo al taller" required>
+                  </div>
+                  <button class="btn btn-primary">Enviar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- fin contenido -->
+
+        <footer th:replace="layout/layout :: footer"></footer>
+        <!-- fin sect3 -->
+      </div>
+      <!-- fin sect2 -->
+    </div>
+
+    <!-- fin sect1 -->
+  </div>
+
+  <statics th:replace="layout/layout :: statics"></statics>
+  <script th:src="@{/js/maintenance.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+    <!-- sect2 -->
+    <div class="body-wrapper">
+
+        <aside th:replace="layout/layout :: header"></aside>
+
+        <!-- sect3 -->
+        <div class="container-fluid">
+
+            <!-- contenido -->
+            <div class="container-fluid">
+                <!--  Row 1 -->
+
+                <div class="row">
+
+                    <div th:replace="layout/layout :: notifications"></div>
+
+                    <div class="widget-content searchable-container list">
+                        <div class="card card-body">
+                            <div class="row">
+                                <div class="col-md-4 col-xl-3">
+                                    <form th:action="@{/maintenance/my}" method="post">
+                                        <input type="hidden" name="estado" id="estado" value="">
+                                        <div class="d-flex">
+                                            <button type="submit" class="btn btn-primary me-2" onclick="setEstado('ACTIVO')">Activo</button>
+                                            <button type="submit" class="btn btn-danger" onclick="setEstado('FINALIZADO')">Finalizado</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+
+                            <div class="card-header">
+                                <h3>Ordenes de trabajo</h3>
+                            </div>
+
+                            <div th:if="${mantenimientos != null and !mantenimientos.empty}">
+                            <div class="card card-body">
+                                <div class="table-responsive">
+                                    <table class="table search-table align-middle text-nowrap">
+                                        <thead class="header-item">
+                                        <th>Vehiculo</th>
+                                        <th>Ingreso al taller</th>
+                                        <th>Fecha de fin</th>
+                                        <th>Estado</th>
+                                        <th>Ver mas</th>
+                                        </thead>
+                                        <tbody>
+                                        <!-- start row -->
+                                        <tr class="search-items" th:each="mantenimiento: ${mantenimientos}">
+                                            <td>
+                                                <div class="user-meta-info">
+                                                    <h6 class="user-name mb-0" th:text="${mantenimiento.vehiculo.marca} + ' Patente: ' + ${mantenimiento.vehiculo.patente} "></h6>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="usr-email-addr" th:text="${mantenimiento.start}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="usr-location" th:text="${mantenimiento.fecha_realizacion}"></span>
+                                            </td>
+                                            <td>
+                                                <span class="usr-location" th:text="${mantenimiento.estado}"></span>
+                                            </td>
+                                            <td>
+                                                <div class="action-btn">
+                                                    <a th:href="@{/maintenance/my/ot/} + ${mantenimiento.idMantenimiento}" class="text-info edit">
+                                                        <i class="ti ti-eye fs-5" title="Ver Orden de trabajo"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <!-- end row -->
+                                        <!-- start row -->
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- fin tabla -->
+                            </div>
+
+                            <div class="text-center p-2" th:if="${mantenimientos == null or  mantenimientos.empty}">
+                                <span>No tiene ordenes de trabajo</span>
+                            </div>
+
+                            <div class="card-footer" th:if="${mantenimientos != null and !mantenimientos.empty}">
+                                <nav th:replace="layout/paginator :: paginator"></nav>
+                            </div>
+
+                            <script>
+                                function setEstado(estado) {
+                                    document.getElementById("estado").value = estado;
+                                }
+                            </script>
+
+                     </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+                    <!-- fin contenido -->
+                </div>
+
+
+
+                <footer th:replace="layout/layout :: footer"></footer>
+                <!-- fin sect3 -->
+            </div>
+            <!-- fin sect2 -->
+        </div>
+
+        <!-- fin sect1 -->
+    </div>
+
+    <statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>

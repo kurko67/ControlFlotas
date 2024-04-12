@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <!-- contenido -->
+    <div class="container-fluid">
+      <!--  Row 1 -->
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="w-100">
+            <div class="chat-container h-100 w-100">
+              <div class="chat-box-inner-part h-100">
+                <div class="chatting-box app-email-chatting-box">
+                  <div
+                          class="p-9 py-3 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
+                    <h5 class="text-dark mb-0 fw-semibold" th:text="'Detalle de Checklist: #' + ${ checkList.idChecklist } + ', Vehiculo: ' + ${checkList.vehiculo.marca} + ' Dominio: ' + ${checkList.vehiculo.patente} + ' Responsable: ' + ${checkList.conductor.nombreApellido}" ></h5>
+                    <ul class="list-unstyled mb-0 d-flex align-items-center">
+                      <li class="position-relative" data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-title="Edit">
+                        <a class="d-block text-dark px-2 fs-5 bg-hover-primary nav-icon-hover position-relative z-index-5"
+                           href="javascript:void(0)">
+                          <i class="ti ti-pencil"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="position-relative overflow-hidden">
+                    <div class="position-relative">
+                      <div class="chat-box p-9" style="height: calc(100vh - 128px)" data-simplebar="init">
+                        <div class="simplebar-wrapper" style="margin: -20px;">
+                          <div class="simplebar-height-auto-observer-wrapper">
+                            <div class="simplebar-height-auto-observer"></div>
+                          </div>
+                          <div class="simplebar-mask">
+                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                              <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                   aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                                <div class="simplebar-content" style="padding: 20px;">
+                                  <div class="chat-list chat active-chat" data-user-id="1">
+                                    <!-- Informacion sobre el check -->
+                                    <div class="row">
+
+                                      <div class="col-12 mb-3">
+                                        <label for="neumaticos" class="form-label fs-2">Neumaticos en condiciones?</label>
+                                        <input type="text" class="form-control" id="neumaticos" th:value="*{checkList.neumaticos ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="neumaticosDdetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="neumaticosDdetalles" th:text="*{checkList.neumaticosDdetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="fluidos" class="form-label fs-2">Fluidos en condiciones?</label>
+                                        <input type="text" class="form-control" id="fluidos" th:value="*{checkList.fluidos ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="fluidosDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="fluidosDetalles"   th:text="*{checkList.fluidosDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="luces" class="form-label fs-2">Luces en condiciones?</label>
+                                        <input type="text" class="form-control" id="luces" th:value="*{checkList.luces ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="lucesDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="lucesDetalles"   th:field="*{checkList.lucesDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="frenos" class="form-label fs-2">Frenos en condiciones?</label>
+                                        <input type="text" class="form-control" id="frenos" th:value="*{checkList.frenos ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="frenosDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="frenosDetalles"   th:field="*{checkList.frenosDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="trenDelantero" class="form-label fs-2">Tren delantero en condiciones?</label>
+                                        <input type="text" class="form-control" id="trenDelantero" th:value="*{checkList.trenDelantero ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="trenDelanteroDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="trenDelanteroDetalles"   th:field="*{checkList.trenDelanteroDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="seguridad" class="form-label fs-2">Elementos de seguridad presentes?</label>
+                                        <input type="text" class="form-control" id="seguridad" th:value="*{checkList.seguridad ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="seguridadDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="seguridadDetalles"  th:field="*{checkList.seguridadDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="carroceria" class="form-label fs-2">Carroceria y limpieza en condiciones?</label>
+                                        <input type="text" class="form-control" id="carroceria" th:value="*{checkList.carroceria ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="carroceriaDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="carroceriaDetalles"  th:field="*{checkList.carroceriaDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
+                                        <label for="documentacion" class="form-label fs-2">Documentacion completa?</label>
+                                        <input type="text" class="form-control" id="documentacion" th:value="*{checkList.documentacion ? 'Sí' : 'No'}" readonly>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="documentacionDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
+                                          <textarea class="form-control" id="documentacionDetalles"  th:field="*{checkList.documentacionDetalles}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                        <div class="mb-4 mt-2">
+                                          <label for="comentariosAdicionales" class="form-label fw-semibold mt-1">Comentarios adicionales.</label>
+                                          <textarea class="form-control" id="comentariosAdicionales"  th:field="*{checkList.comentariosAdicionales}" rows="2" cols="50" ></textarea>
+                                        </div>
+                                      </div>
+
+                                    <div class="mb-4 mt-2">
+                                      <div class="d-flex align-items-center gap-2">
+                                        <a th:href="@{/maintenance/new/} + ${checkList.vehiculo.idVehiculo}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary fs-2">Generar Orden de trabajo</a>
+                                      </div>
+                                    </div>
+
+
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+
+
+                              <!-- fin contenido -->
+
+                              <footer th:replace="layout/layout :: footer"></footer>
+                              <!-- fin sect3 -->
+                            </div>
+                            <!-- fin sect2 -->
+                          </div>
+
+                          <!-- fin sect1 -->
+                        </div>
+
+                        <statics th:replace="layout/layout :: statics"></statics>
+
+
+
+</body>
+</html>

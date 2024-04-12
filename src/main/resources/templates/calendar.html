@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
+  <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+  <link rel="stylesheet" th:href="@{/css/flotas.css}" />
+  <link rel="stylesheet" th:href="@{/css/daypilot/main.css}">
+
+</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 d-none d-md-block">
+
+            <div class="left">
+              <div id="nav"></div>
+            </div>
+
+          </div>
+          <div class="col-md-9">
+
+            <div class="toolbar">
+              <button id="previous">Previous</button>
+              <button id="next">Next</button>
+            </div>
+            <div id="dp"></div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- DayPilot library -->
+      <script th:src="@{/js/daypilot/daypilot-all.min.js}"></script>
+
+      <script>
+       const datePicker = new DayPilot.Navigator("nav", {
+       showMonths: 2,
+       skipMonths: 1,
+       selectMode: "Month",
+       onTimeRangeSelected: args => {
+       calendar.update({
+       startDate: args.day
+     });
+     calendar.events.load("/api/events");
+   }
+ });
+ datePicker.init();
+
+ const calendar = new DayPilot.Month("dp", {
+   eventEndSpec: "Date",
+   eventHeight: 30,
+   eventBarVisible: false,
+
+   onEventClick: async (args) => {
+        const event = args.e.data; // Obtener los datos del evento seleccionado
+        const modal = new DayPilot.Modal({
+            onClosed: function(result) {
+                if (result) {
+                    // Aquí puedes realizar alguna acción después de cerrar el modal si lo necesitas
+                }
+            }
+        });
+        modal.showUrl("/maintenance/modal-maintenance/" + event.idMantenimiento); // URL de la página que muestra los detalles de la tarea
+    },
+
+ });
+ calendar.init();
+
+ const app = {
+   colors: {
+     blue: "#2e78d6",
+     green: "#6aa84f",
+     yellow: "#efb914",
+     red: "#cc4125",
+     gray: "#808080",
+   },
+   elements: {
+     previous: document.querySelector("#previous"),
+     next: document.querySelector("#next"),
+   },
+   async updateColor(e, color) {
+     const params = {
+       id: e.id(),
+       color: color
+     };
+     const {data} = await DayPilot.Http.post('/api/events/setColor', params);
+     e.data.color = color;
+     calendar.events.update(e);
+   },
+   init() {
+     app.elements.previous.addEventListener("click", () => {
+       const current = datePicker.selectionDay;
+       datePicker.select(current.addMonths(-1));
+     });
+     app.elements.next.addEventListener("click", () => {
+       const current = datePicker.selectionDay;
+       datePicker.select(current.addMonths(1));
+     });
+
+     calendar.events.load("/api/events");
+   }
+ };
+
+ app.init();
+
+      </script>
+
+
+      <style>
+
+        .month_default_event_inner {
+            border-radius: 10px;
+        }
+
+      </style>
+
+
+
+      <!-- fin contenido -->
+    </div>
+
+
+
+    <footer th:replace="layout/layout :: footer"></footer>
+    <!-- fin sect3 -->
+  </div>
+  <!-- fin sect2 -->
+</div>
+
+<!-- fin sect1 -->
+</div>
+
+<statics th:replace="layout/layout :: statics"></statics>
+
+
+
+
+</body>
+</html>

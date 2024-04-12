@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+   <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="card overflow-hidden chat-application">
+        <div class="d-flex align-items-center justify-content-between gap-6 m-3 d-lg-none">
+
+        </div>
+        <div class="d-flex w-100">
+          <div class="left-part border-end w-20 flex-shrink-0 d-none d-lg-block h-auto">
+
+          </div>
+          <div class="d-flex w-100">
+            <div class="w-100">
+              <div class="chat-container h-100 w-100">
+                <div class="chat-box-inner-part h-100">
+                  <div class="chatting-box app-email-chatting-box">
+                    <div class="position-relative overflow-hidden">
+                      <div class="position-relative">
+                        <div class="chat-box email-box mh-n100 p-9"
+                             data-simplebar="init">
+
+                          <div class="chat-list chat active-chat" data-user-id="1">
+                            <div
+                                    class="hstack align-items-start mb-7 pb-1 align-items-center justify-content-between flex-wrap gap-6">
+                              <div class="d-flex align-items-center gap-2">
+                                <div>
+                                  <h6 class="fw-semibold mb-0" th:text="${'Creado por: ' + notificacion.emisor.username + ' el ' + {#dates.format(notificacion.created_at, 'yyyy-MM-dd')} }">username</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="border-bottom pb-7 mb-7">
+                              <h4 class="fw-semibold text-dark mb-3" th:text="${notificacion.asunto}">asunto</h4>
+                              <p class="mb-3 text-dark" th:text="${'Hola, ' + notificacion.receptor.username}">Hola user,</p>
+                              <p class="mb-3 text-dark" th:text="${notificacion.mensaje}"> Cuerpo del mensaje
+                              </p>
+                              <p class="mb-3 text-dark">Te deseamos un excelente dia!</p>
+                              <p class="mb-0 text-dark">Saludos,</p>
+                              <h6 class="fw-semibold mb-0 text-dark pb-1">Administración</h6>
+                            </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- fin contenido -->
+
+        <footer th:replace="layout/layout :: footer"></footer>
+        <!-- fin sect3 -->
+      </div>
+      <!-- fin sect2 -->
+    </div>
+
+    <!-- fin sect1 -->
+  </div>
+
+
+  <statics th:replace="layout/layout :: statics"></statics>
+
+
+
+</body>
+</html>

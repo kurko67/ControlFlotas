@@ -1,0 +1,8 @@
+ .mayusculas {
+      text-transform: uppercase;
+    }
+
+  .minusculas {
+    text-transform: lowercase;
+  }
+

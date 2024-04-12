@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+  <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+  <!-- sect2 -->
+  <div class="body-wrapper">
+
+    <aside th:replace="layout/layout :: header"></aside>
+
+    <!-- sect3 -->
+    <div class="container-fluid">
+
+      <!-- contenido -->
+      <div class="container-fluid">
+        <!--  Row 1 -->
+
+        <div class="row">
+          <div class="col-lg-8 d-flex align-items-strech">
+            <div class="card w-100">
+              <div class="card-body">
+                <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                  <div class="mb-3 mb-sm-0">
+                    <h5 class="card-title fw-semibold">Gráfico cantidad OT Mensual</h5>
+                  </div>
+                </div>
+                <div id="chart"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Yearly Breakup -->
+                <div class="card overflow-hidden">
+                  <div class="card-body p-4">
+                    <h5 class="card-title mb-9 fw-semibold">Gasto Mensual actual</h5>
+                    <div class="row align-items-center">
+                      <div class="col-8">
+                        <h4 class="fw-semibold mb-3">$1.588.555</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <!-- Monthly Earnings -->
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row alig n-items-start">
+                      <div class="col-8">
+                        <h5 class="card-title mb-9 fw-semibold"> Problematicas este mes </h5>
+                        <h4 class="fw-semibold mb-3">10</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <div class="mb-4">
+                  <h5 class="card-title fw-semibold">Próximos Vencimientos de licencias</h5>
+                </div>
+                <ul class="timeline-widget mb-0 position-relative mb-n2" th:if="${conductores != null and !conductores.empty}">
+                  <li class="timeline-item d-flex position-relative" th:each="conductor : ${conductores}">
+                    <div class="timeline-time text-dark flex-shrink-0 text-end" th:text="${conductor.vencimientoLicencia}">08/03/2025</div>
+                    <div class="timeline-time text-dark flex-shrink-0 text-end" th:text="${conductor.nombreApellido}">Daniel Alaniz</div>
+                  </li>
+                </ul>
+                <div>
+                  <h5 th:if="${conductores == null or conductores.empty}">No hay vencimientos para los proximos 30 dias. </h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <h5 class="card-title fw-semibold mb-4">Próximos Vencimientos de VTV, RUTA y Seguro</h5>
+                <div class="table-responsive">
+                  <table class="table text-nowrap mb-0 align-middle"  th:if="${vehiculos != null and !vehiculos.empty}">
+                    <thead class="text-dark fs-4">
+                    <tr>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Vehiculo</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Patente</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">TIPO</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Fecha Vencimiento</h6>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="vehiculo : ${vehiculos}">
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[1]}">vehiculo</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[2]}">patente</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[3]}">tipo_vencimiento</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-1" th:text="${vehiculo[4]}">vencimiento</h6>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <div>
+                    <h5 th:if="${vehiculos == null or vehiculos.empty}">No hay vencimientos para los proximos 30 dias.</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- fin contenido -->
+
+      <footer th:replace="layout/layout :: footer"></footer>
+      <!-- fin sect3 -->
+    </div>
+    <!-- fin sect2 -->
+  </div>
+
+  <!-- fin sect1 -->
+</div>
+
+<statics th:replace="layout/layout :: statics"></statics>
+
+</body>
+</html>
