@@ -6,6 +6,7 @@ import com.kurko67.controlflotas.models.entity.*;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
+import com.kurko67.controlflotas.models.service.TwilioWhatsAppService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -43,6 +45,15 @@ public class MantenimientoController {
 
     @Autowired
     private IUsuarioDao usuarioService;
+
+
+    private TwilioWhatsAppService twilioWhatsAppService;
+
+    @Autowired
+    public MantenimientoController( TwilioWhatsAppService twilioWhatsAppService) {
+        this.twilioWhatsAppService = twilioWhatsAppService;
+    }
+
 
 
     @RequestMapping("/new/{id}")
@@ -107,7 +118,7 @@ public class MantenimientoController {
 
         notificacionDao.save(notificacion);
 
-
+        twilioWhatsAppService.sendMessage();
 
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
