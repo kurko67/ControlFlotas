@@ -3,16 +3,15 @@ package com.kurko67.controlflotas.controllers;
 import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.*;
-import com.kurko67.controlflotas.models.service.IConductorService;
-import com.kurko67.controlflotas.models.service.IMantenimientoService;
-import com.kurko67.controlflotas.models.service.IVehiculoService;
-import com.kurko67.controlflotas.models.service.TwilioWhatsAppService;
+import com.kurko67.controlflotas.models.service.*;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/maintenance")
@@ -49,9 +49,14 @@ public class MantenimientoController {
 
     private TwilioWhatsAppService twilioWhatsAppService;
 
+
+    private WhatsAppService whatsAppService;
+
     @Autowired
-    public MantenimientoController( TwilioWhatsAppService twilioWhatsAppService) {
+    public MantenimientoController( TwilioWhatsAppService twilioWhatsAppService,
+                                    WhatsAppService whatsAppService) {
         this.twilioWhatsAppService = twilioWhatsAppService;
+        this.whatsAppService = whatsAppService;
     }
 
 
@@ -69,6 +74,19 @@ public class MantenimientoController {
         model.addAttribute("conductores", conductores);
         return "maintenance";
 
+    }
+
+
+    @GetMapping("/obtener-telefono-conductor")
+    @ResponseBody
+    public ResponseEntity<?> obtenerTelefonoConductor(@RequestParam Long conductorId) {
+        Conductor conductor = conductorService.findOne(conductorId);
+        if (conductor != null) {
+            String telefono = conductor.getNumeroTelefono();
+            return ResponseEntity.ok().body(Map.of("telefono", telefono));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conductor no encontrado");
+        }
     }
 
 
@@ -118,11 +136,13 @@ public class MantenimientoController {
 
         notificacionDao.save(notificacion);
 
-        twilioWhatsAppService.sendMessage();
+        //twilioWhatsAppService.sendMessage();
 
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 
     }
+
+
 
     @GetMapping("/view-maintenance/{id}")
     public String viewMaintenanceById(@PathVariable(value = "id") Long idMaintenance, Model model,

@@ -3,7 +3,9 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
-<head th:replace="layout/layout :: head">Head</head>
+<head th:replace="layout/layout :: head">
+
+</head>
 
 <body>
 
@@ -31,18 +33,18 @@
               <div class="px-4 py-3 border-bottom">
                 <h5 class="card-title fw-semibold mb-0" th:text="'Orden de trabajo ' + ${vehiculo.patente} + ', Responsable: ' + ${vehiculo.conductor.nombreApellido} "></h5>
               </div>
-              <form th:action="@{/maintenance/nuevo}" th:object="${mantenimiento}" method="post">
+              <form th:action="@{/maintenance/nuevo}" th:object="${mantenimiento}" method="post" id="formulario">
                 <div class="card-body p-4">
                   <div class="mb-4">
                     <label class="form-label fw-semibold">Quien realizara la Orden de Trabajo?</label>
                     <select id="conductorid" name="conductorid" class="form-select" aria-label="Seleccionar opción" required th:field="*{conductor}" >
-                      <option value="" selected>Seleccionar conductor</option> <!-- Opción predeterminada -->
-                      <option th:each="conductor : ${conductores}"
-                              th:value="${conductor.idConductor}"
-                              th:text="${conductor.nombreApellido}"
-                              th:selected="${conductor.idConductor == conductorSeleccionado ? 'selected' : ''}">
-                      </option>
-                    </select>
+                    <option value="" selected>Seleccionar conductor</option> <!-- Opción predeterminada -->
+                    <option th:each="conductor : ${conductores}"
+                            th:value="${conductor.idConductor}"
+                            th:text="${conductor.nombreApellido}"
+                            th:selected="${conductor.idConductor == conductorSeleccionado ? 'selected' : ''}">
+                    </option>
+                  </select>
                   </div>
                   <div class="mb-4">
                     <label class="form-label fw-semibold">Tipo</label>
@@ -52,6 +54,7 @@
                     </select>
                   </div>
                   <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
+                  <input type="hidden" id="vehiculo-marca" th:value="${vehiculo.marca}" name="vehiculo-marca">
                   <div class="mb-4">
                     <label for="select1" class="form-label fw-semibold">Selecciona una categoría:</label>
                     <select id="select1" onchange="actualizarSelect2()" class="form-select" th:field="*{categoriaAveria}" required>
@@ -82,7 +85,7 @@
                     <label for="start" class="form-label fw-semibold">Fecha programada para el ingreso del vehiculo al taller</label>
                     <input type="datetime-local" class="form-control" id="start" name="start" placeholder="Fecha programada para el ingreso del vehiculo al taller" required>
                   </div>
-                  <button class="btn btn-primary">Enviar</button>
+                  <button class="btn btn-primary" onclick="enviarMensaje()">Enviar</button>
                 </div>
               </form>
             </div>
@@ -100,6 +103,8 @@
 
     <!-- fin sect1 -->
   </div>
+
+
 
   <statics th:replace="layout/layout :: statics"></statics>
   <script th:src="@{/js/maintenance.js}"></script>
