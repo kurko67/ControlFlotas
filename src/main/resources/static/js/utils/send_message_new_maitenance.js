@@ -11,9 +11,6 @@ $(document).ready(function() {
         var fecha = $('#start').val();
         var detalles = $('#descripcion_problema').val();
 
-
-
-        console.log(conductorId);
         // Realizar la solicitud AJAX al backend para obtener el número de teléfono del conductor
         $.ajax({
             url: '/maintenance/obtener-telefono-conductor',

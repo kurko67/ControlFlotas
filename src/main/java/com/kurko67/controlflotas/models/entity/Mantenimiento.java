@@ -47,10 +47,14 @@ public class Mantenimiento implements Serializable {
     private String categoriaAveria;
     private String subCategoriaAveria;
 
-    //Relacion muchos mantenimientos a un veichulo
+    //Relacion muchos mantenimientos a un conductor
     @ManyToOne
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
+
+    @ManyToOne
+    @JoinColumn(name = "emisor_id")
+    private Usuario emisor;
 
     public Mantenimiento() {
 

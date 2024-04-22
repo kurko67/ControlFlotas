@@ -65,15 +65,13 @@
                                         <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
                                       </div>
 
-
-
                                       <!-- Agrega más bloques similares para cada campo -->
 
                                     </div>
 
                                     <div class="row">
 
-                                      <form th:action="@{/maintenance/update}" method="post" th:object="${mantenimiento}">
+                                      <form th:action="@{/maintenance/update}" method="post" th:object="${mantenimiento}" id="formulario-fin-ot">
 
                                         <input type="hidden"id="idMantenimiento" th:value="${mantenimiento.idMantenimiento}" name="idMantenimiento">
 

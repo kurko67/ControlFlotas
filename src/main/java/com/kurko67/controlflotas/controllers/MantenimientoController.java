@@ -101,7 +101,11 @@ public class MantenimientoController {
             return "redirect:/view-vehicles/" + idVehiculo;
         }
 
-        System.out.println(user);
+        Notificacion notificacion = new Notificacion();
+
+        //Buscar emisor
+        Usuario emisor = usuarioService.findByUsername(user.getUsername());
+        notificacion.setEmisor(emisor);
 
         Vehiculo vehiculo = vehiculoService.findOne(idVehiculo);
         mantenimiento.setText(vehiculo.getPatente());
@@ -110,13 +114,11 @@ public class MantenimientoController {
         mantenimiento.setVehiculo(vehiculo);
         mantenimiento.setStart(start);
         mantenimiento.setEnd(start);
+        mantenimiento.setEmisor(emisor);
         mantenimientoService.save(mantenimiento);
 
-        Notificacion notificacion = new Notificacion();
 
-        //Buscar emisor y definir emisor
-        Usuario emisor = usuarioService.findByUsername(user.getUsername());
-        notificacion.setEmisor(emisor);
+
 
         //buscar conductor usuario y definir receptor
         Conductor conductor_id = conductorService.findOne(conductor);
@@ -219,6 +221,27 @@ public class MantenimientoController {
     }
 
 
+    @GetMapping("/obtener-telefono-emisor")
+    @ResponseBody
+    public ResponseEntity<?> obtenerTelefonoEmisor(@RequestParam Long idMantenimiento) {
+        System.out.println("id desde spring: " + idMantenimiento);
+        Mantenimiento mantenimiento = mantenimientoService.findOne(idMantenimiento);
+        if (mantenimiento != null) {
+            Long idEmisor = mantenimiento.getEmisor().getIdUsuario();
+            System.out.println("Emisor que envio el OT: " + idEmisor);
+            Conductor conductor = conductorService.findConductorByIdUsuario(idEmisor);
+            System.out.println("Entonces el emisor es: " + conductor.getNombreApellido());
+            return ResponseEntity.ok().body(Map.of(
+                    "telefono", conductor.getNumeroTelefono(),
+                    "nombre", conductor.getNombreApellido(),
+                    "conductor", mantenimiento.getConductor().getNombreApellido(),
+                    "vehiculo", mantenimiento.getVehiculo().getMarca()
+            ));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Conductor no encontrado");
+        }
+    }
+
     @PostMapping("/update")
     public String FinalizeMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idMantenimiento,
                                       @RequestParam String descripcion_mantenimiento,
@@ -243,15 +266,13 @@ public class MantenimientoController {
 
         Notificacion notificacion = new Notificacion();
 
-        //Buscar emisor y definir emisor
+        //Buscar emisor
         Usuario emisor = usuarioService.findByUsername(user.getUsername());
         notificacion.setEmisor(emisor);
 
-        //esto debe ser momentaneo y se deben mapear todos los usuarios con rol admin y enviar la notificacion a todos
-        Integer entero = 1;
-        Long largo = entero.longValue();
+        //Se envia el que genero la orden de trabajo, ya que agregue al modelo Mantenimiento el Emisor
 
-        Usuario receptor = usuarioService.getOne(largo);
+        Usuario receptor = mantenimiento.getEmisor();
         notificacion.setReceptor(receptor);
 
         notificacion.setAsunto("Fin orden de Trabajo");

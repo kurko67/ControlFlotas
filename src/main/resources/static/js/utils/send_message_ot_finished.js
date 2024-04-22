@@ -1,36 +1,35 @@
 $(document).ready(function() {
-    $('#formulario').submit(function(event) {
+    $('#formulario-fin-ot').submit(function(event) {
         // Evitar que se envíe el formulario automáticamente
         event.preventDefault();
 
         // Obtener el ID del conductor seleccionado
-        var conductorId = $('#conductorid').val();
-        var nombreConductor = $('#conductorid option:selected').text();
-        var tipo = $('#tipo').val();
-        var marca = $('#vehiculo-marca').val();
-        var fecha = $('#start').val();
-        var detalles = $('#descripcion_problema').val();
+        var idMantenimiento = $('#idMantenimiento').val();
+        var detalles_mantenimiento = $('#descripcion_mantenimiento').val();
+        var costo = $('#costo').val();
 
+        console.log("id desde js: " + idMantenimiento)
 
-
-        console.log(conductorId);
         // Realizar la solicitud AJAX al backend para obtener el número de teléfono del conductor
         $.ajax({
-            url: '/maintenance/obtener-telefono-conductor',
+            url: '/maintenance/obtener-telefono-emisor',
             type: 'GET',
-            data: { conductorId: conductorId },
+            data: { idMantenimiento: idMantenimiento },
             success: function(response) {
                 // Una vez que se obtenga el número de teléfono del conductor, construir la URL de la API de WhatsApp
-                var telefonoConductor = response.telefono;
-                var mensaje = encodeURIComponent('Hola ' + nombreConductor + '. Te he asignado un mantenimiento ' + tipo + ', para el vehiculo: ' +
-                marca + ', el dia: ' + fecha + '. Mas detalles: *' + detalles + '*, Que tengas buen dia!');
-                var whatsappURL = 'https://api.whatsapp.com/send?phone=' + telefonoConductor + '&text=' + mensaje;
+                var telefonoEmisor = response.telefono;
+                var nombreEmisor = response.nombre;
+                var conductor = response.conductor;
+                var vehiculo = response.vehiculo;
+                var mensaje = encodeURIComponent('Hola ' + nombreEmisor + '. Te informamos que la persona: ' + conductor + ', ha realizado el mantenimiento previsto del vehiculo: ' +
+                vehiculo + '. *Detalle de Mantenimiento:* ' + detalles_mantenimiento + ' Costo: $ ' + costo);
+                var whatsappURL = 'https://api.whatsapp.com/send?phone=' + telefonoEmisor + '&text=' + mensaje;
 
                 // Redirigir a la URL de WhatsApp
                 window.open(whatsappURL, '_blank');
 
                 // Enviar el formulario
-                $('#formulario').unbind('submit').submit();
+                $('#formulario-fin-ot').unbind('submit').submit();
             },
             error: function(xhr, status, error) {
                 // Manejar el error si la solicitud AJAX falla
