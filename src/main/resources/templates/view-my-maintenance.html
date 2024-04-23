@@ -82,7 +82,12 @@
 
                                         <div class="col-12 mb-3">
                                           <label for="costo" class="form-label fs-2">Costo del servicio:</label>
-                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}" onkeypress="return soloNumeros(event)">
+                                          <input type="text" class="form-control" id="costo" name="costo" th:field="*{costo}">
+                                        </div>
+
+                                        <div class="col-12 mb-3">
+                                          <label for="km" class="form-label fs-2">Kilometraje actual:</label>
+                                          <input type="number" class="form-control" id="km" name="costo">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary" th:if="${mantenimiento.estado == 'ACTIVO'}">Finalizar trabajo</button>

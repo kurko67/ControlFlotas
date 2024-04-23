@@ -245,24 +245,35 @@ public class MantenimientoController {
     @PostMapping("/update")
     public String FinalizeMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idMantenimiento,
                                       @RequestParam String descripcion_mantenimiento,
-                                      @RequestParam Double costo, BindingResult result, Model model,
+                                      @RequestParam Double costo, BindingResult result,
+                                      @RequestParam Long km, Model model,
                                  RedirectAttributes flash,@AuthenticationPrincipal User user){
 
 
         mantenimiento = mantenimientoService.findOne(idMantenimiento);
+
 
         if(result.hasErrors()){
             flash.addFlashAttribute("error", "Error en la carga de datos");
             return "redirect:/vehicles/my";
         }
 
+        Vehiculo vehiculo = null;
+        vehiculo = mantenimiento.getVehiculo();
 
+        if (vehiculo == null){
+            flash.addFlashAttribute("error", "Error en la carga de datos");
+            return "redirect:/vehicles/my";
+        }
 
         mantenimiento.setEstado("FINALIZADO");
         mantenimiento.setDescripcion_mantenimiento(descripcion_mantenimiento);
         mantenimiento.setCosto(costo);
         mantenimiento.setFecha_realizacion(new Date());
         mantenimientoService.save(mantenimiento);
+
+        vehiculo.setKm(km);
+        vehiculoService.save(vehiculo);
 
         Notificacion notificacion = new Notificacion();
 
