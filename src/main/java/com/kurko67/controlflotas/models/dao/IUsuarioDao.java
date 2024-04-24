@@ -41,5 +41,6 @@ public interface IUsuarioDao extends JpaRepository<Usuario, Long> {
     @Query(value = "update usuarios set habilitado = :valor1 where id_usuario = :valor2 ", nativeQuery = true)
     void HabilitarDeshabilitarUser(@Param("valor1") boolean habilitado,@Param("valor2") Long id);
 
+    boolean existsByUsername(String username);
 
 }

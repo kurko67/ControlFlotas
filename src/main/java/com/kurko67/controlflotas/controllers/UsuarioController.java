@@ -71,6 +71,12 @@ public class UsuarioController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setPassword(encoder.encode(newPasword));
 
+        if(usuariodao.existsByUsername(usuario.getUsername())){
+            System.out.println("el user ya existe");
+            flash.addFlashAttribute("warning", "¡El Usuario " + usuario.getUsername() + " ya existe!");
+            return "redirect:/users/new";
+        }
+
         usuario.setHabilitado(true);
         usuariodao.save(usuario);
         Long iduser = usuario.getIdUsuario();

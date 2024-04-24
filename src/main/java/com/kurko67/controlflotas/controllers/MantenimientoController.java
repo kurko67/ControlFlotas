@@ -246,7 +246,7 @@ public class MantenimientoController {
     public String FinalizeMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idMantenimiento,
                                       @RequestParam String descripcion_mantenimiento,
                                       @RequestParam Double costo, BindingResult result,
-                                      @RequestParam Long km, Model model,
+                                      @RequestParam(value = "km") Long km, Model model,
                                  RedirectAttributes flash,@AuthenticationPrincipal User user){
 
 
