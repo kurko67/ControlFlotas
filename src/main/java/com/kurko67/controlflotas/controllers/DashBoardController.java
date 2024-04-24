@@ -4,6 +4,7 @@ import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.Conductor;
 import com.kurko67.controlflotas.models.entity.Vehiculo;
+import com.kurko67.controlflotas.models.service.ICheckListService;
 import com.kurko67.controlflotas.models.service.IConductorService;
 import com.kurko67.controlflotas.models.service.IMantenimientoService;
 import com.kurko67.controlflotas.models.service.IVehiculoService;
@@ -28,6 +29,9 @@ public class DashBoardController {
     @Autowired
     IMantenimientoService mantenimientoService;
 
+    @Autowired
+    ICheckListService checkListService;
+
     @GetMapping("/")
     public String panelAdministrador(Model model, RedirectAttributes flash){
 
@@ -35,9 +39,26 @@ public class DashBoardController {
         List<Object[]> vehiculos = vehiculoService.find30daysExpires();
         BigDecimal gastoMensual = mantenimientoService.findGastosMensuales() == null ? BigDecimal.valueOf(0) : mantenimientoService.findGastosMensuales();
 
+        /* contar problematicas */
+
+        Integer contarNeumaticos = checkListService.ContarNeumaticos();
+        Integer contarFluidos = checkListService.ContarFluidos();
+        Integer contarLuces = checkListService.ContarLuces();
+        Integer contarFrenos = checkListService.ContarFrenos();
+        Integer contarTrenDelantero = checkListService.ContarTrenDelantero();
+        Integer contarSeguridad = checkListService.ContarSeguridad();
+        Integer contarCarroceria = checkListService.ContarCarroceria();
+        Integer contarDocumentacion = checkListService.ContarDocumentacion();
+
+        int suma;
+        suma = contarNeumaticos + contarFluidos + contarLuces + contarFrenos + contarTrenDelantero + contarSeguridad +  contarCarroceria + contarDocumentacion;
+
+        /* fin contar problematicas */
+
         model.addAttribute("conductores", conductores);
         model.addAttribute("vehiculos", vehiculos);
         model.addAttribute("gastos", gastoMensual);
+        model.addAttribute("problematicas", suma);
 
         return "index";
 

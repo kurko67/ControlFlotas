@@ -41,8 +41,53 @@ public class ICheckListServiceImpl implements ICheckListService {
     }
 
     @Override
+    public Integer ContarNeumaticos() {
+        return checkListDao.ContarNeumaticos();
+    }
+
+    @Override
+    public Integer ContarFluidos() {
+        return checkListDao.ContarFluidos();
+    }
+
+    @Override
+    public Integer ContarLuces() {
+        return checkListDao.ContarLuces();
+    }
+
+    @Override
+    public Integer ContarFrenos() {
+         return checkListDao.ContarFrenos();
+    }
+
+    @Override
+    public Integer ContarTrenDelantero() {
+        return checkListDao.ContarTrenDelantero();
+    }
+
+    @Override
+    public Integer ContarSeguridad() {
+        return checkListDao.ContarSeguridad();
+    }
+
+    @Override
+    public Integer ContarCarroceria() {
+        return checkListDao.ContarCarroceria();
+    }
+
+    @Override
+    public Integer ContarDocumentacion() {
+        return checkListDao.ContarDocumentacion();
+    }
+
+    @Override
     @Transactional
     public void delete(Long id) {
         checkListDao.deleteById(id);
     }
+
+
+
+
+
 }
