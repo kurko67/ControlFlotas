@@ -54,9 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .hasAnyRole("USER")
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .successHandler(successHandler)
-                    .permitAll()
+                .loginPage("/login")
+                .successHandler(successHandler)
+                .permitAll()
                 .failureUrl("/login?error=true")
                 .and()
                 .exceptionHandling().accessDeniedPage("/error/403");

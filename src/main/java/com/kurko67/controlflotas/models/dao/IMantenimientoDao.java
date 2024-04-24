@@ -10,6 +10,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -24,5 +25,8 @@ public interface IMantenimientoDao extends PagingAndSortingRepository<Mantenimie
 
     @Query(value = "select * from mantenimientos where conductor_id = ?1 and estado = ?2 order by estado DESC", nativeQuery = true)
     Page<Mantenimiento> findMantenimientosByConductorId(Long conductor_id, String estado, Pageable pageable);
+
+    @Query(value = "select sum(costo) from mantenimientos where fecha_realizacion between current_date and current_date + interval 30 day", nativeQuery = true)
+    BigDecimal findGastosMensuales();
 
 }

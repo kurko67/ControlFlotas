@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
+  <title>ControlFlotas</title>
   <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
   <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
 </head>
@@ -39,6 +39,11 @@
                   -->
                   <input type="submit" value="Login" class="btn btn-primary btn-block" />
                 </form>
+              </div>
+              <div class="card-footer">
+                <div>
+                  <div class="alert alert-warning" th:if="${error != null }" th:text="${error}"></div><br/>
+                </div>
               </div>
             </div>
           </div>

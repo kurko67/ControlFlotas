@@ -25,6 +25,8 @@
       <div class="container-fluid">
         <!--  Row 1 -->
 
+        <div th:replace="layout/layout :: notifications"></div>
+
         <div class="row">
           <div class="col-lg-8 d-flex align-items-strech">
             <div class="card w-100">
@@ -47,7 +49,7 @@
                     <h5 class="card-title mb-9 fw-semibold">Gasto Mensual actual</h5>
                     <div class="row align-items-center">
                       <div class="col-8">
-                        <h4 class="fw-semibold mb-3">$1.588.555</h4>
+                        <h4 class="fw-semibold mb-3" th:text="'$' + ${gastos}"></h4>
                       </div>
                     </div>
                   </div>
