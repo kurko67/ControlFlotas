@@ -3,12 +3,10 @@ package com.kurko67.controlflotas.controllers;
 import com.kurko67.controlflotas.models.dao.INotificacionDao;
 import com.kurko67.controlflotas.models.dao.IUsuarioDao;
 import com.kurko67.controlflotas.models.entity.*;
-import com.kurko67.controlflotas.models.service.ICheckListService;
-import com.kurko67.controlflotas.models.service.IConductorService;
-import com.kurko67.controlflotas.models.service.IVehiculoService;
+import com.kurko67.controlflotas.models.service.*;
+
 import javax.validation.Valid;
 
-import com.kurko67.controlflotas.models.service.UsuarioService;
 import com.kurko67.controlflotas.util.paginator.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +45,9 @@ public class VehiculoController {
 
     @Autowired
     private INotificacionDao notificacionDao;
+
+    @Autowired
+    IProblematicaService problematicaService;
 
 
     @RequestMapping("/new")
@@ -237,10 +239,105 @@ public class VehiculoController {
 
         notificacionDao.save(notificacion);
 
+        persistirRespuestasNo(checklist, vehiculo);
 
         flash.addFlashAttribute("success", "Gracias por enviarnos sus comentarios !");
         return "redirect:/vehicles/my";
 
+    }
+
+    private void persistirRespuestasNo(CheckList checklist, Vehiculo vehiculo) {
+        try {
+            // Obtener todos los campos de la clase CheckList
+            Field[] fields = checklist.getClass().getDeclaredFields();
+
+            // Iterar sobre cada campo
+            for (Field field : fields) {
+                field.setAccessible(true);
+
+                // Verificar si el campo es de tipo booleano
+                if (field.getType().equals(Boolean.class) || field.getType().equals(boolean.class)) {
+                    // Obtener el valor del campo
+                    boolean fieldValue = (boolean) field.get(checklist);
+
+                    // Si el valor es false, guardar los detalles en Problematicas
+                    if (!fieldValue) {
+                        // Obtener los detalles correspondientes
+                        String detalles = obtenerDetalles(field.getName(), checklist);
+                        String tipos = obtenerTipo(field.getName());
+                        guardarRegistroProblematicas(tipos, detalles, vehiculo, checklist);
+                    }
+                }
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Función para guardar un registro en Problematicas
+    private void guardarRegistroProblematicas(String tipos, String detalles, Vehiculo vehiculo, CheckList checklist) {
+        Problematicas problematicas = new Problematicas();
+        problematicas.setVehiculo(vehiculo);
+        problematicas.setCheckList(checklist);
+        problematicas.setEstado("PENDIENTE");
+        problematicas.setTipo(tipos);
+        problematicas.setCreated_at(new Date());
+        problematicas.setDetalle_problema(detalles); // Establecer el detalle de la respuesta "NO"
+        problematicaService.save(problematicas); // Guardar el registro en la base de datos
+    }
+
+    private String obtenerDetalles(String fieldName, CheckList checklist) {
+        // Implementa la lógica para obtener los detalles según el nombre del campo
+        // Puedes definir un mapa u otro método para mapear los nombres de los campos con sus detalles
+        // Por ejemplo:
+        switch (fieldName) {
+            case "neumaticos":
+                return checklist.getNeumaticosDdetalles();
+            case "fluidos":
+                return checklist.getFluidosDetalles();
+            case "luces":
+                return checklist.getLucesDetalles();
+            case "frenos":
+                return checklist.getFrenosDetalles();
+            case "trenDelantero":
+                return checklist.getTrenDelanteroDetalles();
+            case "seguridad":
+                return checklist.getSeguridadDetalles();
+            case "carroceria":
+                return checklist.getCarroceriaDetalles();
+            case "documentacion":
+                return checklist.getDocumentacionDetalles();
+            // Repite el proceso para cada atributo booleano del checklist
+            default:
+                return "";
+        }
+    }
+
+    private String obtenerTipo(String fieldName) {
+        // Implementa la lógica para obtener los detalles según el nombre del campo
+        // Puedes definir un mapa u otro método para mapear los nombres de los campos con sus detalles
+        // Por ejemplo:
+        switch (fieldName) {
+            case "neumaticos":
+                return "neumaticos";
+            case "fluidos":
+                return "fluidos";
+            case "luces":
+                return "luces";
+            case "frenos":
+                return "frenos";
+            case "trenDelantero":
+                return "trenDelantero";
+            case "seguridad":
+                return "seguridad";
+            case "carroceria":
+                return "carroceria";
+            case "documentacion":
+                return "documentacion";
+            // Repite el proceso para cada atributo booleano del checklist
+            default:
+                return "";
+        }
     }
 
 

@@ -61,7 +61,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="neumaticos" class="form-label fs-2">Neumaticos en condiciones?</label>
-                                        <input type="text" class="form-control" id="neumaticos" th:value="*{checkList.neumaticos ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="neumaticos" th:value="*{checkList.neumaticos ? 'Sí' : 'No'}" th:style="${checkList.neumaticos} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="neumaticosDdetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -71,7 +71,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="fluidos" class="form-label fs-2">Fluidos en condiciones?</label>
-                                        <input type="text" class="form-control" id="fluidos" th:value="*{checkList.fluidos ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="fluidos" th:value="*{checkList.fluidos ? 'Sí' : 'No'}" th:style="${checkList.fluidos} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="fluidosDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -81,7 +81,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="luces" class="form-label fs-2">Luces en condiciones?</label>
-                                        <input type="text" class="form-control" id="luces" th:value="*{checkList.luces ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="luces" th:value="*{checkList.luces ? 'Sí' : 'No'}" th:style="${checkList.luces} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="lucesDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -91,7 +91,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="frenos" class="form-label fs-2">Frenos en condiciones?</label>
-                                        <input type="text" class="form-control" id="frenos" th:value="*{checkList.frenos ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="frenos" th:value="*{checkList.frenos ? 'Sí' : 'No'}" th:style="${checkList.frenos} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="frenosDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -101,7 +101,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="trenDelantero" class="form-label fs-2">Tren delantero en condiciones?</label>
-                                        <input type="text" class="form-control" id="trenDelantero" th:value="*{checkList.trenDelantero ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="trenDelantero" th:value="*{checkList.trenDelantero ? 'Sí' : 'No'}" th:style="${checkList.trenDelantero} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="trenDelanteroDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -111,7 +111,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="seguridad" class="form-label fs-2">Elementos de seguridad presentes?</label>
-                                        <input type="text" class="form-control" id="seguridad" th:value="*{checkList.seguridad ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="seguridad" th:value="*{checkList.seguridad ? 'Sí' : 'No'}" th:style="${checkList.seguridad} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="seguridadDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -121,7 +121,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="carroceria" class="form-label fs-2">Carroceria y limpieza en condiciones?</label>
-                                        <input type="text" class="form-control" id="carroceria" th:value="*{checkList.carroceria ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="carroceria" th:value="*{checkList.carroceria ? 'Sí' : 'No'}" th:style="${checkList.carroceria} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="carroceriaDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>
@@ -131,7 +131,7 @@
 
                                       <div class="col-12 mb-3">
                                         <label for="documentacion" class="form-label fs-2">Documentacion completa?</label>
-                                        <input type="text" class="form-control" id="documentacion" th:value="*{checkList.documentacion ? 'Sí' : 'No'}" readonly>
+                                        <input type="text" class="form-control" id="documentacion" th:value="*{checkList.documentacion ? 'Sí' : 'No'}" th:style="${checkList.documentacion} ? 'border-color: green;' : 'border-color: red;'" readonly>
 
                                         <div class="mb-4 mt-2">
                                           <label for="documentacionDetalles" class="form-label fw-semibold mt-1">Mas detalles.</label>

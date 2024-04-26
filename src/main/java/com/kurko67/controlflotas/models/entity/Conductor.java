@@ -22,6 +22,8 @@ public class Conductor implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String vencimientoLicencia;
 
+    // Relacion uno  a uno con usuario
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

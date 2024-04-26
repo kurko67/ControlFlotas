@@ -46,6 +46,8 @@ public class CheckList implements Serializable {
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
 
+
+
     private static final long serialVersionUID = 1L;
 
 
