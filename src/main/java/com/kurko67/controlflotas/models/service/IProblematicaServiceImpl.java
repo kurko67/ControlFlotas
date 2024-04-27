@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class IProblematicaServiceImpl implements IProblematicaService{
 
@@ -34,5 +36,10 @@ public class IProblematicaServiceImpl implements IProblematicaService{
     @Override
     public void delete(Long id) {
         problematicaDao.deleteById(id);
+    }
+
+    @Override
+    public List<Problematicas> findProblematicaById(Long id) {
+        return (List<Problematicas>) problematicaDao.findProblematicaById(id);
     }
 }

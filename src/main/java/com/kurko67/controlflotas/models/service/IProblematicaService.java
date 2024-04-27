@@ -5,11 +5,14 @@ import com.kurko67.controlflotas.models.entity.Vehiculo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface IProblematicaService {
 
     public Page<Problematicas> findAll(Pageable pageable);
     public void save(Problematicas problematicas);
     public Problematicas findOne(Long id);
     public void delete(Long id);
+    public List<Problematicas> findProblematicaById(Long id);
 
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head th:replace="layout/layout :: head">Head</head>
+
+<body>
+
+<!-- sect1 -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+
+    <aside th:replace="layout/layout :: menu-izquierdo"></aside>
+
+    <!-- sect2 -->
+    <div class="body-wrapper">
+
+        <aside th:replace="layout/layout :: header"></aside>
+
+        <!-- sect3 -->
+        <div class="container-fluid">
+
+            <!-- contenido -->
+            <div class="container-fluid">
+                <!--  Row 1 -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="px-4 py-3 border-bottom">
+                                <h6 class="card-title fw-semibold mb-0">Seleccione solo los que desea integrar en la OT, para el vehiculo: Scania 1114, Patente 445666</h6>
+                            </div>
+                                <div class="card-body p-4">
+                                    <div class="mb-4">
+
+                                        <ul th:each="problematica: ${problematicas}">
+                                            <li>
+                                                <div class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user"
+                                                   id="chat_user_1" data-user-id="1">
+                                                    <div class="form-check mb-0">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    </div>
+
+                                                    <div class="position-relative w-100 ms-2">
+                                                        <div>
+                                                            <span class="badge text-bg-secondary mb-2 text-uppercase" th:text="${problematica.tipo}">luces</span>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-between mb-2 ">
+                                                            <p class="text-break mb-0" style="font-color:#000 !important;" th:text="${problematica.detalle_problema}">Cambiar los faros de adelante, o pulirlos</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary">Continuar >></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- fin contenido -->
+
+                <footer th:replace="layout/layout :: footer"></footer>
+                <!-- fin sect3 -->
+            </div>
+            <!-- fin sect2 -->
+        </div>
+
+        <!-- fin sect1 -->
+    </div>
+
+    <statics th:replace="layout/layout :: statics"></statics>
+    <script th:src="@{/js/maintenance.js}"></script>
+
+</body>
+</html>

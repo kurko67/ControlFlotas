@@ -147,7 +147,7 @@
 
                                     <div class="mb-4 mt-2">
                                       <div class="d-flex align-items-center gap-2">
-                                        <a th:href="@{/maintenance/new/} + ${checkList.vehiculo.idVehiculo}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary fs-2">Generar Orden de trabajo</a>
+                                        <a th:href="@{/checklist/generate/ot/} + ${checkList.idChecklist}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary fs-2">Generar Orden de trabajo</a>
                                       </div>
                                     </div>
 
