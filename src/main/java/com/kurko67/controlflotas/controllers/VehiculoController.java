@@ -283,7 +283,7 @@ public class VehiculoController {
         problematicas.setTipo(tipos);
         problematicas.setCreated_at(new Date());
         problematicas.setDetalle_problema(detalles); // Establecer el detalle de la respuesta "NO"
-        problematicaService.save(problematicas); // Guardar el registro en la base de datos
+        problematicaService.save(problematicas); // Guardar el registro en la base de datoss
     }
 
     private String obtenerDetalles(String fieldName, CheckList checklist) {
