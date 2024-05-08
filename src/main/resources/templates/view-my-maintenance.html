@@ -65,7 +65,10 @@
                                         <textarea class="form-control" id="descripcion" th:text="${#strings.capitalize(mantenimiento.descripcion_problema)}" readonly></textarea>
                                       </div>
 
-                                      <!-- Agrega más bloques similares para cada campo -->
+                                      <div class="col-12 mb-3">
+                                        <label for="lugar_atencion" class="form-label fs-2">Lugar de atención o taller:</label>
+                                        <input type="text" class="form-control" id="lugar_atencion" th:value="${#strings.capitalize(mantenimiento.lugar_atencion)}" readonly>
+                                      </div>
 
                                     </div>
 

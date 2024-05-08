@@ -93,6 +93,11 @@
                                       </div>
 
                                       <div class="col-12 mb-3">
+                                        <label for="lugar_atencion" class="form-label fs-2">Lugar de atención o taller:</label>
+                                        <input type="text" class="form-control" id="lugar_atencion" th:value="${#strings.capitalize(mantenimiento.lugar_atencion)}" readonly>
+                                      </div>
+
+                                      <div class="col-12 mb-3">
                                         <label for="fechaRealizacion" class="form-label fs-2">Fecha Realizacion:</label>
                                         <input type="text" class="form-control" id="fechaRealizacion" th:value="${#dates.format(mantenimiento.fecha_realizacion, 'dd-MM-yyyy')}" readonly>
                                       </div>
@@ -108,7 +113,7 @@
                                       </div>
 
 
-                                      <!-- Agrega más bloques similares para cada campo -->
+
 
                                     </div>
                                   </div>

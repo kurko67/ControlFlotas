@@ -132,7 +132,8 @@ public class MantenimientoController {
                 " *** Categoría:  " + mantenimiento.getCategoriaAveria() +
                 " -- Sub Categoría:  " + mantenimiento.getSubCategoriaAveria() +
                 " *** Mas detalles: *** " + mantenimiento.getDescripcion_problema() +
-                " *** Fecha programada: *** " + mantenimiento.getStart());
+                " *** Fecha programada: *** " + mantenimiento.getStart() +
+                "*** Lugar de atención: ***" + mantenimiento.getLugar_atencion());
         notificacion.setTipo("ORDEN_TRABAJO");
         notificacion.setCreated_at(new Date());
 

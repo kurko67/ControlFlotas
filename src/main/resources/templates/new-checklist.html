@@ -31,7 +31,7 @@
               <div class="px-4 py-3 border-bottom">
                 <h5 class="card-title fw-semibold mb-0" th:text="'Control semanal vehiculo ' + ${vehiculo.patente}"></h5>
               </div>
-              <form th:action="@{/vehicles/checklist/nuevo}" th:object="${checklist}" method="post">
+              <form th:action="@{/vehicles/checklist/nuevo}" th:object="${checklist}" method="post" id="form-checklist">
                 <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
                 <div class="card-body p-4">
                   <div class="mb-4">
@@ -48,7 +48,7 @@
                     </select>
                     <div class="mb-4">
                       <label for="neumaticosDdetalles" class="form-label fw-semibold mt-1">Si su respuesta fue no, especifique.</label>
-                      <textarea class="form-control" id="neumaticosDdetalles" placeholder="Detalles sobre el problema"  th:field="*{neumaticosDdetalles}" rows="2" cols="50" ></textarea>
+                      <textarea class="form-control" id="neumaticosDdetalles" name="neumaticosDdetalles" placeholder="Detalles sobre el problema"  th:field="*{neumaticosDdetalles}" rows="2" cols="50" ></textarea>
                     </div>
                   </div>
 

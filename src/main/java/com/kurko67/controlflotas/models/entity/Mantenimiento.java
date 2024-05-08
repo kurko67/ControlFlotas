@@ -46,6 +46,7 @@ public class Mantenimiento implements Serializable {
     private String estado; // activo, finalizado
     private String categoriaAveria;
     private String subCategoriaAveria;
+    private String lugar_atencion;
 
     //Relacion muchos mantenimientos a un conductor
     @ManyToOne

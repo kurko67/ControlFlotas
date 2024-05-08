@@ -20,6 +20,11 @@
       <div class="note-content">
         <h6>Descripcion del Problema</h6>
         <p class="note-inner-content mt-2" th:text="${mantenimiento.descripcion_problema}"></p>
+        <div th:if="${mantenimiento.lugar_atencion != null}">
+          <h6>Lugar de ateción o taller</h6>
+          <p class="note-inner-content mt-2" th:text="${mantenimiento.lugar_atencion}"></p>
+        </div>
+
       </div>
 
       <div th:if="${mantenimiento.estado == 'FINALIZADO'}">

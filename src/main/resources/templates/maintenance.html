@@ -85,6 +85,10 @@
                     <label for="start" class="form-label fw-semibold">Fecha programada para el ingreso del vehiculo al taller</label>
                     <input type="datetime-local" class="form-control" id="start" name="start" placeholder="Fecha programada para el ingreso del vehiculo al taller" required>
                   </div>
+                  <div class="mb-4">
+                    <label for="lugar_atencion" class="form-label fw-semibold">Lugar de atención o Taller</label>
+                    <input type="text" class="form-control" id="lugar_atencion" name="lugar_atencion" placeholder="Lugar de atención o Taller" th:field="*{lugar_atencion}">
+                  </div>
                   <button class="btn btn-primary" onclick="enviarMensaje()">Enviar</button>
                 </div>
               </form>

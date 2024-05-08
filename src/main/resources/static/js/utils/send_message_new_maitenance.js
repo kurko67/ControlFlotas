@@ -10,6 +10,7 @@ $(document).ready(function() {
         var marca = $('#vehiculo-marca').val();
         var fecha = $('#start').val();
         var detalles = $('#descripcion_problema').val();
+        var lugar = $('#lugar_atencion').val();
 
         // Realizar la solicitud AJAX al backend para obtener el número de teléfono del conductor
         $.ajax({
@@ -20,7 +21,7 @@ $(document).ready(function() {
                 // Una vez que se obtenga el número de teléfono del conductor, construir la URL de la API de WhatsApp
                 var telefonoConductor = response.telefono;
                 var mensaje = encodeURIComponent('Hola ' + nombreConductor + '. Te he asignado un mantenimiento ' + tipo + ', para el vehiculo: ' +
-                marca + ', el dia: ' + fecha + '. Mas detalles: *' + detalles + '*, Que tengas buen dia!');
+                marca + ', el dia: ' + fecha + '. *Mas detalles:*' + detalles + ', Lugar de atención o taller: ' + lugar + ', Que tengas buen dia!');
                 var whatsappURL = 'https://api.whatsapp.com/send?phone=' + telefonoConductor + '&text=' + mensaje;
 
                 // Redirigir a la URL de WhatsApp
