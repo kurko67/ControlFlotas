@@ -34,12 +34,12 @@
                                 <div class="card-body p-4">
                                     <div class="mb-4">
 
-                                        <ul th:each="problematica: ${problematicas}">
+                                        <ul th:each="problematica : ${problematicas}">
                                             <li>
                                                 <div class="px-4 py-3 bg-hover-light-black d-flex align-items-start chat-user"
                                                    id="chat_user_1" data-user-id="1">
                                                     <div class="form-check mb-0">
-                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <input class="form-check-input" type="checkbox" value="" th:id="${problematica.idProblematica}">
                                                     </div>
 
                                                     <div class="position-relative w-100 ms-2">

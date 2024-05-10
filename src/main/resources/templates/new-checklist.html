@@ -31,7 +31,7 @@
               <div class="px-4 py-3 border-bottom">
                 <h5 class="card-title fw-semibold mb-0" th:text="'Control semanal vehiculo ' + ${vehiculo.patente}"></h5>
               </div>
-              <form th:action="@{/vehicles/checklist/nuevo}" th:object="${checklist}" method="post" id="form-checklist">
+              <form th:action="@{/vehicles/checklist/nuevo}" th:object="${checklist}" method="post" id="miFormulario">
                 <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
                 <div class="card-body p-4">
                   <div class="mb-4">
@@ -177,7 +177,7 @@
                     </div>
                   </div>
 
-                  <button class="btn btn-primary">Enviar</button>
+                  <button type="submit" class="btn btn-primary">Enviar</button>
                 </div>
               </form>
             </div>

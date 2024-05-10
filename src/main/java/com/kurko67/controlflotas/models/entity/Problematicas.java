@@ -19,6 +19,7 @@ public class Problematicas implements Serializable {
     private String tipo; //neumatico, luces, ect
     private String detalle_problema;
     private String estado; //puede ser resuelto o pendiente
+    private String checkTemp; // Se utiliza para saber si esta elegido momentaneamente para la realizacion de la OT
 
 
     private Date created_at;
