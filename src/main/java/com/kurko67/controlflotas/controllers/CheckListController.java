@@ -13,10 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -87,6 +84,34 @@ public class CheckListController {
         return "ot-from-checklist";
 
     }
+
+    @GetMapping("/actualizarestado/{id}")
+    @ResponseBody
+    public String actualizarEstadoCheck(@PathVariable(value = "id") Long idProblematica) {
+
+        // Buscar la problemática en la base de datos
+        Problematicas problematicas = problematicaService.findOne(idProblematica);
+
+        if (problematicas != null) {
+            // Obtener el estado actual
+            String estado = problematicas.getCheckTemp();
+
+            // Cambiar el estado
+            if (estado.equals("SI")) {
+                problematicas.setCheckTemp("NO");
+            } else {
+                problematicas.setCheckTemp("SI");
+            }
+
+            // Guardar la problemática actualizada
+            problematicaService.save(problematicas);
+
+            return "Estado actualizado correctamente";
+        } else {
+            return "Error: La problemática no existe";
+        }
+    }
+
 
 
 }

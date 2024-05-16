@@ -280,6 +280,7 @@ public class VehiculoController {
         problematicas.setVehiculo(vehiculo);
         problematicas.setCheckList(checklist);
         problematicas.setEstado("PENDIENTE");
+        problematicas.setCheckTemp("SI");
         problematicas.setTipo(tipos);
         problematicas.setCreated_at(new Date());
         problematicas.setDetalle_problema(detalles); // Establecer el detalle de la respuesta "NO"
@@ -307,7 +308,6 @@ public class VehiculoController {
                 return checklist.getCarroceriaDetalles();
             case "documentacion":
                 return checklist.getDocumentacionDetalles();
-            // Repite el proceso para cada atributo booleano del checklist
             default:
                 return "";
         }
@@ -334,7 +334,6 @@ public class VehiculoController {
                 return "carroceria";
             case "documentacion":
                 return "documentacion";
-            // Repite el proceso para cada atributo booleano del checklist
             default:
                 return "";
         }
