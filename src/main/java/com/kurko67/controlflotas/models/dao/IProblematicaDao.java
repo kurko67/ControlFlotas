@@ -13,4 +13,7 @@ public interface IProblematicaDao  extends PagingAndSortingRepository<Problemati
     @Query(value = "SELECT * FROM problematicas WHERE checklist_id = ?1", nativeQuery = true)
     List<Problematicas> findProblematicaById(Long id);
 
+    @Query(value = "SELECT * FROM problematicas WHERE checklist_id = ?1 and check_temp = 'SI'", nativeQuery = true)
+    List<Problematicas> findCheckTempSiByCheckListId(Long id);
+
 }

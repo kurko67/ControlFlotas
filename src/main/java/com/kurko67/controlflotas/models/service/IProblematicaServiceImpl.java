@@ -42,4 +42,10 @@ public class IProblematicaServiceImpl implements IProblematicaService{
     public List<Problematicas> findProblematicaById(Long id) {
         return (List<Problematicas>) problematicaDao.findProblematicaById(id);
     }
+
+    @Override
+    public List<Problematicas> findCheckTempSiByCheckListId(Long id) {
+        return (List<Problematicas>) problematicaDao.findCheckTempSiByCheckListId(id);
+    }
+
 }

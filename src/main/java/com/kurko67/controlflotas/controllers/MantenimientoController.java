@@ -46,11 +46,16 @@ public class MantenimientoController {
     @Autowired
     private IUsuarioDao usuarioService;
 
+    @Autowired
+    private IProblematicaService problematicaService;
+
 
     private TwilioWhatsAppService twilioWhatsAppService;
 
 
     private WhatsAppService whatsAppService;
+
+
 
     @Autowired
     public MantenimientoController( TwilioWhatsAppService twilioWhatsAppService,
@@ -60,10 +65,15 @@ public class MantenimientoController {
     }
 
 
-
-    @RequestMapping("/new/{id}")
-    public String formVehicles(@PathVariable(value = "id") Long idVehiculo, Model model,
+    //parametro idchecklist es opcional
+    @RequestMapping("/new/{id}/{idchecklist?}")
+    public String formVehicles(@PathVariable(value = "id") Long idVehiculo, @PathVariable(value = "idchecklist", required = false) Long idchecklist, Model model,
                                @AuthenticationPrincipal User user){
+
+        if(idchecklist != null){
+            List<Problematicas> problematicas = problematicaService.findCheckTempSiByCheckListId(idchecklist);
+            model.addAttribute("problematicas",problematicas );
+        }
 
         List<Conductor> conductores = conductorService.findAll();
         Vehiculo vehiculo  = vehiculoService.findOne(idVehiculo);

@@ -33,7 +33,7 @@
                             </div>
                                 <div class="card-body p-4">
                                     <div class="mb-4">
-                                        <h6>Sin realizar de Ordenes anteriores</h6>
+                                        <h6>Arreglos pendientes</h6>
                                     </div>
                                     </hr>
                                     <div class="mb-4">
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             <div class="card-footer">
-                                <a th:href="#"><button class="btn btn-primary">Continuar >></button></a>
+                                <a th:href="@{/maintenance/new/} + ${idvehiculo}" sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-primary">Continuar >></button></a>
                             </div>
                         </div>
                     </div>

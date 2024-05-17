@@ -15,4 +15,6 @@ public interface IProblematicaService {
     public void delete(Long id);
     public List<Problematicas> findProblematicaById(Long id);
 
+    public List<Problematicas> findCheckTempSiByCheckListId(Long id);
+
 }

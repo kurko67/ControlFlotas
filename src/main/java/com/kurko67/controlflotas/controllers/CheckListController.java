@@ -77,6 +77,7 @@ public class CheckListController {
 
         List<Problematicas> problematicas = problematicaService.findProblematicaById(checkList.getIdChecklist());
         model.addAttribute("problematicas", problematicas);
+        model.addAttribute("idvehiculo", checkList.getVehiculo().getIdVehiculo());
 
         System.out.println(problematicas.get(1).getIdProblematica());
 
