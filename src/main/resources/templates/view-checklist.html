@@ -146,12 +146,13 @@
                                       </div>
 
                                     <div class="mb-4 mt-2">
-                                      <div class="d-flex align-items-center gap-2">
+                                      <div class="d-flex align-items-center gap-2" th:if="${ tiene_ot == null}">
                                         <a th:href="@{/checklist/generate/ot/} + ${checkList.idChecklist}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary fs-2">Generar Orden de trabajo</a>
                                       </div>
+                                      <div class="d-flex align-items-center gap-2" th:if="${ tiene_ot != null}">
+                                        <h5 class="text-secondary">Ya se ha generado una orden de trabajo para este checklist.</h5>
+                                      </div>
                                     </div>
-
-
                                     </div>
                                   </div>
                                 </div>

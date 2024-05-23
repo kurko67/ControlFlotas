@@ -55,6 +55,7 @@
                   </div>
                   <input type="hidden" id="idVehiculo" th:value="${vehiculo.idVehiculo}" name="idVehiculo">
                   <input type="hidden" id="vehiculo-marca" th:value="${vehiculo.marca}" name="vehiculo-marca">
+                  <input type="hidden" id="idcheck" th:value="${idchecklist}" name="idcheck">
                   <div class="mb-4">
                     <label for="select1" class="form-label fw-semibold">Selecciona una categoría:</label>
                     <select id="select1" onchange="actualizarSelect2()" class="form-select" th:field="*{categoriaAveria}" required>
@@ -79,7 +80,7 @@
                   </div>
                   <div class="mb-4">
                     <label for="descripcion_problema" class="form-label fw-semibold">Descripcion</label>
-                    <textarea class="form-control" id="descripcion_problema" placeholder="Detalles sobre el problema, donde llevarlo, hora, etc.."  th:field="*{descripcion_problema}" rows="4" cols="50" required></textarea>
+                    <textarea class="form-control" name="descripcion_problema" id="descripcion_problema" placeholder="Detalles sobre el problema, donde llevarlo, hora, etc.."  th:text="${problematicasStr}" rows="4" cols="50" required></textarea>                    </textarea>
                   </div>
                   <div class="mb-4">
                     <label for="start" class="form-label fw-semibold">Fecha programada para el ingreso del vehiculo al taller</label>

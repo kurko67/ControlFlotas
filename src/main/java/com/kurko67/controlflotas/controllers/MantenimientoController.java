@@ -26,6 +26,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/maintenance")
@@ -66,13 +67,25 @@ public class MantenimientoController {
 
 
     //parametro idchecklist es opcional
-    @RequestMapping("/new/{id}/{idchecklist?}")
+    @GetMapping({"/new/{id}", "/new/{id}/{idchecklist}"})
     public String formVehicles(@PathVariable(value = "id") Long idVehiculo, @PathVariable(value = "idchecklist", required = false) Long idchecklist, Model model,
                                @AuthenticationPrincipal User user){
 
         if(idchecklist != null){
+            System.out.println("ingresaron las problematicas");
+
             List<Problematicas> problematicas = problematicaService.findCheckTempSiByCheckListId(idchecklist);
-            model.addAttribute("problematicas",problematicas );
+            // Convertir la lista de problemáticas a una cadena de texto
+            String problematicasStr = problematicas.stream()
+                    .map(Problematicas::getDetalle_problema) // Suponiendo que tienes un método getDetalleProblema
+                    .collect(Collectors.joining("\n"));
+            System.out.println(problematicasStr);
+            model.addAttribute("problematicasStr", problematicasStr);
+            model.addAttribute("idchecklist", idchecklist);
+
+        }else{
+            System.out.println("NO ingresaron las problematicas");
+            model.addAttribute("problematicas", "");
         }
 
         List<Conductor> conductores = conductorService.findAll();
@@ -85,6 +98,7 @@ public class MantenimientoController {
         return "maintenance";
 
     }
+
 
 
     @GetMapping("/obtener-telefono-conductor")
@@ -101,15 +115,21 @@ public class MantenimientoController {
 
 
     @PostMapping("/nuevo")
-    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo,@RequestParam Long conductor,  @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, BindingResult result, Model model,
-                                     RedirectAttributes flash,@AuthenticationPrincipal User user){
-
-
+    public String newMaintenance(@Valid Mantenimiento mantenimiento, @RequestParam Long idVehiculo,
+                                 @RequestParam String descripcion_problema,
+                                 @RequestParam Long conductor,
+                                 @RequestParam Long idcheck,
+                                 @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+                                 BindingResult result, Model model,
+                                 RedirectAttributes flash,
+                                 @AuthenticationPrincipal User user){
 
         if(result.hasErrors()){
             flash.addFlashAttribute("error", "Error en la carga de datos");
             return "redirect:/view-vehicles/" + idVehiculo;
         }
+
+        System.out.println("Check: " + idcheck);
 
         Notificacion notificacion = new Notificacion();
 
@@ -122,12 +142,11 @@ public class MantenimientoController {
         mantenimiento.setEstado("ACTIVO");
         mantenimiento.setCreated_at(new Date());
         mantenimiento.setVehiculo(vehiculo);
+        mantenimiento.setDescripcion_problema(descripcion_problema);
         mantenimiento.setStart(start);
         mantenimiento.setEnd(start);
         mantenimiento.setEmisor(emisor);
         mantenimientoService.save(mantenimiento);
-
-
 
 
         //buscar conductor usuario y definir receptor
@@ -150,6 +169,11 @@ public class MantenimientoController {
         notificacionDao.save(notificacion);
 
         //twilioWhatsAppService.sendMessage();
+        /* actualizar las problemanticas resueltas mendiante el checklist que genera una orden de trabajo */
+
+        if (idcheck != null){
+            problematicaService.UpdateCheckListOt(mantenimiento.getIdMantenimiento(), idcheck);
+        }
 
         return "redirect:/vehicles/view-vehicles/" + idVehiculo;
 

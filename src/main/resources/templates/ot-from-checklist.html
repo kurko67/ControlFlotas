@@ -29,7 +29,7 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="px-4 py-3 border-bottom">
-                                <h6 class="card-title fw-semibold mb-0">Seleccione solo los que desea integrar en la OT, para el vehiculo: Scania 1114, Patente 445666</h6>
+                                <h6 class="card-title fw-semibold mb-0" th:text="'Seleccione solo los que desea integrar en la OT del vehiculo dominio:' + ${vehiculo.patente}"></h6>
                             </div>
                                 <div class="card-body p-4">
                                     <div class="mb-4">
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                             <div class="card-footer">
-                                <a th:href="@{/maintenance/new/} + ${idvehiculo}" sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-primary">Continuar >></button></a>
+                                <a th:href="@{/maintenance/new/} + ${vehiculo.idVehiculo} + '/' + ${idchecklist}" sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-primary">Continuar >></button></a>
                             </div>
                         </div>
                     </div>

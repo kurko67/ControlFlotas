@@ -58,6 +58,10 @@ public class CheckListController {
 
         }
 
+        Problematicas problematicas = problematicaService.findOneProblematicaByIdCheck(checkList.getIdChecklist());
+
+
+        model.addAttribute("tiene_ot", problematicas.getMantenimiento());
         model.addAttribute("checkList", checkList);
         return "view-checklist";
 
@@ -77,7 +81,8 @@ public class CheckListController {
 
         List<Problematicas> problematicas = problematicaService.findProblematicaById(checkList.getIdChecklist());
         model.addAttribute("problematicas", problematicas);
-        model.addAttribute("idvehiculo", checkList.getVehiculo().getIdVehiculo());
+        model.addAttribute("vehiculo", checkList.getVehiculo());
+        model.addAttribute("idchecklist", checkList.getIdChecklist());
 
         System.out.println(problematicas.get(1).getIdProblematica());
 

@@ -14,7 +14,8 @@ public interface IProblematicaService {
     public Problematicas findOne(Long id);
     public void delete(Long id);
     public List<Problematicas> findProblematicaById(Long id);
-
     public List<Problematicas> findCheckTempSiByCheckListId(Long id);
+    public void UpdateCheckListOt(Long mantenimiento_id, Long checklist_id);
+    public Problematicas findOneProblematicaByIdCheck(Long id);
 
 }

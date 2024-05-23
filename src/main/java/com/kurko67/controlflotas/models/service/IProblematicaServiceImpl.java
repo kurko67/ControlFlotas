@@ -48,4 +48,15 @@ public class IProblematicaServiceImpl implements IProblematicaService{
         return (List<Problematicas>) problematicaDao.findCheckTempSiByCheckListId(id);
     }
 
+    @Override
+    public void UpdateCheckListOt(Long mantenimiento_id, Long checklist_id) {
+        problematicaDao.UpdateCheckListOt(mantenimiento_id, checklist_id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Problematicas findOneProblematicaByIdCheck(Long id) {
+        return problematicaDao.findOneProblematicaByIdCheck(id);
+    }
+
 }
