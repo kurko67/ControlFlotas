@@ -38,6 +38,14 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a class="sidebar-link" th:href="@{/list-notifications}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
+                            <span class="hide-menu">Notificaciones</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a class="sidebar-link" th:href="@{/vehicles/my}" sec:authorize="hasRole('ROLE_USER')" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-car"></i>

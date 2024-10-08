@@ -27,3 +27,19 @@ function actualizarEstado(checkbox) {
     };
     xhr.send();
 }
+
+function buscar() {
+    var marca = document.getElementById('input-search').value;
+
+    // Realiza la solicitud AJAX al servidor
+    fetch('/vehicles/buscar?marca=' + encodeURIComponent(marca)) // Cambia la URL para que coincida con tu controlador
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('resultados').innerHTML = html;
+        })
+        .catch(error => console.error('Error al realizar la búsqueda:', error));
+}
+
+
+
+

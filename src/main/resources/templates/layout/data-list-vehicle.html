@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="card" th:fragment="data-table-vehicles">
+        <div class="card-header">
+            <h3>Vehiculos</h3>
+        </div>
+
+        <div id="resultados" th:if="${vehiculos != null and !vehiculos.empty}">
+            <div class="card card-body">
+                <div class="table-responsive">
+                    <table class="table search-table align-middle text-nowrap">
+                        <thead class="header-item">
+                        <th>Patente</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Responsable</th>
+                        <th>Ver</th>
+                        <th>Editar</th>
+                        </thead>
+                        <tbody>
+                        <tr class="search-items" th:each="vehiculo: ${vehiculos}">
+                            <td>
+                                <div class="user-meta-info">
+                                    <h6 class="user-name mb-0" th:text="${vehiculo.patente}"></h6>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="usr-email-addr" th:text="${vehiculo.marca}"></span>
+                            </td>
+                            <td>
+                                <span class="usr-location" th:text="${vehiculo.anio}"></span>
+                            </td>
+                            <td>
+                                <span class="usr-ph-no" th:text="${vehiculo != null && vehiculo.conductor != null ? (vehiculo.conductor.nombreApellido == null ? 'SIN ASIGNAR' : vehiculo.conductor.nombreApellido) : 'SIN ASIGNAR'}"></span>
+                            </td>
+                            <td>
+                                <div class="action-btn">
+                                    <a th:href="@{/vehicles/view-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
+                                        <i class="ti ti-eye fs-5" title="Ver vehiculo"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-btn">
+                                    <a th:href="@{/vehicles/edit-vehicles/} + ${vehiculo.idVehiculo}" class="text-info edit">
+                                        <i class="ti ti-edit fs-5" title="Editar vehiculo"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
