@@ -3,10 +3,20 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
-<head th:replace="layout/layout :: head">Head</head>
+<head >
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Control de Flotas</title>
+  <link rel="shortcut icon" type="image/png" th:href="@{/images/logos/favicon.png}" />
+  <link rel="stylesheet" th:href="@{/css/styles.min.css}" />
+  <link rel="stylesheet" th:href="@{/css/flotas.css}" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
 
 <body>
 
+
+<
 <!-- sect1 -->
 <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
      data-sidebar-position="fixed" data-header-position="fixed">
@@ -93,6 +103,11 @@
                                         </div>
                                       </div>
 
+
+
+                                      <div id="canvas-container" style="width: 100%; height: 500px;"></div>
+
+
                                       <div class="d-flex align-items-center gap-2">
                                         <a th:href="@{/maintenance/new/} + ${vehiculo.idVehiculo}" sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary fs-2">Generar Orden de trabajo</a>
                                       </div>
@@ -168,7 +183,107 @@
   </div>
 
 
-  <statics th:replace="layout/layout :: statics"></statics>
+
+
+
+
+    <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/sidebarmenu.js}"></script>
+    <script th:src="@{/js/app.min.js}"></script>
+    <script th:src="@{/libs/apexcharts/dist/apexcharts.min.js}"></script>
+    <script th:src="@{/libs/simplebar/dist/simplebar.js}"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
+    <script th:src="@{/js/utils/notifications.js}"></script>
+    <script th:src="@{/js/utils/my_functions.js}"></script>
+    <script th:src="@{/js/utils/send_message_new_maitenance.js}"></script>
+    <script th:src="@{/js/utils/send_message_ot_finished.js}"></script>
+    <script th:src="@{/js/utils/validate-checkList.js}"></script>
+
+
+        <script>
+        // Escena, cámara y renderizador
+        const container = document.getElementById('canvas-container');
+
+        // Crear escena, cámara y renderizador
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        container.appendChild(renderer.domElement);
+
+        // Crear un camión básico
+        const truck = new THREE.Group();
+
+        // Cuerpo del camión
+        const bodyGeometry = new THREE.BoxGeometry(5, 2, 2);
+        const bodyMaterial = new THREE.MeshBasicMaterial({ color: 0x1E90FF });
+        const truckBody = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        truck.add(truckBody);
+
+        // Ruedas del camión
+        const wheelGeometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32);
+        const wheelMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+
+        const wheelPositions = [
+            [-2, -1.1, 1.5], [2, -1.1, 1.5], // Ruedas delanteras
+            [-2, -1.1, -1.5], [2, -1.1, -1.5] // Ruedas traseras
+        ];
+
+        wheelPositions.forEach((pos, index) => {
+            const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+            wheel.rotation.z = Math.PI / 2;
+            wheel.position.set(...pos);
+            wheel.userData = { id: index + 1 }; // Identificación de cada rueda
+            truck.add(wheel);
+
+            // Hacer ruedas clickeables
+            wheel.callback = () => {
+                alert(`Has seleccionado la rueda ${wheel.userData.id}`);
+                window.location.href = `/cubierta?id=${wheel.userData.id}`;
+            };
+
+            // Agregar a lista de clickeables
+            clickableObjects.push(wheel);
+        });
+
+        scene.add(truck);
+
+        // Posición de la cámara
+        camera.position.z = 10;
+
+        // Lista de objetos clickeables
+        const clickableObjects = [];
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        // Manejar clics del mouse
+        function onMouseClick(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(clickableObjects);
+
+            if (intersects.length > 0) {
+                const object = intersects[0].object;
+                if (object.callback) object.callback();
+            }
+        }
+
+        window.addEventListener('click', onMouseClick);
+
+        // Animación
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+
+                          <!-- <statics th:replace="layout/layout :: statics"></statics> -->
+
 
 
 

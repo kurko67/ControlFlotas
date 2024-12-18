@@ -49,6 +49,10 @@ public class Vehiculo implements Serializable {
     @JoinColumn(name = "conductor_id")
     private Conductor conductor;
 
+
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    private List<Cubierta> cubiertas;
+
     private static final long serialVersionUID = 1L;
 
 }

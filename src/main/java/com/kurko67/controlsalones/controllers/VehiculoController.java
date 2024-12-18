@@ -66,38 +66,51 @@ public class VehiculoController {
     }
 
     @PostMapping("/nuevo")
-    public String crearVehiculo(@Valid Vehiculo vehiculo,BindingResult result, @RequestParam(value = "conductorid") Long idconductor, @RequestParam String patente, Model model, RedirectAttributes flash,
-                                @AuthenticationPrincipal User user){
+    public String crearVehiculo(
+            @Valid Vehiculo vehiculo,
+            BindingResult result,
+            @RequestParam(value = "conductorid", required = false) Long idConductor,
+            @RequestParam String patente,
+            Model model,
+            RedirectAttributes flash,
+            @AuthenticationPrincipal User user) {
 
-
-        if(result.hasErrors()){
-            flash.addFlashAttribute("danger",  "Error en la carga de datos");
+        if (result.hasErrors()) {
+            flash.addFlashAttribute("danger", "Error en la carga de datos");
             return "redirect:/vehicles/new";
         }
 
-        if(vehiculoService.existsByPatente(patente) && vehiculo.getIdVehiculo() == null ){
-            flash.addFlashAttribute("warning","La patente ingresada ya existe (" + vehiculo.getMarca() +")");
+        if (vehiculoService.existsByPatente(patente) && vehiculo.getIdVehiculo() == null) {
+            flash.addFlashAttribute("warning", "La patente ingresada ya existe (" + vehiculo.getMarca() + ")");
             return "redirect:/vehicles/new";
         }
 
-
-        // idconductor == 0 > Quiere decir que no se especifico conductor asignado
-
-        if(idconductor > 0){
-            Conductor conductor = new Conductor();
-            conductor = conductorService.findOne(idconductor);
-            vehiculo.setConductor(conductor);
+        // Asociar conductor al vehículo si se especificó
+        if (idConductor != null && idConductor > 0) {
+            Conductor conductor = conductorService.findOne(idConductor);
+            if (conductor != null) {
+                vehiculo.setConductor(conductor);
+            }
         }
 
-        String mensajeFlash = (vehiculo.getIdVehiculo() != null) ? "Vehiculo " + vehiculo.getMarca() + " editado con exito" : "Vehiculo " + vehiculo.getMarca() + " creado con exito";
+        // Asociar cubiertas al vehículo
+        if (vehiculo.getCubiertas() != null) {
+            for (Cubierta cubierta : vehiculo.getCubiertas()) {
+                cubierta.setVehiculo(vehiculo);
+            }
+        }
 
+        // Guardar el vehículo (y sus cubiertas gracias a Cascade)
         vehiculo.setCreated_at(new Date());
         vehiculo.setUpdated_at(new Date());
         vehiculoService.save(vehiculo);
 
+        String mensajeFlash = (vehiculo.getIdVehiculo() != null) ?
+                "Vehiculo " + vehiculo.getMarca() + " editado con éxito" :
+                "Vehiculo " + vehiculo.getMarca() + " creado con éxito";
+
         flash.addFlashAttribute("success", mensajeFlash);
         return "redirect:/vehicles/list-vehicles";
-
     }
 
 

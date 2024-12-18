@@ -34,6 +34,7 @@ public class CheckList implements Serializable {
     private String documentacionDetalles;
     private String comentariosAdicionales;
     private Date created_at;
+    private String tipo_checkList;
 
     //Relacion muchos checklist a un vehiculo
     @ManyToOne
